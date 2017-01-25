@@ -1,0 +1,14 @@
+{
+	"Level_1": [
+		{
+			"path" : ["./assets/models", "./assets/materials/scripts"],
+			"mesh" : "Fox.mesh"
+		}
+	],
+	"Level_2": [
+		{
+			"path" : ["./assets/models", "./assets/materials/scripts"],
+			"mesh" : "Fox.mesh"
+		}
+	]
+}
