@@ -1,3 +1,11 @@
+fragment_program FurFp_GLSL glsl
+{
+   source FurFp.glsl
+}
+vertex_program FurVp_GLSL glsl
+{
+	source FurVp.glsl
+}
 material Fox
 {
 	technique
