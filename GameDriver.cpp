@@ -2,6 +2,6 @@
 
 int main()
 {
-   GameManager* game_manager = GameManager::getGameManager();  //singleton
-   return 0;
+	GameManager* game_manager = GameManager::getGameManager();  //singleton
+	return 0;
 }

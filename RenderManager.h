@@ -7,33 +7,35 @@ class GameManager;
 
 class RenderManager
 {
-   private:
-      Ogre::Root* root;
-      Ogre::RenderWindow* window;
-      Ogre::SceneManager* scene_manager;
+	private:
+		Ogre::Root* root;
+		Ogre::RenderWindow* window;
+		Ogre::SceneManager* scene_manager;
 
-      Ogre::Camera* camera;
-      Ogre::Viewport* viewport;
+		Ogre::Camera* camera;
+		Ogre::Viewport* viewport;
 
-      GameManager* game_manager;
+		GameManager* game_manager;
 
-      void init();
-      size_t window_handle;
-      Ogre::Real time_since_last_frame;
+		void init();
+		size_t window_handle;
+		Ogre::Real time_since_last_frame;
 
-   public:
-      RenderManager(GameManager* game_manager);
-      virtual ~RenderManager();
+	public:
+		RenderManager(GameManager* game_manager);
+		virtual ~RenderManager();
 
-      size_t getRenderWindowHandle();
-      int getRenderWindowWidth();
-      int getRenderWindowHeight();
+		size_t getRenderWindowHandle();
+		int getRenderWindowWidth();
+		int getRenderWindowHeight();
 
-      Ogre::RenderWindow* getRenderWindow();
-      Ogre::SceneManager* getSceneManager();
+		Ogre::RenderWindow* getRenderWindow();
+		Ogre::SceneManager* getSceneManager();
 
-      void startRendering();
-      void stopRendering();
+		void startRendering();
+		void stopRendering();
+
+		void buildSimpleScene();
 };
 
 #endif
