@@ -5,8 +5,7 @@
 
 class GameManager;
 
-class RenderManager
-{
+class RenderManager{
 	private:
 		Ogre::Root* root;
 		Ogre::RenderWindow* window;

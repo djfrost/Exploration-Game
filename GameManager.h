@@ -6,8 +6,7 @@
 class RenderManager;
 
 //supplies communication between managers
-class GameManager
-{
+class GameManager{
 	private:
 		RenderManager* render_manager;
 

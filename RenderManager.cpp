@@ -3,9 +3,8 @@
 
 #include <iostream>
 using namespace std;
-
-void RenderManager::init()
-{
+using namespace Ogre;
+void RenderManager::init(){
 	root = NULL;
 	window = NULL;
 	scene_manager = NULL;
@@ -14,8 +13,7 @@ void RenderManager::init()
 	root->loadPlugin("RenderSystem_GL");  //prepares external dlls for later use
 
 	Ogre::RenderSystem* render_system = root->getRenderSystemByName("OpenGL Rendering Subsystem"); //just returns a pointer to an uninialized render system
-	if (!render_system)
-	{
+	if (!render_system){
 	 //ASSERT_CRITICAL(false);
 	}
 
@@ -44,17 +42,15 @@ void RenderManager::init()
 	float actual_height = Ogre::Real(viewport->getActualHeight());
 	float aspect_ratio = actual_width/actual_height;
 	camera->setAspectRatio(aspect_ratio);
-}
-
-RenderManager::RenderManager(GameManager* gm)
-{
-	game_manager = gm;
-	init();
 	buildSimpleScene();
 }
 
-RenderManager::~RenderManager()
-{
+RenderManager::RenderManager(GameManager* gm){
+	game_manager = gm;
+	init();
+}
+
+RenderManager::~RenderManager(){
    game_manager = NULL;
    
    scene_manager->clearScene();
@@ -69,33 +65,27 @@ RenderManager::~RenderManager()
    root = NULL;
 }
 
-size_t RenderManager::getRenderWindowHandle()
-{
+size_t RenderManager::getRenderWindowHandle(){
 	return window_handle;
 }
 
-int RenderManager::getRenderWindowWidth()
-{
+int RenderManager::getRenderWindowWidth(){
 	return viewport->getActualWidth();
 }
 
-int RenderManager::getRenderWindowHeight()
-{
+int RenderManager::getRenderWindowHeight(){
 	return viewport->getActualHeight();
 }
 
-void RenderManager::startRendering()
-{
+void RenderManager::startRendering(){
 	root->startRendering();
 }
 
-Ogre::RenderWindow* RenderManager::getRenderWindow()
-{
+Ogre::RenderWindow* RenderManager::getRenderWindow(){
 	return window;
 }
 
-Ogre::SceneManager* RenderManager::getSceneManager()
-{
+Ogre::SceneManager* RenderManager::getSceneManager(){
    return scene_manager;
 }
 
@@ -104,6 +94,7 @@ void RenderManager::buildSimpleScene(){
 	rgm.addResourceLocation("./Assets/Models", "FileSystem", "Level_1");
 	rgm.addResourceLocation("./Assets/Materials/scripts", "FileSystem", "Level_1");
 	rgm.declareResource("Fox.mesh","Mesh","Level_1");
+	rgm.declareResource("Torus.mesh","Mesh","Level_1");
 	rgm.initialiseResourceGroup("Level_1");
 	rgm.loadResourceGroup("Level_1", true, true);
 	
@@ -111,4 +102,28 @@ void RenderManager::buildSimpleScene(){
 	camera->lookAt(Ogre::Vector3(0,0,0));
 	camera->setNearClipDistance(2);
 	camera->setFarClipDistance(50);
+	scene_manager->setAmbientLight(Ogre::ColourValue(.05,.05,.05));
+	Ogre::Light* light = scene_manager->createLight("Light");
+	light->setType(Ogre::Light::LT_DIRECTIONAL);
+	
+	light->setDiffuseColour(1.0,1.0,1.0);
+	light->setDirection(Ogre::Vector3(0.0,0.0,-1.0));
+	
+	Ogre::SceneNode* torus_node = scene_manager->createSceneNode("Torus_Node");
+	Ogre::SceneNode* fox_node = scene_manager->createSceneNode("Fox_Node");
+	
+	Ogre::Entity* torus_entity = scene_manager->createEntity("Torus_Entity","Torus.mesh");
+	Ogre::Entity* fox_entity = scene_manager->createEntity("Fox_Entity","Fox.mesh");
+	
+	torus_node->attachObject(torus_entity);
+	fox_node->attachObject(fox_entity);
+	Ogre::SceneNode* scene_root_node = scene_manager->getRootSceneNode();
+	scene_root_node->addChild(torus_node);
+	scene_root_node->addChild(fox_node);
+	
+	Vector3 vr(1,0,0);
+	Quaternion q(Degree(60),vr);
+	torus_node->rotate(q);
+	torus_node->translate(0.0,1.0,0.0);
+	torus_node->scale(1,2,1);
 }
