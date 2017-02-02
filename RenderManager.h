@@ -4,7 +4,7 @@
 #include "Ogre.h"
 
 class GameManager;
-
+class ResourceParser;
 class RenderManager{
 	private:
 		Ogre::Root* root;

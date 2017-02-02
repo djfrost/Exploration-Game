@@ -1,14 +1,23 @@
 {
-	"Level_1": [
-		{
-			"path" : ["./assets/models", "./assets/materials/scripts"],
-			"mesh" : "Fox.mesh"
+	"levels":{
+		"level_1": {
+			"path": ["./assets/models", "./assets/materials/scripts"],
+			"mesh": {
+				"mesh_file": "Fox.mesh",
+				"mesh_transform": "0,0,0",
+				"mesh_rotate": "0,0,0",
+				"mesh_scale": "0,0,0"
+			}
+		},
+		"level_2": {
+			"path": ["./assets/models", "./assets/materials/scripts"],
+			"mesh": {
+				"mesh_file": "Fox.mesh",
+				"mesh_transform": "0,0,0",
+				"mesh_rotate": "0,0,0",
+				"mesh_scale": "0,0,0"
+			}
 		}
-	],
-	"Level_2": [
-		{
-			"path" : ["./assets/models", "./assets/materials/scripts"],
-			"mesh" : "Fox.mesh"
-		}
-	]
+	},
+	"first_level": "level_1"
 }

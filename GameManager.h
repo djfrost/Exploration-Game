@@ -4,12 +4,12 @@
 #include <string>
 
 class RenderManager;
-
+class LevelLoader;
 //supplies communication between managers
 class GameManager{
 	private:
 		RenderManager* render_manager;
-
+		LevelLoader* levelLoader;
 		GameManager();
 		void init();
 

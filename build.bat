@@ -12,5 +12,10 @@ set BOOST_PATH=%GAME_PATH%/boost
 set FREEIMAGE_PATH=%GAME_PATH%/FreeImage/lib
 set ZLIB_PATH=%GAME_PATH%/zlib-1.2.11/lib
 make DRIVE_LETTER="%DRIVE_LETTER%" PROJECT_DIR="%PROJECT_PATH%"
-set PATH=%PATH%;%OGRE_PATH%/build/bin;%BOOST_PATH%/lib;%ZLIB_PATH%;%FREEIMAGE_PATH%
-Game.exe
+if %errorlevel% neq 0 (
+	echo "Unsuccessful compile"
+)
+if %errorlevel% equ 0 (
+	set PATH=%PATH%;%OGRE_PATH%/build/bin;%BOOST_PATH%/lib;%ZLIB_PATH%;%FREEIMAGE_PATH%
+	Game.exe
+)

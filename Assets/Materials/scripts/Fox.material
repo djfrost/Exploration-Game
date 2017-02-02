@@ -1,11 +1,4 @@
-fragment_program FurFp_GLSL glsl
-{
-   source FurFp.glsl
-}
-vertex_program FurVp_GLSL glsl
-{
-	source FurVp.glsl
-}
+
 material Fox
 {
 	technique
@@ -13,10 +6,9 @@ material Fox
 		pass
 		{
 			ambient 1.0 0.0 0.0 1.0
-			diffuse 1.0 0.27 0.0 1.0
+			diffuse 1.0 0.2 0.0 1.0
 			
 			lighting on
-			shading phong
 		}
 	}
 }

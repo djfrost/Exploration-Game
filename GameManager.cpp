@@ -1,8 +1,8 @@
 #include "GameManager.h"
 #include "RenderManager.h"
-
+#include "LevelLoader.h"
 #include <iostream>
-
+#include <string>
 //the problem is that in C++, it is not known when this initialization code will be called
 //so we will use a function static variable that is initialized the first time the method is called
 //destructor automatically called?
@@ -13,6 +13,8 @@ GameManager* GameManager::getGameManager(){
 
 void GameManager::init(){
 	render_manager = new RenderManager(this);  //calls render manager's init, sets up the frame listener
+	std::string file = "resources.json";
+	levelLoader = new LevelLoader(this, file);
 }
 
 GameManager::GameManager(){
