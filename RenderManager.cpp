@@ -127,3 +127,14 @@ void RenderManager::buildSimpleScene(){
 	torus_node->translate(0.0,1.0,0.0);
 	torus_node->scale(1,2,1);
 }
+
+void RenderManager::addPath(std::string path, std::string resourceGroup){
+	Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
+	rgm.addResourceLocation(path, "FileSystem", resourceGroup);
+}
+void RenderManager::unloadScene(std::string currScene){
+	Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
+	rgm.unloadResourceGroup(currScene.c_str());
+	currSceneNode->removeAndDestroyAllChildren();
+	//currSceneNode->
+}

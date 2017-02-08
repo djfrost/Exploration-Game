@@ -40,3 +40,7 @@ int GameManager::getRenderWindowWidth(){
 int GameManager::getRenderWindowHeight(){
 	return render_manager->getRenderWindowHeight();
 }
+
+void GameManager::addPath(std::string path, std::string resourceGroup){
+	render_manager->addPath(path, resourceGroup);
+}

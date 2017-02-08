@@ -2,20 +2,14 @@
 	"levels":{
 		"level_1": {
 			"path": ["./assets/models", "./assets/materials/scripts"],
-			"mesh": {
-				"mesh_file": "Fox.mesh",
-				"mesh_transform": "0,0,0",
-				"mesh_rotate": "0,0,0",
-				"mesh_scale": "0,0,0"
+			"meshes": {
+					"Fox" : "Fox.mesh"
 			}
 		},
 		"level_2": {
 			"path": ["./assets/models", "./assets/materials/scripts"],
-			"mesh": {
-				"mesh_file": "Fox.mesh",
-				"mesh_transform": "0,0,0",
-				"mesh_rotate": "0,0,0",
-				"mesh_scale": "0,0,0"
+			"meshes": {
+					"Fox" : "Fox.mesh"
 			}
 		}
 	},

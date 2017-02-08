@@ -1,6 +1,6 @@
 #if !defined RENDER_MANAGER
 #define RENDER_MANAGER
-
+#include <string>
 #include "Ogre.h"
 
 class GameManager;
@@ -15,11 +15,12 @@ class RenderManager{
 		Ogre::Viewport* viewport;
 
 		GameManager* game_manager;
-
 		void init();
 		size_t window_handle;
 		Ogre::Real time_since_last_frame;
-
+		//Curr and next scene
+		Ogre::SceneNode* currSceneNode;
+		Ogre::SceneNode* nextSceneNode;
 	public:
 		RenderManager(GameManager* game_manager);
 		virtual ~RenderManager();
@@ -35,6 +36,8 @@ class RenderManager{
 		void stopRendering();
 
 		void buildSimpleScene();
+		void addPath(std::string path, std::string resourceGroup);
+		void unloadScene(std::string currScene);
 };
 
 #endif

@@ -21,6 +21,7 @@ class GameManager{
 		int getRenderWindowHeight();
 		size_t getRenderWindowHandle();
 		std::string getLoadedLevelName();
+		void addPath(std::string path, std::string resourceGroup);
 };
 
 #endif

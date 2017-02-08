@@ -1,14 +1,79 @@
+vertex_program GLSLDemo/FurVS glsl 
+{ 
+  source FurVP.vert 
+  default_params
+  {
+    param_named fFurLength float 0.15
+	param_named fUVScale float 1.0
+	param_named fLayer float 0
+	param_named vGravity vec3(0,-2.0,0)
+	param_named vLightDir vec4(0,0,-1.0,0)
+  }
+} 
+
+fragment_program GLSLDemo/FurFS glsl 
+{ 
+  source FurFP.frag 
+  default_params
+  {
+    param_named Ka float 0.2
+    param_named Kd float 0.5
+    param_named Ks float 0.0
+    param_named furTU int 0
+  }
+} 
 
 material Fox
-{
-	technique
-	{
-		pass
-		{
-			ambient 1.0 0.0 0.0 1.0
-			diffuse 1.0 0.2 0.0 1.0
-			
-			lighting on
-		}
-	}
+{ 
+  technique GLSL
+  { 
+    pass base_coat
+    { 
+      ambient 0.7 0.7 0.7
+      diffuse 0.5 0.8 0.5
+      specular 1.0 1.0 1.0 1.5
+
+      vertex_program_ref GLSLDemo/FurVS
+      {
+      }
+
+      fragment_program_ref GLSLDemo/FurFS 
+      { 
+      } 
+
+      texture_unit
+      {
+        texture FoxFur.png
+        tex_coord_set 0
+        filtering trilinear
+      }
+
+    } 
+
+    pass grow_fur
+    { 
+      ambient 0.7 0.7 0.7
+      diffuse 0.8 1.0 0.8
+      specular 1.0 1.0 1.0 64
+      depth_write off
+
+      scene_blend src_alpha one
+      iteration 10
+      
+      vertex_program_ref GLSLDemo/FurVS
+      {
+      }
+
+      fragment_program_ref GLSLDemo/FurFS
+      {
+      }
+
+      texture_unit
+      {
+        texture FoxFur.png
+        tex_coord_set 0
+        filtering trilinear
+      }
+    } 
+  } 
 }

@@ -21,14 +21,16 @@ class LevelLoader{
 		ptree pt;
 		//Loads the json file into pt
 		void ReadResources(std::string fileName);
+		std::string currScene;
+		std::string nextScene;
 	public: 
 		//Loads the json file, and stores a reference to the game manager
 		LevelLoader(GameManager* gameManager, std::string fileName);
 		//Deletes references
 		~LevelLoader();
-		//Gets the number of levels
-		int GetNumLevels();
 		//Loads a level given it's name
 		void LoadLevel(std::string levelName);
+		void LoadMesh(std::string mesh);
+		void AddPath(std::string path);
 };
 #endif

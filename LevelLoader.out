@@ -1,1 +1,3 @@
-level_1	./assets/models	./assets/materials/scripts
+level_1
+	./assets/models	./assets/materials/scriptsFox
+Fox.mesh

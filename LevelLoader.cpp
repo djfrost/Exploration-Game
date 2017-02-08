@@ -1,11 +1,14 @@
 #include "LevelLoader.h"
 #include <vector>
 #include <boost/foreach.hpp>
+#include "GameManager.h"
+#include <typeinfo>
 LevelLoader::LevelLoader(GameManager* gameManager, std::string fileName){
 	gm = gameManager;
 	ReadResources(fileName);
 	//Now that we have the ptree from the json file, we want to load the first level
 	std::string levelOne = pt.get<std::string>("first_level");
+	currScene = levelOne;
 	LoadLevel(levelOne);
 }
 
@@ -20,24 +23,35 @@ void LevelLoader::ReadResources(std::string fileName){
 	jsonFile.close();
 }
 
-int LevelLoader::GetNumLevels(){
-	
-}
-
-void LevelLoader::LoadLevel(std::string levelName){
+void LevelLoader::LoadLevel(std::string levelName)
+{
+	nextScene = levelName;
 	ptree levelTree;
-	std::ofstream outFile("LevelLoader.out");
-	outFile << levelName;
 	
 	std::string level = "levels." + levelName;
 	levelTree = pt.get_child(level);
-	//get path
-	std::vector< std::string > paths;
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, levelTree.get_child("path")){
-		assert(v.first.empty()); // array elements have no names
-		paths.push_back(v.second.data());
-		outFile << "\t" + v.second.data();
+		AddPath(v.second.data());
 	}
-	outFile.close();
-	//get meshes
+	ptree meshTree = levelTree.get_child("meshes");
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, meshTree.get_child("")){
+		LoadMesh(v.second.data());
+	}
+}
+
+/*
+	Given a mesh file as a string, this function will
+	load the mesh and send it to the next scene. When the
+	next scene is loaded, this mesh will be inside of it.
+*/
+void LevelLoader::LoadMesh(std::string mesh){
+	
+}
+
+/*
+	Given a path as a string, it adds it to the resource
+	group manager for the next level.
+*/
+void LevelLoader::AddPath(std::string path){
+	
 }
