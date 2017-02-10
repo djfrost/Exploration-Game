@@ -132,9 +132,17 @@ void RenderManager::addPath(std::string path, std::string resourceGroup){
 	Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
 	rgm.addResourceLocation(path, "FileSystem", resourceGroup);
 }
+void RenderManager::addMesh(std::string mesh, std::string resourceGroup){
+	Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
+	rgm.declareResource(mesh, "Mesh", resourceGroup);
+}
 void RenderManager::unloadScene(std::string currScene){
 	Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
 	rgm.unloadResourceGroup(currScene.c_str());
 	currSceneNode->removeAndDestroyAllChildren();
-	//currSceneNode->
+}
+void RenderManager::loadScene(std::string sceneName){
+	Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
+	rgm.initialiseResourceGroup(sceneName);
+	rgm.loadResourceGroup(sceneName, true, true);
 }

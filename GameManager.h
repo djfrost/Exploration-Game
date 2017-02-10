@@ -2,7 +2,7 @@
 #define GAME_MANAGER
 
 #include <string>
-
+#include <vector>
 class RenderManager;
 class LevelLoader;
 //supplies communication between managers
@@ -22,6 +22,8 @@ class GameManager{
 		size_t getRenderWindowHandle();
 		std::string getLoadedLevelName();
 		void addPath(std::string path, std::string resourceGroup);
+		void addMesh(std::string mesh, std::vector<float> transform, std::vector<float> rotate, std::vector<float> scale, std::string resourceGroup);
+		void loadScene(std::string scene);
 };
 
 #endif

@@ -44,3 +44,10 @@ int GameManager::getRenderWindowHeight(){
 void GameManager::addPath(std::string path, std::string resourceGroup){
 	render_manager->addPath(path, resourceGroup);
 }
+void GameManager::addMesh(std::string mesh, std::vector<float> transform, std::vector<float> rotate, std::vector<float> scale, std::string resourceGroup){
+	render_manager->addMesh(mesh, resourceGroup);
+}
+
+void GameManager::loadScene(std::string scene){
+	render_manager->loadScene(scene);
+}

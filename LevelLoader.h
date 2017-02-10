@@ -5,6 +5,7 @@
 #include "boost/property_tree/json_parser.hpp"
 #include <iostream>
 #include <string>
+#include <vector>
 using boost::property_tree::ptree;
 
 class GameManager;
@@ -23,6 +24,7 @@ class LevelLoader{
 		void ReadResources(std::string fileName);
 		std::string currScene;
 		std::string nextScene;
+		//std::vector<float> parse3F(std::string floats);
 	public: 
 		//Loads the json file, and stores a reference to the game manager
 		LevelLoader(GameManager* gameManager, std::string fileName);
@@ -30,7 +32,5 @@ class LevelLoader{
 		~LevelLoader();
 		//Loads a level given it's name
 		void LoadLevel(std::string levelName);
-		void LoadMesh(std::string mesh);
-		void AddPath(std::string path);
 };
 #endif

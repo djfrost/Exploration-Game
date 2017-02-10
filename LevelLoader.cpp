@@ -1,8 +1,6 @@
 #include "LevelLoader.h"
-#include <vector>
 #include <boost/foreach.hpp>
 #include "GameManager.h"
-#include <typeinfo>
 LevelLoader::LevelLoader(GameManager* gameManager, std::string fileName){
 	gm = gameManager;
 	ReadResources(fileName);
@@ -31,27 +29,39 @@ void LevelLoader::LoadLevel(std::string levelName)
 	std::string level = "levels." + levelName;
 	levelTree = pt.get_child(level);
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, levelTree.get_child("path")){
-		AddPath(v.second.data());
+		gm->addPath(v.second.data(), levelName);
 	}
 	ptree meshTree = levelTree.get_child("meshes");
-	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, meshTree.get_child("")){
-		LoadMesh(v.second.data());
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, meshTree.get_child("mesh")){
+		ptree meshEntityTree = meshTree.get_child(v.second.data());
+		std::string meshFile;
+		for(auto& fileItem : meshEntityTree.get_child("file")){
+			meshFile = fileItem.second.get_value<std::string>();
+		}
+	
+		std::vector<float> transform;
+		for (auto& item : meshEntityTree.get_child("transform")){
+			transform.push_back(item.second.get_value<float>());
+		}
+		std::vector<float> rotate;
+		for (auto& item : meshEntityTree.get_child("rotate")){
+			rotate.push_back(item.second.get_value<float>());
+		}std::vector<float> scale;
+		for (auto& item : meshEntityTree.get_child("scale")){
+			scale.push_back(item.second.get_value<float>());
+		}
+		gm->addMesh(meshFile, transform, rotate, scale, levelName);
 	}
+	// unload last scene load next scene
+	gm->loadScene(levelName);
 }
-
-/*
-	Given a mesh file as a string, this function will
-	load the mesh and send it to the next scene. When the
-	next scene is loaded, this mesh will be inside of it.
-*/
-void LevelLoader::LoadMesh(std::string mesh){
-	
-}
-
-/*
-	Given a path as a string, it adds it to the resource
-	group manager for the next level.
-*/
-void LevelLoader::AddPath(std::string path){
-	
-}
+/*std::vector<float> LevelLoader::parse3F(std::string floats){
+	std::vector<float> floatVec;
+	int firstDelim = floats.find(",");
+	floatVec.push_back(stof(floats.substr(0,firstDelim)));
+	floats.erase(0, firstDelim);
+	firstDelim = floats.find(",");
+	floatVec.push_back(stof(floats.substr(0,firstDelim)));
+	floats.erase(0, firstDelim);
+	floatVec.push_back(stof(floats.substr(0,floats.length)));
+}*/
