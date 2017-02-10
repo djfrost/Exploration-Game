@@ -42,7 +42,7 @@ void RenderManager::init(){
 	float actual_height = Ogre::Real(viewport->getActualHeight());
 	float aspect_ratio = actual_width/actual_height;
 	camera->setAspectRatio(aspect_ratio);
-	buildSimpleScene();
+	//buildSimpleScene();
 }
 
 RenderManager::RenderManager(GameManager* gm){
@@ -137,12 +137,35 @@ void RenderManager::addMesh(std::string mesh, std::string resourceGroup){
 	rgm.declareResource(mesh, "Mesh", resourceGroup);
 }
 void RenderManager::unloadScene(std::string currScene){
-	Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
-	rgm.unloadResourceGroup(currScene.c_str());
-	currSceneNode->removeAndDestroyAllChildren();
+	if(groupExists(currScene)){
+		Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
+		rgm.unloadResourceGroup(currScene.c_str());
+		currSceneNode->removeAndDestroyAllChildren();
+		delete currSceneNode;
+	}
 }
-void RenderManager::loadScene(std::string sceneName){
+void RenderManager::loadScene(std::string sceneName, std::string lastScene){
 	Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
+	unloadScene(lastScene);
 	rgm.initialiseResourceGroup(sceneName);
 	rgm.loadResourceGroup(sceneName, true, true);
+}
+void RenderManager::initialiseNewScene(){
+	nextSceneNode = scene_manager->createSceneNode("Base_Level_Node");
+}
+
+bool RenderManager::groupExists( std::string group )
+{
+   Ogre::StringVector groupNameList = Ogre::ResourceGroupManager::getSingleton().getResourceGroups(); 
+   Ogre::StringVector::iterator resGroupIter = groupNameList.begin(); 
+
+   for(;resGroupIter < groupNameList.end();resGroupIter++)
+   { 
+      Ogre::String resGroupName = (*resGroupIter); 
+      if( resGroupName == group )
+      {
+             return true;
+       } 
+   }
+   return false;
 }

@@ -23,7 +23,8 @@ class GameManager{
 		std::string getLoadedLevelName();
 		void addPath(std::string path, std::string resourceGroup);
 		void addMesh(std::string mesh, std::vector<float> transform, std::vector<float> rotate, std::vector<float> scale, std::string resourceGroup);
-		void loadScene(std::string scene);
+		void loadScene(std::string scene, std::string lastScene);
+		void initialiseNewScene();
 };
 
 #endif

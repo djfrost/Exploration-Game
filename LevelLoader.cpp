@@ -6,7 +6,8 @@ LevelLoader::LevelLoader(GameManager* gameManager, std::string fileName){
 	ReadResources(fileName);
 	//Now that we have the ptree from the json file, we want to load the first level
 	std::string levelOne = pt.get<std::string>("first_level");
-	currScene = levelOne;
+	currScene = "";
+	nextScene = "";
 	LoadLevel(levelOne);
 }
 
@@ -25,7 +26,7 @@ void LevelLoader::LoadLevel(std::string levelName)
 {
 	nextScene = levelName;
 	ptree levelTree;
-	
+	gm->initialiseNewScene();
 	std::string level = "levels." + levelName;
 	levelTree = pt.get_child(level);
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, levelTree.get_child("path")){
@@ -53,7 +54,9 @@ void LevelLoader::LoadLevel(std::string levelName)
 		gm->addMesh(meshFile, transform, rotate, scale, levelName);
 	}
 	// unload last scene load next scene
-	gm->loadScene(levelName);
+	gm->loadScene(nextScene, currScene);
+	currScene = levelName;
+	nextScene = "";
 }
 /*std::vector<float> LevelLoader::parse3F(std::string floats){
 	std::vector<float> floatVec;

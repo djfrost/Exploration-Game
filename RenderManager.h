@@ -21,6 +21,7 @@ class RenderManager{
 		//Curr and next scene
 		Ogre::SceneNode* currSceneNode;
 		Ogre::SceneNode* nextSceneNode;
+		bool groupExists( std::string group );
 	public:
 		RenderManager(GameManager* game_manager);
 		virtual ~RenderManager();
@@ -39,7 +40,8 @@ class RenderManager{
 		void addPath(std::string path, std::string resourceGroup);
 		void addMesh(std::string mesh, std::string resourceGroup);
 		void unloadScene(std::string currScene);
-		void loadScene(std::string sceneName);
+		void loadScene(std::string sceneName, std::string lastScene);
+		void initialiseNewScene();
 };
 
 #endif

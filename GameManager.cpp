@@ -48,6 +48,9 @@ void GameManager::addMesh(std::string mesh, std::vector<float> transform, std::v
 	render_manager->addMesh(mesh, resourceGroup);
 }
 
-void GameManager::loadScene(std::string scene){
-	render_manager->loadScene(scene);
+void GameManager::loadScene(std::string scene, std::string lastScene){
+	render_manager->loadScene(scene, lastScene);
+}
+void GameManager::initialiseNewScene(){
+	render_manager->initialiseNewScene();
 }
