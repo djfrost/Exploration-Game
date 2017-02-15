@@ -1,10 +1,11 @@
 {
 	"levels":{
 		"level_1": {
-			"path": ["./assets/models", "./assets/materials/scripts"],
+			"path": ["./assets/Models", "./assets/Materials/scripts", "./assets/Textures"],
 			"meshes": {
 					"meshNames" : {
-						"name" : "Fox"
+						"name" : "Fox",
+						"name" : "Grass"
 					},					
 					"Fox" : {
 						"file" : "Fox.mesh",
@@ -12,9 +13,6 @@
 						"rotate" : "0.0,1.0,0.0",
 						"angle" : "45.0",
 						"scale" : "1.0,1.0,1.0"
-					},
-					"meshNames" : {
-						"name" : "Grass"
 					},					
 					"Grass" : {
 						"file" : "Grass.mesh",

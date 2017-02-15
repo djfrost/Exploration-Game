@@ -172,8 +172,8 @@ void RenderManager::loadScene(std::string sceneName, std::string lastScene, std:
 	rgm.loadResourceGroup(sceneName, true, true);
 	Ogre::SceneNode* scene_root_node = scene_manager->getRootSceneNode();
 	for(int i = 0; i < meshFiles.size(); i++){
-		Ogre::SceneNode* fox_node = scene_manager->createSceneNode("Fox_Node");
-		Ogre::Entity* fox_entity = scene_manager->createEntity("Fox_Entity","Fox.mesh");
+		Ogre::SceneNode* fox_node = scene_manager->createSceneNode(meshNames[i] + "_node");
+		Ogre::Entity* fox_entity = scene_manager->createEntity(meshNames[i] + "_Entity",meshNames[i] + ".mesh");
 		fox_node->attachObject(fox_entity);
 		fox_node->translate(transforms[i][0],transforms[i][1],transforms[i][2]);
 		Vector3 vr(rotates[i][0],rotates[i][1],rotates[i][2]);
