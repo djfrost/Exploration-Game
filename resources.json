@@ -3,23 +3,39 @@
 		"level_1": {
 			"path": ["./assets/models", "./assets/materials/scripts"],
 			"meshes": {
-					"mesh" : "fox",
+					"meshNames" : {
+						"name" : "Fox"
+					},					
 					"Fox" : {
-						"file" : "fox.mesh",
-						"transform" : "1.0,0.0,0.0",
+						"file" : "Fox.mesh",
+						"transform" : "0.0,0.0,-2.0",
+						"rotate" : "0.0,1.0,0.0",
+						"angle" : "45.0",
+						"scale" : "1.0,1.0,1.0"
+					},
+					"meshNames" : {
+						"name" : "Grass"
+					},					
+					"Grass" : {
+						"file" : "Grass.mesh",
+						"transform" : "0.0,2.0,0.0",
 						"rotate" : "0.0,0.0,0.0",
-						"scale" : "0.0,0.0,0.0"
+						"angle" : "45.0",
+						"scale" : "10.0,10.0,10.0"
 					}
-			}
+			}	
 		},
 		"level_2": {
 			"path": ["./assets/models", "./assets/materials/scripts"],
 			"meshes": {
-					"mesh" : "fox",
+					"meshNames" : {
+						"name" : "Fox"
+					},					
 					"Fox" : {
-						"file" : "fox.mesh",
+						"file" : "Fox.mesh",
 						"transform" : "1.0,0.0,0.0",
-						"rotate" : "0.0,0.0,0.0",
+						"rotate" : "0.0,1.0,0.0",
+						"angle" : "60.0",
 						"scale" : "0.0,0.0,0.0"
 					}
 			}

@@ -38,9 +38,9 @@ class RenderManager{
 
 		void buildSimpleScene();
 		void addPath(std::string path, std::string resourceGroup);
-		void addMesh(std::string mesh, std::string resourceGroup);
+		void addMesh(std::string mesh, std::string resourceGroup, std::string mesh_file);
 		void unloadScene(std::string currScene);
-		void loadScene(std::string sceneName, std::string lastScene);
+		void loadScene(std::string sceneName, std::string lastScene, std::vector<std::string> meshNames, std::vector<std::string> meshFiles, std::vector< std::vector<float> > transforms, std::vector < std::vector<float> > rotates, std::vector<float> angle, std::vector < std::vector<float> > scales );
 		void initialiseNewScene();
 };
 

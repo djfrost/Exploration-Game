@@ -1,6 +1,7 @@
 #include "LevelLoader.h"
 #include <boost/foreach.hpp>
 #include "GameManager.h"
+#include <sstream>
 LevelLoader::LevelLoader(GameManager* gameManager, std::string fileName){
 	gm = gameManager;
 	ReadResources(fileName);
@@ -27,44 +28,61 @@ void LevelLoader::LoadLevel(std::string levelName)
 	nextScene = levelName;
 	ptree levelTree;
 	gm->initialiseNewScene();
+	std::ofstream outFile("LevelLoader.out");
+	outFile << levelName;
 	std::string level = "levels." + levelName;
 	levelTree = pt.get_child(level);
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, levelTree.get_child("path")){
 		gm->addPath(v.second.data(), levelName);
 	}
 	ptree meshTree = levelTree.get_child("meshes");
-	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, meshTree.get_child("mesh")){
-		ptree meshEntityTree = meshTree.get_child(v.second.data());
-		std::string meshFile;
-		for(auto& fileItem : meshEntityTree.get_child("file")){
-			meshFile = fileItem.second.get_value<std::string>();
+	std::vector<std::string> meshes;
+	std::vector<std::string> meshFiles;
+	std::vector< std::vector< float > > transforms;
+	std::vector< std::vector< float > > rotates;
+	std::vector< std::vector< float > > scales;
+	std::vector<float> angle;
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, meshTree.get_child("meshNames")){
+		outFile << v.second.data();
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &t, meshTree.get_child(v.second.data())){
+			std::string type = t.first.data();
+			if(type == "file")
+			{
+				outFile << t.second.data();
+				meshFiles.push_back(t.second.data());
+			}
+			else if(type == "transform"){
+				std::string transNotParsed = t.second.data();
+				transforms.push_back(parse3F(transNotParsed));
+			}
+			else if(type == "rotate"){
+				std::string rotNotParsed = t.second.data();
+				rotates.push_back(parse3F(rotNotParsed));
+			}
+			else if(type == "scale"){
+				std::string scaleNotParsed = t.second.data();
+				scales.push_back(parse3F(scaleNotParsed));
+			}
+			else if(type == "angle"){
+				std::string anglestr = t.second.data();
+				angle.push_back(stof(anglestr));
+			}
 		}
-	
-		std::vector<float> transform;
-		for (auto& item : meshEntityTree.get_child("transform")){
-			transform.push_back(item.second.get_value<float>());
-		}
-		std::vector<float> rotate;
-		for (auto& item : meshEntityTree.get_child("rotate")){
-			rotate.push_back(item.second.get_value<float>());
-		}std::vector<float> scale;
-		for (auto& item : meshEntityTree.get_child("scale")){
-			scale.push_back(item.second.get_value<float>());
-		}
-		gm->addMesh(meshFile, transform, rotate, scale, levelName);
+		meshes.push_back(v.second.data());
+		//gm->addMesh(v.second.data(), transform, rotate, scale, levelName, meshFile);
 	}
 	// unload last scene load next scene
-	gm->loadScene(nextScene, currScene);
+	gm->loadScene(nextScene, currScene, meshes, meshFiles, transforms, rotates, angle, scales);
 	currScene = levelName;
 	nextScene = "";
 }
-/*std::vector<float> LevelLoader::parse3F(std::string floats){
+std::vector<float> LevelLoader::parse3F(std::string floats){
 	std::vector<float> floatVec;
-	int firstDelim = floats.find(",");
-	floatVec.push_back(stof(floats.substr(0,firstDelim)));
-	floats.erase(0, firstDelim);
-	firstDelim = floats.find(",");
-	floatVec.push_back(stof(floats.substr(0,firstDelim)));
-	floats.erase(0, firstDelim);
-	floatVec.push_back(stof(floats.substr(0,floats.length)));
-}*/
+	std::stringstream ss;
+	ss.str(floats);
+	std::string tempFloat;
+	while(std::getline(ss, tempFloat, ',')){
+		floatVec.push_back(stof(tempFloat));
+	}
+	return floatVec;
+}

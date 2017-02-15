@@ -44,12 +44,12 @@ int GameManager::getRenderWindowHeight(){
 void GameManager::addPath(std::string path, std::string resourceGroup){
 	render_manager->addPath(path, resourceGroup);
 }
-void GameManager::addMesh(std::string mesh, std::vector<float> transform, std::vector<float> rotate, std::vector<float> scale, std::string resourceGroup){
-	render_manager->addMesh(mesh, resourceGroup);
+void GameManager::addMesh(std::string mesh, std::vector<float> transform, std::vector<float> rotate, std::vector<float> scale, std::string resourceGroup, std::string mesh_file){
+	render_manager->addMesh(mesh, resourceGroup, mesh_file);
 }
 
-void GameManager::loadScene(std::string scene, std::string lastScene){
-	render_manager->loadScene(scene, lastScene);
+void GameManager::loadScene(std::string scene, std::string lastScene, std::vector<std::string> meshNames, std::vector<std::string> meshFiles, std::vector < std::vector<float> > transforms, std::vector < std::vector<float> > rotates, std::vector<float> angle, std::vector < std::vector<float> > scales ){
+	render_manager->loadScene(scene, lastScene, meshNames, meshFiles, transforms, rotates, angle, scales);
 }
 void GameManager::initialiseNewScene(){
 	render_manager->initialiseNewScene();

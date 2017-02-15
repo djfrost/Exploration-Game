@@ -1,79 +1,35 @@
-vertex_program GLSLDemo/FurVS glsl 
-{ 
-  source FurVP.vert 
-  default_params
-  {
-    param_named fFurLength float 0.15
-	param_named fUVScale float 1.0
-	param_named fLayer float 0
-	param_named vGravity vec3(0,-2.0,0)
-	param_named vLightDir vec4(0,0,-1.0,0)
-  }
-} 
+// Fox genrated by blender2ogre 0.5.9
 
-fragment_program GLSLDemo/FurFS glsl 
-{ 
-  source FurFP.frag 
-  default_params
-  {
-    param_named Ka float 0.2
-    param_named Kd float 0.5
-    param_named Ks float 0.0
-    param_named furTU int 0
-  }
-} 
+material Fox 
+{
+    receive_shadows on 
 
-material Fox
-{ 
-  technique GLSL
-  { 
-    pass base_coat
-    { 
-      ambient 0.7 0.7 0.7
-      diffuse 0.5 0.8 0.5
-      specular 1.0 1.0 1.0 1.5
+    technique
+    {
+        pass Fox
+        {
+            ambient 0.800000011920929 0.800000011920929 0.800000011920929 1.0
+            diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
 
-      vertex_program_ref GLSLDemo/FurVS
-      {
-      }
+            alpha_to_coverage off
+            colour_write on
+            cull_hardware clockwise
+            depth_check on
+            depth_func less_equal
+            depth_write on
+            illumination_stage 
+            light_clip_planes off
+            light_scissor off
+            lighting on
+            normalise_normals off
+            polygon_mode solid
+            scene_blend one zero
+            scene_blend_op add
+            shading gouraud
+            transparent_sorting on
 
-      fragment_program_ref GLSLDemo/FurFS 
-      { 
-      } 
-
-      texture_unit
-      {
-        texture FoxFur.png
-        tex_coord_set 0
-        filtering trilinear
-      }
-
-    } 
-
-    pass grow_fur
-    { 
-      ambient 0.7 0.7 0.7
-      diffuse 0.8 1.0 0.8
-      specular 1.0 1.0 1.0 64
-      depth_write off
-
-      scene_blend src_alpha one
-      iteration 10
-      
-      vertex_program_ref GLSLDemo/FurVS
-      {
-      }
-
-      fragment_program_ref GLSLDemo/FurFS
-      {
-      }
-
-      texture_unit
-      {
-        texture FoxFur.png
-        tex_coord_set 0
-        filtering trilinear
-      }
-    } 
-  } 
+        }
+    }
 }

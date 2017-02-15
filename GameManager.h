@@ -22,8 +22,8 @@ class GameManager{
 		size_t getRenderWindowHandle();
 		std::string getLoadedLevelName();
 		void addPath(std::string path, std::string resourceGroup);
-		void addMesh(std::string mesh, std::vector<float> transform, std::vector<float> rotate, std::vector<float> scale, std::string resourceGroup);
-		void loadScene(std::string scene, std::string lastScene);
+		void addMesh(std::string mesh, std::vector<float> transform, std::vector<float> rotate, std::vector<float> scale, std::string resourceGroup, std::string mesh_file);
+		void loadScene(std::string scene, std::string lastScene, std::vector<std::string> meshNames, std::vector<std::string> meshFiles, std::vector < std::vector<float> > transforms, std::vector < std::vector<float> > rotates, std::vector<float> angle, std::vector < std::vector<float> > scales );
 		void initialiseNewScene();
 };
 
