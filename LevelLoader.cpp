@@ -28,8 +28,6 @@ void LevelLoader::LoadLevel(std::string levelName)
 	nextScene = levelName;
 	ptree levelTree;
 	gm->initialiseNewScene();
-	std::ofstream outFile("LevelLoader.out");
-	outFile << levelName;
 	std::string level = "levels." + levelName;
 	levelTree = pt.get_child(level);
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, levelTree.get_child("path")){
@@ -43,25 +41,23 @@ void LevelLoader::LoadLevel(std::string levelName)
 	std::vector< std::vector< float > > scales;
 	std::vector<float> angle;
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, meshTree.get_child("meshNames")){
-		outFile << v.second.data();
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &t, meshTree.get_child(v.second.data())){
 			std::string type = t.first.data();
 			if(type == "file")
 			{
-				outFile << t.second.data();
 				meshFiles.push_back(t.second.data());
 			}
 			else if(type == "transform"){
 				std::string transNotParsed = t.second.data();
-				transforms.push_back(parse3F(transNotParsed));
+				transforms.push_back(parseMultF(transNotParsed));
 			}
 			else if(type == "rotate"){
 				std::string rotNotParsed = t.second.data();
-				rotates.push_back(parse3F(rotNotParsed));
+				rotates.push_back(parseMultF(rotNotParsed));
 			}
 			else if(type == "scale"){
 				std::string scaleNotParsed = t.second.data();
-				scales.push_back(parse3F(scaleNotParsed));
+				scales.push_back(parseMultF(scaleNotParsed));
 			}
 			else if(type == "angle"){
 				std::string anglestr = t.second.data();
@@ -69,14 +65,65 @@ void LevelLoader::LoadLevel(std::string levelName)
 			}
 		}
 		meshes.push_back(v.second.data());
-		//gm->addMesh(v.second.data(), transform, rotate, scale, levelName, meshFile);
 	}
+	ptree cameraTree = levelTree.get_child("Cameras");
+	std::vector< std::vector < float > > positions;
+	std::vector< std::vector < float > > lookAts;
+	std::vector<float> nearclips;
+	std::vector<float> farclips;
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, cameraTree.get_child("Names")){
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &t, cameraTree.get_child(v.second.data())){
+			std::string type = t.first.data();
+			if(type == "position")
+			{
+				std::string posNotParsed = t.second.data();
+				positions.push_back(parseMultF(posNotParsed));
+			}
+			else if(type == "lookat"){
+				std::string laNotParsed = t.second.data();
+				lookAts.push_back(parseMultF(laNotParsed));
+			}
+			else if(type == "nearclip"){
+				nearclips.push_back(stof(t.second.data()));
+			}
+			else if(type == "farclip"){
+				farclips.push_back(stof(t.second.data()));
+			}
+		}
+	}
+	ptree lightTree = levelTree.get_child("Lights");
+	std::vector<std::string> names;
+	std::vector<float> types;
+	std::vector< std::vector < float > > colors;
+	std::vector< std::vector < float > > directions;
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, lightTree.get_child("Names")){
+		std::string name = v.second.data();
+		names.push_back(name);
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &t, lightTree.get_child(v.second.data())){
+			std::string type = t.first.data();
+			if(type == "type"){
+				types.push_back(stof(t.second.data()));
+			}
+			else if(type == "color"){
+				std::string colNotParsed = t.second.data();
+				colors.push_back(parseMultF(colNotParsed));
+			}
+			else if(type == "direction"){
+				std::string dirNotParsed = t.second.data();
+				directions.push_back(parseMultF(dirNotParsed));
+			}
+		}
+	}
+	std::string skybox = levelTree.get<std::string>("SkyMap");
 	// unload last scene load next scene
+	gm->loadLights(names,types, colors, directions);
+	gm->loadCameras(positions, lookAts, nearclips, farclips);
 	gm->loadScene(nextScene, currScene, meshes, meshFiles, transforms, rotates, angle, scales);
+	gm->loadSkyBox(skybox);
 	currScene = levelName;
 	nextScene = "";
 }
-std::vector<float> LevelLoader::parse3F(std::string floats){
+std::vector<float> LevelLoader::parseMultF(std::string floats){
 	std::vector<float> floatVec;
 	std::stringstream ss;
 	ss.str(floats);

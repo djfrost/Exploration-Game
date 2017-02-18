@@ -24,7 +24,7 @@ class LevelLoader{
 		void ReadResources(std::string fileName);
 		std::string currScene;
 		std::string nextScene;
-		std::vector<float> parse3F(std::string floats);
+		std::vector<float> parseMultF(std::string floats);
 	public: 
 		//Loads the json file, and stores a reference to the game manager
 		LevelLoader(GameManager* gameManager, std::string fileName);

@@ -51,6 +51,15 @@ void GameManager::addMesh(std::string mesh, std::vector<float> transform, std::v
 void GameManager::loadScene(std::string scene, std::string lastScene, std::vector<std::string> meshNames, std::vector<std::string> meshFiles, std::vector < std::vector<float> > transforms, std::vector < std::vector<float> > rotates, std::vector<float> angle, std::vector < std::vector<float> > scales ){
 	render_manager->loadScene(scene, lastScene, meshNames, meshFiles, transforms, rotates, angle, scales);
 }
+void GameManager::loadCameras(std::vector< std::vector< float > > positions, std::vector< std::vector < float > > lookAts, std::vector<float> nearclips, std::vector<float> farclips){
+	render_manager->loadCameras(positions, lookAts, nearclips, farclips);
+}
+void GameManager::loadLights(std::vector<std::string> names, std::vector<float> types, std::vector< std::vector < float > > colors, std::vector< std::vector < float > > directions){
+	render_manager->loadLights(names, types, colors, directions);
+}
+void GameManager::loadSkyBox(std::string skyBoxMat){
+	render_manager->loadSkyBox(skyBoxMat);
+}
 void GameManager::initialiseNewScene(){
 	render_manager->initialiseNewScene();
 }

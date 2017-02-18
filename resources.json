@@ -3,25 +3,77 @@
 		"level_1": {
 			"path": ["./assets/Models", "./assets/Materials/scripts", "./assets/Textures"],
 			"meshes": {
-					"meshNames" : {
-						"name" : "Fox",
-						"name" : "Grass"
-					},					
-					"Fox" : {
-						"file" : "Fox.mesh",
-						"transform" : "0.0,0.0,-2.0",
-						"rotate" : "0.0,1.0,0.0",
-						"angle" : "45.0",
-						"scale" : "1.0,1.0,1.0"
-					},					
-					"Grass" : {
-						"file" : "Grass.mesh",
-						"transform" : "0.0,2.0,0.0",
-						"rotate" : "0.0,0.0,0.0",
-						"angle" : "45.0",
-						"scale" : "10.0,10.0,10.0"
-					}
-			}	
+				"meshNames" : {
+					"name" : "Fox",
+					"name" : "GroundGrass",
+					"name" : "Tree",
+					"name" : "Tree2",
+					"name" : "Sky"
+				},					
+				"Fox" : {
+					"file" : "Fox.mesh",
+					"transform" : "0.0,0.0,-10.0",
+					"rotate" : "0.0,0.0,0.0",
+					"angle" : "45.0",
+					"scale" : "1.0,1.0,1.0"
+				},					
+				"GroundGrass" : {
+					"file" : "GroundGrass.mesh",
+					"transform" : "0.0,-7.15,0.0",
+					"rotate" : "0.0,1.0,0.0",
+					"angle" : "180.0",
+					"scale" : "40.0,1.0,40.0"
+				},
+				"Tree" : {
+					"file" : "leaves.001.mesh",
+					"transform" : "-6.0,-7.15,-4.0",
+					"rotate" : "0.0,0.0,0.0",
+					"angle" : "180.0",
+					"scale" : "1.5,3.0,1.0"
+				},
+				"Tree2" : {
+					"file" : "leaves.001.mesh",
+					"transform" : "6.0,-7.15,-4.0",
+					"rotate" : "0.0,0.0,0.0",
+					"angle" : "180.0",
+					"scale" : "1.5,3.0,1.0"
+				},
+				"Sky" : {
+					"file" : "Sky.mesh",
+					"transform" : "0.0,0.0,-25.0",
+					"rotate" : "0.0,0.0,1.0",
+					"angle" : "180.0",
+					"scale" : "50,50.0,1.0"
+				}
+			},
+			"Cameras" : {
+				"Names" : {
+					"Name" : "1"
+				},
+				"1" : {
+					"position" : "0.0,5.0,20.0",
+					"lookat" : "0.0,0.0,0.0",
+					"nearclip" : "2.0",
+					"farclip" : "50.0"
+				}
+			},
+			"Lights" : {
+				"Names" : {
+					"Name" : "BaseLight",
+					"Name" : "TopLight"
+				},
+				"BaseLight" : {
+					"type" : "1",
+					"color" : "1.0,1.0,1.0",
+					"direction" : "0.0,0.0,-1.0"
+				},
+				"TopLight" : {
+					"type" : "1",
+					"color" : "1.0,1.0,1.0",
+					"direction" : "0.0,-7.15,0.0"
+				}
+			},
+			"SkyMap" : "sky"
 		},
 		"level_2": {
 			"path": ["./assets/models", "./assets/materials/scripts"],

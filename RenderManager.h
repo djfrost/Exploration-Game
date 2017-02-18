@@ -41,7 +41,10 @@ class RenderManager{
 		void addMesh(std::string mesh, std::string resourceGroup, std::string mesh_file);
 		void unloadScene(std::string currScene);
 		void loadScene(std::string sceneName, std::string lastScene, std::vector<std::string> meshNames, std::vector<std::string> meshFiles, std::vector< std::vector<float> > transforms, std::vector < std::vector<float> > rotates, std::vector<float> angle, std::vector < std::vector<float> > scales );
+		void loadCameras(std::vector< std::vector< float > > positions, std::vector< std::vector < float > > lookAts, std::vector<float> nearclips, std::vector<float> farclips);
+		void loadLights(std::vector<std::string> names, std::vector<float> types, std::vector< std::vector < float > > colors, std::vector< std::vector < float > > directions);
 		void initialiseNewScene();
+		void loadSkyBox(std::string skyBoxMat);
 };
 
 #endif

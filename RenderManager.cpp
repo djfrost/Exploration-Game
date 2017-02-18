@@ -152,16 +152,7 @@ void RenderManager::unloadScene(std::string currScene){
 //Unload the last scene, then initialise the current resource group and load it.
 void RenderManager::loadScene(std::string sceneName, std::string lastScene, std::vector<std::string> meshNames, std::vector<std::string> meshFiles, std::vector< std::vector<float> >transforms, std::vector < std::vector<float> > rotates, std::vector<float> angle, std::vector < std::vector<float> > scales ){
 	//Temp code
-	camera->setPosition(Ogre::Vector3(0,0,10));
-	camera->lookAt(Ogre::Vector3(0,0,0));
-	camera->setNearClipDistance(2);
-	camera->setFarClipDistance(50);
-	scene_manager->setAmbientLight(Ogre::ColourValue(.05,.05,.05));
-	Ogre::Light* light = scene_manager->createLight("Light");
-	light->setType(Ogre::Light::LT_DIRECTIONAL);
-	
-	light->setDiffuseColour(1.0,1.0,1.0);
-	light->setDirection(Ogre::Vector3(0.0,0.0,-1.0));
+	scene_manager->setAmbientLight(Ogre::ColourValue(.30,.30,.30));
 	//End of temp code
 	Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
 	unloadScene(lastScene);
@@ -173,7 +164,7 @@ void RenderManager::loadScene(std::string sceneName, std::string lastScene, std:
 	Ogre::SceneNode* scene_root_node = scene_manager->getRootSceneNode();
 	for(int i = 0; i < meshFiles.size(); i++){
 		Ogre::SceneNode* fox_node = scene_manager->createSceneNode(meshNames[i] + "_node");
-		Ogre::Entity* fox_entity = scene_manager->createEntity(meshNames[i] + "_Entity",meshNames[i] + ".mesh");
+		Ogre::Entity* fox_entity = scene_manager->createEntity(meshNames[i] + "_Entity",meshFiles[i]);
 		fox_node->attachObject(fox_entity);
 		fox_node->translate(transforms[i][0],transforms[i][1],transforms[i][2]);
 		Vector3 vr(rotates[i][0],rotates[i][1],rotates[i][2]);
@@ -181,6 +172,26 @@ void RenderManager::loadScene(std::string sceneName, std::string lastScene, std:
 		fox_node->rotate(q);
 		fox_node->scale(scales[i][0],scales[i][1],scales[i][2]);
 		scene_root_node->addChild(fox_node);
+		/*
+			mAnimationState = mEntity->getAnimationState("Walk");
+			mAnimationState->setWeight(1);
+			mAnimationState->setLoop(true);
+			mAnimationState->setEnabled(true); 
+		*/
+	}
+}
+void RenderManager::loadCameras(std::vector< std::vector< float > > positions, std::vector< std::vector < float > > lookAts, std::vector<float> nearclips, std::vector<float> farclips){
+	camera->setPosition(Ogre::Vector3(positions[0][0], positions[0][1], positions[0][2]));
+	camera->lookAt(Ogre::Vector3(lookAts[0][0], lookAts[0][1], lookAts[0][2]));
+	camera->setNearClipDistance(nearclips[0]);
+	camera->setFarClipDistance(farclips[0]);
+}
+void RenderManager::loadLights(std::vector<std::string> names, std::vector<float> types, std::vector< std::vector < float > > colors, std::vector< std::vector < float > > directions){
+	for(int i = 0; i < types.size(); i++){
+		Ogre::Light* light = scene_manager->createLight(names[i]);
+		light->setType(Ogre::Light::LT_DIRECTIONAL);
+		light->setDiffuseColour(colors[i][0],colors[i][1],colors[i][2]);
+		light->setDirection(Ogre::Vector3(directions[i][0],directions[i][1],directions[i][2]));
 	}
 }
 //Get a new scene node
@@ -205,4 +216,7 @@ bool RenderManager::groupExists( std::string group )
        } 
    }
    return false;
+}
+void RenderManager::loadSkyBox(std::string skyBoxMat){
+	scene_manager->setSkyBox(true, skyBoxMat);
 }

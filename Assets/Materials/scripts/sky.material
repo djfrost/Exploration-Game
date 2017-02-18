@@ -1,0 +1,17 @@
+material sky
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            depth_write off
+            texture_unit
+            {
+                cubic_texture skybox_fr.png skybox_bk.png skybox_lf.png skybox_rt.png skybox_up.png skybox_dn.png  separateUV
+				tex_coord_set 0
+                tex_address_mode clamp
+            }
+        }
+    }
+}
