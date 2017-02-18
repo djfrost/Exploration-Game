@@ -1,6 +1,8 @@
 #include "RenderManager.h"
 #include "GameManager.h"
-
+#include "AnimationRenderListener.h"
+#undef OGRE_MAX_NUM_BONES
+#define OGRE_MAX_NUM_BONES 20000
 #include <iostream>
 using namespace std;
 using namespace Ogre;
@@ -40,9 +42,11 @@ void RenderManager::init(){
 
 	float actual_width = Ogre::Real(viewport->getActualWidth());
 	float actual_height = Ogre::Real(viewport->getActualHeight());
-	float aspect_ratio = actual_width/actual_height;
+	float aspect_ratio = 16/9;
 	camera->setAspectRatio(aspect_ratio);
 	//buildSimpleScene();
+	render_listener = new AnimationRenderListener(this);
+	root->addFrameListener(render_listener);
 }
 
 RenderManager::RenderManager(GameManager* gm){
@@ -51,6 +55,12 @@ RenderManager::RenderManager(GameManager* gm){
 }
 
 RenderManager::~RenderManager(){
+   render_listener->stopRendering();
+   delete render_listener;
+   render_listener = NULL;
+   for(int i = 0; i < anims.size(); i++){
+	   delete anims[i];
+   }
    game_manager = NULL;
    
    scene_manager->clearScene();
@@ -150,7 +160,7 @@ void RenderManager::unloadScene(std::string currScene){
 	}
 }
 //Unload the last scene, then initialise the current resource group and load it.
-void RenderManager::loadScene(std::string sceneName, std::string lastScene, std::vector<std::string> meshNames, std::vector<std::string> meshFiles, std::vector< std::vector<float> >transforms, std::vector < std::vector<float> > rotates, std::vector<float> angle, std::vector < std::vector<float> > scales ){
+void RenderManager::loadScene(std::string sceneName, std::string lastScene, std::vector<std::string> meshNames, std::vector<std::string> meshFiles, std::vector< std::vector<float> >transforms, std::vector < std::vector<float> > rotates, std::vector<float> angle, std::vector < std::vector<float> > scales, std::vector<std::string> animNames ){
 	//Temp code
 	scene_manager->setAmbientLight(Ogre::ColourValue(.30,.30,.30));
 	//End of temp code
@@ -172,6 +182,13 @@ void RenderManager::loadScene(std::string sceneName, std::string lastScene, std:
 		fox_node->rotate(q);
 		fox_node->scale(scales[i][0],scales[i][1],scales[i][2]);
 		scene_root_node->addChild(fox_node);
+		if(animNames[i] != "none"){
+			Ogre::AnimationState* animState = fox_entity->getAnimationState(animNames[i]);
+			animState->setLoop(true);
+			animState->setEnabled(true);
+			anims.push_back(animState);
+		}
+		
 	}
 }
 void RenderManager::loadCameras(std::vector< std::vector< float > > positions, std::vector< std::vector < float > > lookAts, std::vector<float> nearclips, std::vector<float> farclips){

@@ -40,6 +40,7 @@ void LevelLoader::LoadLevel(std::string levelName)
 	std::vector< std::vector< float > > rotates;
 	std::vector< std::vector< float > > scales;
 	std::vector<float> angle;
+	std::vector<std::string> defaultAnims;
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, meshTree.get_child("meshNames")){
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &t, meshTree.get_child(v.second.data())){
 			std::string type = t.first.data();
@@ -62,6 +63,11 @@ void LevelLoader::LoadLevel(std::string levelName)
 			else if(type == "angle"){
 				std::string anglestr = t.second.data();
 				angle.push_back(stof(anglestr));
+			}
+			else if(type == "defaultAnim"){
+				std::string anim = t.second.data();
+				defaultAnims.push_back(anim);
+				std::cout << anim << std::endl << std::endl << std::endl << std::endl;
 			}
 		}
 		meshes.push_back(v.second.data());
@@ -158,9 +164,9 @@ void LevelLoader::LoadLevel(std::string levelName)
 	// unload last scene load next scene
 	gm->loadLights(names,types, colors, directions);
 	gm->loadCameras(positions, lookAts, nearclips, farclips);
-	gm->loadScene(nextScene, currScene, meshes, meshFiles, transforms, rotates, angle, scales);
+	gm->loadScene(nextScene, currScene, meshes, meshFiles, transforms, rotates, angle, scales, defaultAnims);
 	gm->loadSkyBox(skybox);
-	gm->processAnims(objects, typesAnims, values, axis, timeSteps, start, begin);
+	//gm->processAnims(objects, typesAnims, values, axis, timeSteps, start, begin);
 	currScene = levelName;
 	nextScene = "";
 }

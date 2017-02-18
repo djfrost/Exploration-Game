@@ -48,8 +48,8 @@ void GameManager::addMesh(std::string mesh, std::vector<float> transform, std::v
 	render_manager->addMesh(mesh, resourceGroup, mesh_file);
 }
 
-void GameManager::loadScene(std::string scene, std::string lastScene, std::vector<std::string> meshNames, std::vector<std::string> meshFiles, std::vector < std::vector<float> > transforms, std::vector < std::vector<float> > rotates, std::vector<float> angle, std::vector < std::vector<float> > scales ){
-	render_manager->loadScene(scene, lastScene, meshNames, meshFiles, transforms, rotates, angle, scales);
+void GameManager::loadScene(std::string scene, std::string lastScene, std::vector<std::string> meshNames, std::vector<std::string> meshFiles, std::vector < std::vector<float> > transforms, std::vector < std::vector<float> > rotates, std::vector<float> angle, std::vector < std::vector<float> > scales, std::vector<std::string> animNames ){
+	render_manager->loadScene(scene, lastScene, meshNames, meshFiles, transforms, rotates, angle, scales, animNames);
 }
 void GameManager::loadCameras(std::vector< std::vector< float > > positions, std::vector< std::vector < float > > lookAts, std::vector<float> nearclips, std::vector<float> farclips){
 	render_manager->loadCameras(positions, lookAts, nearclips, farclips);

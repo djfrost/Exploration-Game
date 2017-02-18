@@ -8,7 +8,7 @@ LIBS=-lboost_system-mgw51-mt-1_63 -lOgreMain
 COMPILE = $(CC) $(INC_DIRS) -c
 LINK = $(CC) $(LIB_DIRS) -o
 
-FILES =  LevelLoader.o RenderManager.o GameManager.o GameDriver.o
+FILES =  LevelLoader.o AnimationRenderListener.o RenderManager.o GameManager.o GameDriver.o
 all: Ogre
 
 Ogre: 		$(FILES)
@@ -22,3 +22,5 @@ RenderManager.o: RenderManager.h RenderManager.cpp
 			$(COMPILE) RenderManager.cpp
 GameDriver.o:	GameDriver.cpp
 			$(COMPILE) GameDriver.cpp
+AnimationRenderListener.o: AnimationRenderListener.h AnimationRenderListener.cpp
+			$(COMPILE) AnimationRenderListener.cpp
