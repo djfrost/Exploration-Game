@@ -172,12 +172,6 @@ void RenderManager::loadScene(std::string sceneName, std::string lastScene, std:
 		fox_node->rotate(q);
 		fox_node->scale(scales[i][0],scales[i][1],scales[i][2]);
 		scene_root_node->addChild(fox_node);
-		/*
-			mAnimationState = mEntity->getAnimationState("Walk");
-			mAnimationState->setWeight(1);
-			mAnimationState->setLoop(true);
-			mAnimationState->setEnabled(true); 
-		*/
 	}
 }
 void RenderManager::loadCameras(std::vector< std::vector< float > > positions, std::vector< std::vector < float > > lookAts, std::vector<float> nearclips, std::vector<float> farclips){
@@ -219,4 +213,30 @@ bool RenderManager::groupExists( std::string group )
 }
 void RenderManager::loadSkyBox(std::string skyBoxMat){
 	scene_manager->setSkyBox(true, skyBoxMat);
+}
+void RenderManager::processAnims(std::vector<std::string> objects, std::vector<std::string> types, std::vector< std::vector < float > > values, std::vector< std::vector < float > >  axis, std::vector< std::vector < float > > timeSteps, std::vector< std::vector < float > > start, std::vector < std::vector<float> > begin){
+	for(int i =0; i < objects.size(); i++){
+		Ogre::Animation* newAnim = scene_manager->createAnimation(objects[i] + "Anim", timeSteps[i][0]);
+		newAnim->setInterpolationMode(Ogre::Animation::IM_SPLINE);
+		Ogre::SceneNode* scene_root_node = scene_manager->getRootSceneNode();
+		Ogre::Node* animNode = scene_root_node->getChild(objects[i] + "_node");
+		Ogre::NodeAnimationTrack* animTrack = newAnim->createNodeTrack(1,animNode);
+		if(types[i] == "rot"){
+			Ogre::TransformKeyFrame* animFrame = animTrack->createNodeKeyFrame(start[i][0]);
+			Ogre::Quaternion rotQ(Degree(begin[i][0]), Ogre::Vector3(axis[i][0],axis[i][1], axis[i][2]));
+			animFrame->setRotation(rotQ);
+			Ogre::TransformKeyFrame* animFrameEnd = animTrack->createNodeKeyFrame(timeSteps[i][0]);
+			Ogre::Quaternion rotQ2(Degree(values[i][0]), Ogre::Vector3(axis[i][0],axis[i][1], axis[i][2]));
+			animFrameEnd->setRotation(rotQ2);
+		}
+		Ogre::AnimationState* anim = scene_manager->createAnimationState(objects[i] + "Anim");
+		anim->setEnabled(true);
+		anim->setLoop(true);
+		anims.push_back(anim);
+	}
+}
+void RenderManager::processAnimations(float timestep){
+	for(int i = 0; i < anims.size(); i++){
+		anims[i]->addTime(timestep);
+	}
 }

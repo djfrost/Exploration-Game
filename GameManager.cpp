@@ -60,6 +60,9 @@ void GameManager::loadLights(std::vector<std::string> names, std::vector<float> 
 void GameManager::loadSkyBox(std::string skyBoxMat){
 	render_manager->loadSkyBox(skyBoxMat);
 }
+void GameManager::processAnims(std::vector<std::string> objects, std::vector<std::string> types, std::vector< std::vector < float > > values, std::vector< std::vector < float > >  axis, std::vector< std::vector < float > > timeSteps, std::vector< std::vector < float > > start, std::vector < std::vector<float> > begin){
+	render_manager->processAnims(objects, types, values, axis, timeSteps, start, begin);
+}
 void GameManager::initialiseNewScene(){
 	render_manager->initialiseNewScene();
 }

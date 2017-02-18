@@ -114,12 +114,53 @@ void LevelLoader::LoadLevel(std::string levelName)
 			}
 		}
 	}
+	ptree animTree = meshTree.get_child("Animations");
+	std::vector<std::string> objects;
+	std::vector<std::string> typesAnims;
+	std::vector< std::vector < float > > values;
+	std::vector< std::vector < float > > axis;
+	std::vector< std::vector < float > > timeSteps;
+	std::vector< std::vector < float > > start;
+	std::vector< std::vector < float > > begin;
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, animTree.get_child("AnimNames")){
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &t, animTree.get_child(v.second.data())){
+			std::string type = t.first.data();
+			if(type == "object")
+			{
+				objects.push_back(t.second.data());
+			}
+			else if(type == "type"){
+				typesAnims.push_back(t.second.data());
+			}
+			else if(type == "value"){
+				std::string valNotParsed = t.second.data();
+				values.push_back(parseMultF(valNotParsed));
+			}
+			else if(type == "axis"){
+				std::string axNotParsed = t.second.data();
+				axis.push_back(parseMultF(axNotParsed));
+			}
+			else if(type == "timestep"){
+				std::string timeNotParsed = t.second.data();
+				timeSteps.push_back(parseMultF(timeNotParsed));
+			}
+			else if(type == "start"){
+				std::string startNotParsed = t.second.data();
+				start.push_back(parseMultF(startNotParsed));
+			}
+			else if(type == "begin"){
+				std::string begNotParsed = t.second.data();
+				begin.push_back(parseMultF(begNotParsed));
+			}
+		}
+	}
 	std::string skybox = levelTree.get<std::string>("SkyMap");
 	// unload last scene load next scene
 	gm->loadLights(names,types, colors, directions);
 	gm->loadCameras(positions, lookAts, nearclips, farclips);
 	gm->loadScene(nextScene, currScene, meshes, meshFiles, transforms, rotates, angle, scales);
 	gm->loadSkyBox(skybox);
+	gm->processAnims(objects, typesAnims, values, axis, timeSteps, start, begin);
 	currScene = levelName;
 	nextScene = "";
 }
