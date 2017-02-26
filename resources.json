@@ -7,8 +7,7 @@
 					"name" : "Fox",
 					"name" : "GroundGrass",
 					"name" : "Tree",
-					"name" : "Tree2",
-					"name" : "Sky"
+					"name" : "Tree2"
 				},					
 				"Fox" : {
 					"file" : "Fox.mesh",
@@ -73,7 +72,7 @@
 					"position" : "0.0,5.0,20.0",
 					"lookat" : "0.0,0.0,0.0",
 					"nearclip" : "2.0",
-					"farclip" : "50.0"
+					"farclip" : "0.0"
 				}
 			},
 			"Lights" : {

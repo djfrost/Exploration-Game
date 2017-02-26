@@ -195,7 +195,7 @@ void RenderManager::loadCameras(std::vector< std::vector< float > > positions, s
 	camera->setPosition(Ogre::Vector3(positions[0][0], positions[0][1], positions[0][2]));
 	camera->lookAt(Ogre::Vector3(lookAts[0][0], lookAts[0][1], lookAts[0][2]));
 	camera->setNearClipDistance(nearclips[0]);
-	camera->setFarClipDistance(farclips[0]);
+	camera->setFarClipDistance(0);
 }
 void RenderManager::loadLights(std::vector<std::string> names, std::vector<float> types, std::vector< std::vector < float > > colors, std::vector< std::vector < float > > directions){
 	for(int i = 0; i < types.size(); i++){
