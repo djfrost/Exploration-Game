@@ -2,10 +2,12 @@
 #define RENDER_MANAGER
 #include <string>
 #include "Ogre.h"
+#include "CSC2110/ListArray.h"
 
 class AnimationRenderListener;
 class GameManager;
 class ResourceParser;
+class RenderListener;
 class RenderManager{
 	private:
 		Ogre::Root* root;
@@ -14,7 +16,6 @@ class RenderManager{
 		AnimationRenderListener* render_listener;
 		Ogre::Camera* camera;
 		Ogre::Viewport* viewport;
-
 		GameManager* game_manager;
 		void init();
 		size_t window_handle;
@@ -24,6 +25,7 @@ class RenderManager{
 		Ogre::SceneNode* nextSceneNode;
 		bool groupExists( std::string group );
 		std::vector<Ogre::AnimationState* > anims;
+		ListArray<RenderListener>* render_listeners;
 	public:
 		RenderManager(GameManager* game_manager);
 		virtual ~RenderManager();
@@ -34,10 +36,6 @@ class RenderManager{
 
 		Ogre::RenderWindow* getRenderWindow();
 		Ogre::SceneManager* getSceneManager();
-
-		void startRendering();
-		void stopRendering();
-
 		void buildSimpleScene();
 		void addPath(std::string path, std::string resourceGroup);
 		void addMesh(std::string mesh, std::string resourceGroup, std::string mesh_file);
@@ -49,6 +47,14 @@ class RenderManager{
 		void loadSkyBox(std::string skyBoxMat);
 		void processAnims(std::vector<std::string> objects, std::vector<std::string> types, std::vector< std::vector < float > > values, std::vector< std::vector < float > >  axis, std::vector< std::vector < float > > timeSteps, std::vector< std::vector < float > > start, std::vector < std::vector<float> > begin );
 		void processAnimations(float timestep);
+		void processKeyboardInput(std::string keyName);
+		void checkForInput(float time_step);
+		void leftJoystickAxisMoved(float north_south, float east_west);
+		void rightJoystickAxisMoved(float north_south, float east_west);
+		void startRendering();
+		void stopRendering();
+		void logComment(std::string comment);
+
 };
 
 #endif

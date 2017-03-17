@@ -3,7 +3,7 @@
 material Leaves.001 
 {
     receive_shadows on 
-
+	cast_shadows on
     technique
     {
         pass Leaves.001

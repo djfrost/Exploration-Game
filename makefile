@@ -1,19 +1,24 @@
 AutomatedMakefile = am
 CC = g++ -std=c++11
 
-INC_DIRS=-I./ -I$(OGRE_PATH)/OgreMain/include -I$(BOOST_PATH)
-LIB_DIRS=-L./ -L$(OGRE_PATH)/build/lib -L$(BOOST_PATH)/stage/lib
-LIBS=-lboost_system-mgw51-mt-1_63 -lOgreMain 
+INC_DIRS=-I./ -I$(OGRE_PATH)/OgreMain/include -I$(BOOST_PATH) -I$(OIS_PATH)/include
+LIB_DIRS=-L./ -L$(OGRE_PATH)/build/lib -L$(BOOST_PATH)/stage/lib -L$(OIS_PATH)/lib
+LIBS=-lboost_system-mgw51-mt-1_63 -lOgreMain -lois
 
 COMPILE = $(CC) $(INC_DIRS) -c
 LINK = $(CC) $(LIB_DIRS) -o
 
-FILES =  LevelLoader.o AnimationRenderListener.o RenderManager.o LogManager.o GameManager.o GameDriver.o
+FILES = InputRenderListener.o InputManager.o LevelLoader.o AnimationRenderListener.o RenderManager.o LogManager.o GameManager.o GameDriver.o RenderListener.o
 all: Ogre
 
 Ogre: 		$(FILES)
-		$(LINK)  Game.exe $(FILES) $(LIBS)
-
+			$(LINK)  Game.exe $(FILES) $(LIBS)
+RenderListener.o: RenderListener.h RenderListener.cpp
+			$(COMPILE) RenderListener.cpp
+InputRenderListener.o: InputRenderListener.h InputRenderListener.cpp
+			$(COMPILE) InputRenderListener.cpp
+InputManager.o : InputManager.h InputManager.cpp
+			$(COMPILE) InputManager.cpp
 GameManager.o: 	GameManager.h GameManager.cpp
 			$(COMPILE) GameManager.cpp
 LevelLoader.o:	LevelLoader.h LevelLoader.cpp

@@ -4,13 +4,44 @@
 #undef OGRE_MAX_NUM_BONES
 #define OGRE_MAX_NUM_BONES 20000
 #include <iostream>
+#include "CSC2110/ListArrayIterator.h"
+#include "InputRenderListener.h"
 using namespace std;
 using namespace Ogre;
+
+void RenderManager::startRendering(){
+	ListArrayIterator<RenderListener>* render_listeners_iter = render_listeners->iterator();
+	while(render_listeners_iter->hasNext()){
+		RenderListener* render_listener = render_listeners_iter->next();
+		render_listener->startRendering();
+	}
+	delete render_listeners_iter;
+	root->startRendering();
+}
+
+void RenderManager::stopRendering(){
+	ListArrayIterator<RenderListener>* render_listeners_iter = render_listeners->iterator();
+	while(render_listeners_iter->hasNext()){
+		RenderListener* render_listener = render_listeners_iter->next();
+		render_listener->stopRendering();
+	}
+	delete render_listeners_iter;
+	//root->stopRendering();
+}
+
+void RenderManager::leftJoystickAxisMoved(float north_south, float east_west){
+	//Specify what to do on joystick moved
+}
+
+void RenderManager::rightJoystickAxisMoved(float north_south, float east_west){
+	
+}
+
 void RenderManager::init(){
 	root = NULL;
 	window = NULL;
 	scene_manager = NULL;
-
+	
 	root = OGRE_NEW Ogre::Root("","");  //resource/config files go here
 	root->loadPlugin("RenderSystem_GL");  //prepares external dlls for later use
 
@@ -35,7 +66,7 @@ void RenderManager::init(){
 	//by default, the size of the viewport matches the size of the window, but the viewport can be cropped
 	//the camera represents a view into an existing scene and the viewport represents a region into which an existing camera will render its contents
 	camera = scene_manager->createCamera("Camera");
-
+	scene_manager->setShadowTechnique(SHADOWTYPE_TEXTURE_MODULATIVE);
 	//z-order, left, top, width, height
 	viewport = window->addViewport(camera, 0, 0.0, 0.0, 1.0, 1.0);  //assign a camera to a viewport (can have many cameras and viewports in a single window)
 	viewport->setBackgroundColour(Ogre::ColourValue(0,0,0));
@@ -47,6 +78,10 @@ void RenderManager::init(){
 	//buildSimpleScene();
 	render_listener = new AnimationRenderListener(this);
 	root->addFrameListener(render_listener);
+	render_listeners = new ListArray<RenderListener>();
+	RenderListener* inListener = new InputRenderListener(this);
+	root->addFrameListener(inListener);
+	render_listeners->add(inListener);
 }
 
 RenderManager::RenderManager(GameManager* gm){
@@ -85,10 +120,6 @@ int RenderManager::getRenderWindowWidth(){
 
 int RenderManager::getRenderWindowHeight(){
 	return viewport->getActualHeight();
-}
-
-void RenderManager::startRendering(){
-	root->startRendering();
 }
 
 Ogre::RenderWindow* RenderManager::getRenderWindow(){
@@ -256,4 +287,21 @@ void RenderManager::processAnimations(float timestep){
 	for(int i = 0; i < anims.size(); i++){
 		anims[i]->addTime(timestep);
 	}
+}
+void RenderManager::processKeyboardInput(std::string keyName){
+	if(keyName == "ESCAPE"){
+		stopRendering();
+	}
+	else if(keyName == "A"){
+		//do stuff
+	}
+	else if(keyName == "D"){
+		
+	}
+}
+void RenderManager::checkForInput(float time_step){
+	game_manager->checkForInput(time_step);
+}
+void RenderManager::logComment(std::string comment){
+	game_manager->logComment(comment);
 }

@@ -1,6 +1,8 @@
 #include "GameManager.h"
 #include "RenderManager.h"
 #include "LevelLoader.h"
+#include "LogManager.h"
+#include "InputManager.h"
 #include <iostream>
 #include <string>
 //the problem is that in C++, it is not known when this initialization code will be called
@@ -12,9 +14,15 @@ GameManager* GameManager::getGameManager(){
 }
 
 void GameManager::init(){
+	logManager = new LogManager("GameLog.txt");
+	logComment("Loading Render Manager");
 	render_manager = new RenderManager(this);  //calls render manager's init, sets up the frame listener
+	logComment("Render Manager loaded successfully");
+	inputManager = new InputManager(this);
+	logComment("Input Manager loaded successfully");
 	std::string file = "resources.json";
 	levelLoader = new LevelLoader(this, file);
+	logComment("Level Loader loaded successfully");
 }
 
 GameManager::GameManager(){
@@ -65,4 +73,25 @@ void GameManager::processAnims(std::vector<std::string> objects, std::vector<std
 }
 void GameManager::initialiseNewScene(){
 	render_manager->initialiseNewScene();
+}
+void GameManager::logComment(std::string comment){
+	logManager->logComment(comment);
+}
+void GameManager::checkForInput(float time_step){
+	inputManager->checkForInput();
+}
+void GameManager::keyPressed(std::string keyPressed){
+	render_manager->processKeyboardInput(keyPressed);
+}
+bool GameManager::keyReleased(std::string keyUp){
+	
+}
+void GameManager::logProblem(std::string prob, std::string file, int line){
+	logManager->logProblem(prob, file, line);
+}
+void GameManager::leftJoystickAxisMoved(float north_south, float east_west){
+	
+}
+void GameManager::rightJoystickAxisMoved(float north_south, float east_west){
+	
 }

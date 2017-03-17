@@ -3,7 +3,7 @@
 material Bark 
 {
     receive_shadows on 
-
+	cast_shadows on
     technique
     {
         pass Bark

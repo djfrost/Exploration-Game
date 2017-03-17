@@ -72,7 +72,8 @@
 					"position" : "0.0,5.0,20.0",
 					"lookat" : "0.0,0.0,0.0",
 					"nearclip" : "2.0",
-					"farclip" : "0.0"
+					"farclip" : "0.0",
+					"childOf" : "Fox"
 				}
 			},
 			"Lights" : {
@@ -83,7 +84,7 @@
 				"BaseLight" : {
 					"type" : "1",
 					"color" : "1.0,1.0,1.0",
-					"direction" : "0.0,0.0,-1.0"
+					"direction" : "0.0,-4.0,-1.0"
 				},
 				"TopLight" : {
 					"type" : "1",

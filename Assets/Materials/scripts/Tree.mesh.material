@@ -19,7 +19,7 @@ material _missing_material_
 material Bark 
 {
     receive_shadows on 
-
+	cast_shadows on
     technique
     {
         pass Bark

@@ -5,11 +5,15 @@
 #include <vector>
 class RenderManager;
 class LevelLoader;
+class LogManager;
+class InputManager;
 //supplies communication between managers
 class GameManager{
 	private:
 		RenderManager* render_manager;
 		LevelLoader* levelLoader;
+		LogManager* logManager;
+		InputManager* inputManager;
 		GameManager();
 		void init();
 
@@ -29,6 +33,13 @@ class GameManager{
 		void loadSkyBox(std::string skyBoxMat);
 		void processAnims(std::vector<std::string> objects, std::vector<std::string> types, std::vector< std::vector < float > > values, std::vector< std::vector < float > >  axis, std::vector< std::vector < float > > timeSteps, std::vector< std::vector < float > > start, std::vector < std::vector<float> > begin);
 		void initialiseNewScene();
+		void logComment(std::string comment);
+		void checkForInput(float time_step);
+		void keyPressed(std::string keyPressed);
+		bool keyReleased(std::string keyUp);
+		void logProblem(std::string prob, std::string file, int line);
+		void leftJoystickAxisMoved(float north_south, float east_west);
+		void rightJoystickAxisMoved(float north_south, float east_west);
 };
 
 #endif

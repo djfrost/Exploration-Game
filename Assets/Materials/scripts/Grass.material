@@ -1,7 +1,8 @@
 
 material _missing_material_
 {
-    receive_shadows off
+    receive_shadows on 
+	cast_shadows on
     technique
     {
         pass
@@ -19,7 +20,7 @@ material _missing_material_
 material Grass 
 {
     receive_shadows on 
-
+	cast_shadows on
     technique
     {
         pass Grass

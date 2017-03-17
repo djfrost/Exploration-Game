@@ -1,0 +1,16 @@
+****COMMENT****
+11:25:16
+Loading Render Manager
+***************
+****COMMENT****
+11:25:18
+Render Manager loaded successfully
+***************
+****COMMENT****
+11:25:18
+Input Manager loaded successfully
+***************
+****COMMENT****
+11:25:19
+Level Loader loaded successfully
+***************
