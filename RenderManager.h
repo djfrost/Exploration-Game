@@ -8,6 +8,7 @@ class AnimationRenderListener;
 class GameManager;
 class ResourceParser;
 class RenderListener;
+class InputFunctionHandler;
 class RenderManager{
 	private:
 		Ogre::Root* root;
@@ -26,6 +27,8 @@ class RenderManager{
 		bool groupExists( std::string group );
 		std::vector<Ogre::AnimationState* > anims;
 		ListArray<RenderListener>* render_listeners;
+		InputFunctionHandler* ifh;
+		void destroyAllAttachedMovableObjects( Ogre::SceneNode* node );
 	public:
 		RenderManager(GameManager* game_manager);
 		virtual ~RenderManager();
@@ -41,20 +44,20 @@ class RenderManager{
 		void addMesh(std::string mesh, std::string resourceGroup, std::string mesh_file);
 		void unloadScene(std::string currScene);
 		void loadScene(std::string sceneName, std::string lastScene, std::vector<std::string> meshNames, std::vector<std::string> meshFiles, std::vector< std::vector<float> > transforms, std::vector < std::vector<float> > rotates, std::vector<float> angle, std::vector < std::vector<float> > scales, std::vector<std::string> animNames);
-		void loadCameras(std::vector< std::vector< float > > positions, std::vector< std::vector < float > > lookAts, std::vector<float> nearclips, std::vector<float> farclips);
+		void loadCameras(std::vector< std::vector< float > > positions, std::vector< std::vector < float > > lookAts, std::vector<float> nearclips, std::vector<float> farclips, std::vector<float> rotation, std::vector<float> angle, std::vector<std::string> parents);
 		void loadLights(std::vector<std::string> names, std::vector<float> types, std::vector< std::vector < float > > colors, std::vector< std::vector < float > > directions);
 		void initialiseNewScene();
 		void loadSkyBox(std::string skyBoxMat);
 		void processAnims(std::vector<std::string> objects, std::vector<std::string> types, std::vector< std::vector < float > > values, std::vector< std::vector < float > >  axis, std::vector< std::vector < float > > timeSteps, std::vector< std::vector < float > > start, std::vector < std::vector<float> > begin );
 		void processAnimations(float timestep);
-		void processKeyboardInput(std::string keyName);
+		void processKeyboardInput(std::string keyName, bool released);
 		void checkForInput(float time_step);
 		void leftJoystickAxisMoved(float north_south, float east_west);
 		void rightJoystickAxisMoved(float north_south, float east_west);
 		void startRendering();
 		void stopRendering();
 		void logComment(std::string comment);
-
+		void destroySceneNode( Ogre::SceneNode* node );
 };
 
 #endif

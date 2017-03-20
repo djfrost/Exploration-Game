@@ -21,7 +21,7 @@ void InputManager::checkForInput(){
 }
 
 bool InputManager::keyPressed(const OIS::KeyEvent& e){
-	cout << "KP" << endl;
+	//cout << "KP" << endl;
 	game_manager->keyPressed(keyMap(e));
 	return true;
 }

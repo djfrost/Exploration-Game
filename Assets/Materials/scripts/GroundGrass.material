@@ -34,7 +34,7 @@ material GroundGrass
             {
                 texture grassMat.jpg
                 tex_address_mode wrap
-                scale 0.1 0.1
+                scale 0.033 0.033
                 tex_coord_set 0
                 colour_op modulate
             }

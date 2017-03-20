@@ -13,7 +13,7 @@
 					"file" : "Fox.mesh",
 					"transform" : "0.0,0.0,-10.0",
 					"rotate" : "0.0,1.0,0.0",
-					"angle" : "45.0",
+					"angle" : "90.0",
 					"scale" : "1.0,1.0,1.0",
 					"defaultAnim" : "none"
 				},					
@@ -22,7 +22,7 @@
 					"transform" : "0.0,-7.15,0.0",
 					"rotate" : "0.0,1.0,0.0",
 					"angle" : "180.0",
-					"scale" : "40.0,1.0,40.0",
+					"scale" : "120.0,1.0,120.0",
 					"defaultAnim" : "none"
 				},
 				"Tree" : {
@@ -69,10 +69,12 @@
 					"Name" : "1"
 				},
 				"1" : {
-					"position" : "0.0,5.0,20.0",
+					"position" : "0.0,0.0,30.0",
 					"lookat" : "0.0,0.0,0.0",
 					"nearclip" : "2.0",
 					"farclip" : "0.0",
+					"rotation" : "0.0,1.0,0.0",
+					"angle" : "90.0",
 					"childOf" : "Fox"
 				}
 			},

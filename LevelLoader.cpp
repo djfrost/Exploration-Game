@@ -77,6 +77,9 @@ void LevelLoader::LoadLevel(std::string levelName)
 	std::vector< std::vector < float > > lookAts;
 	std::vector<float> nearclips;
 	std::vector<float> farclips;
+	std::vector<std::string> parents;
+	std::vector<float> camRots;
+	std::vector<float> camAngle;
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, cameraTree.get_child("Names")){
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &t, cameraTree.get_child(v.second.data())){
 			std::string type = t.first.data();
@@ -94,6 +97,16 @@ void LevelLoader::LoadLevel(std::string levelName)
 			}
 			else if(type == "farclip"){
 				farclips.push_back(stof(t.second.data()));
+			}
+			else if(type == "rotation"){
+				std::string rotNotParsed = t.second.data();
+				camRots = parseMultF(rotNotParsed);
+			}
+			else if(type == "angle"){
+				camAngle.push_back(stof(t.second.data()));
+			}
+			else if(type == "childOf"){
+				parents.push_back(t.second.data());
 			}
 		}
 	}
@@ -163,8 +176,8 @@ void LevelLoader::LoadLevel(std::string levelName)
 	std::string skybox = levelTree.get<std::string>("SkyMap");
 	// unload last scene load next scene
 	gm->loadLights(names,types, colors, directions);
-	gm->loadCameras(positions, lookAts, nearclips, farclips);
 	gm->loadScene(nextScene, currScene, meshes, meshFiles, transforms, rotates, angle, scales, defaultAnims);
+	gm->loadCameras(positions, lookAts, nearclips, farclips, camRots, camAngle, parents);
 	gm->loadSkyBox(skybox);
 	//gm->processAnims(objects, typesAnims, values, axis, timeSteps, start, begin);
 	currScene = levelName;

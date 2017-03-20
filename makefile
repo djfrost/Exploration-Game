@@ -8,11 +8,13 @@ LIBS=-lboost_system-mgw51-mt-1_63 -lOgreMain -lois
 COMPILE = $(CC) $(INC_DIRS) -c
 LINK = $(CC) $(LIB_DIRS) -o
 
-FILES = InputRenderListener.o InputManager.o LevelLoader.o AnimationRenderListener.o RenderManager.o LogManager.o GameManager.o GameDriver.o RenderListener.o
+FILES = InputRenderListener.o InputManager.o LevelLoader.o AnimationRenderListener.o RenderManager.o LogManager.o GameManager.o GameDriver.o RenderListener.o InputFunctionHandler.o
 all: Ogre
 
 Ogre: 		$(FILES)
 			$(LINK)  Game.exe $(FILES) $(LIBS)
+InputFunctionHandler.o: InputFunctionHandler.h InputFunctionHandler.cpp
+			$(COMPILE) InputFunctionHandler.cpp
 RenderListener.o: RenderListener.h RenderListener.cpp
 			$(COMPILE) RenderListener.cpp
 InputRenderListener.o: InputRenderListener.h InputRenderListener.cpp

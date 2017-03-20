@@ -6,6 +6,7 @@
 #include <iostream>
 #include "CSC2110/ListArrayIterator.h"
 #include "InputRenderListener.h"
+#include "InputFunctionHandler.h"
 using namespace std;
 using namespace Ogre;
 
@@ -76,6 +77,7 @@ void RenderManager::init(){
 	float aspect_ratio = 16/9;
 	camera->setAspectRatio(aspect_ratio);
 	//buildSimpleScene();
+	ifh = new InputFunctionHandler(this);
 	render_listener = new AnimationRenderListener(this);
 	root->addFrameListener(render_listener);
 	render_listeners = new ListArray<RenderListener>();
@@ -91,22 +93,32 @@ RenderManager::RenderManager(GameManager* gm){
 
 RenderManager::~RenderManager(){
    render_listener->stopRendering();
+   std::cout << "Rendering Stopped" << std::endl;
    delete render_listener;
+   std::cout << "render_listener destroyed" << std::endl;
    render_listener = NULL;
-   for(int i = 0; i < anims.size(); i++){
-	   delete anims[i];
-   }
    game_manager = NULL;
-   
+   std::cout << "GameManager reference gone" << std::endl;
+   for(int i = 0; i < anims.size(); i++){
+	   anims[i] = NULL;
+   }
+   std::cout << "Animation states deleted" << std::endl;
+   render_listeners->removeAll();
+   delete render_listeners;
+   std::cout << "Render listeners deleted" << std::endl;
+   delete ifh;
+   std::cout << "input handler functions deleted" << std::endl;
    scene_manager->clearScene();
+   std::cout << "Scene cleared" << std::endl;
    scene_manager->destroyAllCameras();
-
+   std::cout << "Cameras destroyed" << std::endl;
    window->removeAllViewports();
-
+   std::cout << "Viewports gone" << std::endl;
    window->destroy();
    window = NULL;
-
-   delete root;
+   std::cout << "Window destroyed" << std::endl;
+   delete scene_manager;
+   std::cout << "SceneManager deleted" << std::endl;
    root = NULL;
 }
 
@@ -204,15 +216,16 @@ void RenderManager::loadScene(std::string sceneName, std::string lastScene, std:
 	rgm.loadResourceGroup(sceneName, true, true);
 	Ogre::SceneNode* scene_root_node = scene_manager->getRootSceneNode();
 	for(int i = 0; i < meshFiles.size(); i++){
-		Ogre::SceneNode* fox_node = scene_manager->createSceneNode(meshNames[i] + "_node");
+		Ogre::SceneNode* parent_node = scene_manager->createSceneNode(meshNames[i] + "_transform");
+		Ogre::SceneNode* fox_node = parent_node->createChildSceneNode(meshNames[i] + "_node");
 		Ogre::Entity* fox_entity = scene_manager->createEntity(meshNames[i] + "_Entity",meshFiles[i]);
 		fox_node->attachObject(fox_entity);
-		fox_node->translate(transforms[i][0],transforms[i][1],transforms[i][2]);
+		parent_node->translate(transforms[i][0],transforms[i][1],transforms[i][2]);
 		Vector3 vr(rotates[i][0],rotates[i][1],rotates[i][2]);
 		Quaternion q(Degree(angle[i]),vr);
 		fox_node->rotate(q);
 		fox_node->scale(scales[i][0],scales[i][1],scales[i][2]);
-		scene_root_node->addChild(fox_node);
+		scene_root_node->addChild(parent_node);
 		if(animNames[i] != "none"){
 			Ogre::AnimationState* animState = fox_entity->getAnimationState(animNames[i]);
 			animState->setLoop(true);
@@ -222,11 +235,18 @@ void RenderManager::loadScene(std::string sceneName, std::string lastScene, std:
 		
 	}
 }
-void RenderManager::loadCameras(std::vector< std::vector< float > > positions, std::vector< std::vector < float > > lookAts, std::vector<float> nearclips, std::vector<float> farclips){
+void RenderManager::loadCameras(std::vector< std::vector< float > > positions, std::vector< std::vector < float > > lookAts, std::vector<float> nearclips, std::vector<float> farclips, std::vector<float> rotation, std::vector<float> angle, std::vector<std::string> parents){
 	camera->setPosition(Ogre::Vector3(positions[0][0], positions[0][1], positions[0][2]));
 	camera->lookAt(Ogre::Vector3(lookAts[0][0], lookAts[0][1], lookAts[0][2]));
 	camera->setNearClipDistance(nearclips[0]);
 	camera->setFarClipDistance(0);
+	Ogre::SceneNode* parentNode = scene_manager->getSceneNode(parents[0] + "_node");
+	Ogre::SceneNode* rotNode = parentNode->createChildSceneNode("camRot_node");
+	Ogre::SceneNode* cameraNode = rotNode->createChildSceneNode("CameraNode");
+	cameraNode->attachObject(camera);
+	Vector3 vr(rotation[0],rotation[1],rotation[2]);
+	Quaternion q(Degree(angle[0]),vr);
+	rotNode->rotate(q);
 }
 void RenderManager::loadLights(std::vector<std::string> names, std::vector<float> types, std::vector< std::vector < float > > colors, std::vector< std::vector < float > > directions){
 	for(int i = 0; i < types.size(); i++){
@@ -287,21 +307,41 @@ void RenderManager::processAnimations(float timestep){
 	for(int i = 0; i < anims.size(); i++){
 		anims[i]->addTime(timestep);
 	}
+	ifh->keyDownFunctions();
 }
-void RenderManager::processKeyboardInput(std::string keyName){
-	if(keyName == "ESCAPE"){
-		stopRendering();
-	}
-	else if(keyName == "A"){
-		//do stuff
-	}
-	else if(keyName == "D"){
-		
-	}
+void RenderManager::processKeyboardInput(std::string keyName, bool released){
+	ifh->processInput(keyName, released);
 }
 void RenderManager::checkForInput(float time_step){
 	game_manager->checkForInput(time_step);
 }
 void RenderManager::logComment(std::string comment){
 	game_manager->logComment(comment);
+}
+void RenderManager::destroyAllAttachedMovableObjects( Ogre::SceneNode* node )
+{
+   if(!node) return;
+
+   // Destroy all the attached objects
+   Ogre::SceneNode::ObjectIterator itObject = node->getAttachedObjectIterator();
+
+   while ( itObject.hasMoreElements() )
+      node->getCreator()->destroyMovableObject(itObject.getNext());
+
+   // Recurse to child SceneNodes
+   Ogre::SceneNode::ChildNodeIterator itChild = node->getChildIterator();
+
+   while ( itChild.hasMoreElements() )
+   {
+      Ogre::SceneNode* pChildNode = static_cast<SceneNode*>(itChild.getNext());
+      destroyAllAttachedMovableObjects( pChildNode );
+   }
+}
+
+void RenderManager::destroySceneNode( Ogre::SceneNode* node )
+{
+   if(!node) return;
+   destroyAllAttachedMovableObjects(node);
+   node->removeAndDestroyAllChildren();
+   node->getCreator()->destroySceneNode(node);
 }

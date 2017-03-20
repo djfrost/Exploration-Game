@@ -32,8 +32,14 @@ GameManager::GameManager(){
 
 GameManager::~GameManager(){
 	std::cout << "GameManager destructor called" << std::endl;
-
+	delete levelLoader;
+	std::cout << "Deleted Level Loader" << std::endl;
+	delete inputManager;
+	std::cout << "Deleted Input Manager" << std::endl;
+	delete logManager;
+	std::cout << "Deleted Log Manager" << std::endl;
 	delete render_manager;
+	std::cout << "Deleted Render Manager" << std::endl;
 	render_manager = NULL;
 }
 
@@ -59,8 +65,8 @@ void GameManager::addMesh(std::string mesh, std::vector<float> transform, std::v
 void GameManager::loadScene(std::string scene, std::string lastScene, std::vector<std::string> meshNames, std::vector<std::string> meshFiles, std::vector < std::vector<float> > transforms, std::vector < std::vector<float> > rotates, std::vector<float> angle, std::vector < std::vector<float> > scales, std::vector<std::string> animNames ){
 	render_manager->loadScene(scene, lastScene, meshNames, meshFiles, transforms, rotates, angle, scales, animNames);
 }
-void GameManager::loadCameras(std::vector< std::vector< float > > positions, std::vector< std::vector < float > > lookAts, std::vector<float> nearclips, std::vector<float> farclips){
-	render_manager->loadCameras(positions, lookAts, nearclips, farclips);
+void GameManager::loadCameras(std::vector< std::vector< float > > positions, std::vector< std::vector < float > > lookAts, std::vector<float> nearclips, std::vector<float> farclips, std::vector<float> rotation, std::vector<float> angle, std::vector<std::string> parents){
+	render_manager->loadCameras(positions, lookAts, nearclips, farclips, rotation, angle, parents);
 }
 void GameManager::loadLights(std::vector<std::string> names, std::vector<float> types, std::vector< std::vector < float > > colors, std::vector< std::vector < float > > directions){
 	render_manager->loadLights(names, types, colors, directions);
@@ -81,10 +87,10 @@ void GameManager::checkForInput(float time_step){
 	inputManager->checkForInput();
 }
 void GameManager::keyPressed(std::string keyPressed){
-	render_manager->processKeyboardInput(keyPressed);
+	render_manager->processKeyboardInput(keyPressed, false);
 }
 bool GameManager::keyReleased(std::string keyUp){
-	
+	render_manager->processKeyboardInput(keyUp, true);
 }
 void GameManager::logProblem(std::string prob, std::string file, int line){
 	logManager->logProblem(prob, file, line);
