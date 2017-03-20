@@ -1,16 +1,16 @@
 ****COMMENT****
-21:31:34
+12:03:32
 Loading Render Manager
 ***************
 ****COMMENT****
-21:31:38
+12:03:35
 Render Manager loaded successfully
 ***************
 ****COMMENT****
-21:31:39
+12:03:36
 Input Manager loaded successfully
 ***************
 ****COMMENT****
-21:31:40
+12:03:38
 Level Loader loaded successfully
 ***************

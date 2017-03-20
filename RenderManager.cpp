@@ -279,7 +279,7 @@ bool RenderManager::groupExists( std::string group )
    }
    return false;
 }
-void RenderManager::loadSkyBox(std::string skyBoxMat){
+void RenderManager::loadSkyBox(std::string skyBoxMat){ 
 	scene_manager->setSkyBox(true, skyBoxMat);
 }
 void RenderManager::processAnims(std::vector<std::string> objects, std::vector<std::string> types, std::vector< std::vector < float > > values, std::vector< std::vector < float > >  axis, std::vector< std::vector < float > > timeSteps, std::vector< std::vector < float > > start, std::vector < std::vector<float> > begin){

@@ -7,39 +7,54 @@ void func1(RenderManager* rm){
 void func2(RenderManager* rm){
 	Ogre::SceneManager* sm = rm->getSceneManager();
 	Ogre::SceneNode* mc = sm->getSceneNode("Fox_transform");
-	mc->translate(mc->getOrientation() * Ogre::Vector3(0,0,0.1));
+	mc->translate(mc->getOrientation() * Ogre::Vector3(0,0,0.2));
 };
 void func3(RenderManager* rm){
 	Ogre::SceneManager* sm = rm->getSceneManager();
 	Ogre::SceneNode* mc = sm->getSceneNode("Fox_transform");
-	mc->translate(mc->getOrientation() * Ogre::Vector3(0.1,0,0));
+	mc->translate(mc->getOrientation() * Ogre::Vector3(0.2,0,0));
 };
 void func4(RenderManager* rm){
 	Ogre::SceneManager* sm = rm->getSceneManager();
 	Ogre::SceneNode* mc = sm->getSceneNode("Fox_transform");
-	mc->translate(mc->getOrientation() * Ogre::Vector3(0,0,-0.1));
+	mc->translate(mc->getOrientation() * Ogre::Vector3(0,0,-0.2));
 };
 void func5(RenderManager* rm){
 	Ogre::SceneManager* sm = rm->getSceneManager();
 	Ogre::SceneNode* mc = sm->getSceneNode("Fox_transform");
-	mc->translate(mc->getOrientation() * Ogre::Vector3(-0.1,0,0));
+	mc->translate(mc->getOrientation() * Ogre::Vector3(-0.2	,0,0));
 };
 void func6(RenderManager* rm){
 	Ogre::SceneManager* sm = rm->getSceneManager();
 	Ogre::SceneNode* rotNode = sm->getSceneNode("camRot_node");
+	Ogre::Quaternion Quat = rotNode->getOrientation();
+	Ogre::Degree DegZ;
+	DegZ = (2 * Ogre::Degree(Ogre::Math::ACos(rotNode->getOrientation().w)).valueDegrees());
+	std::cout << DegZ.valueAngleUnits() << std::endl;
+	if(DegZ.valueAngleUnits() <117.5){
+		rotNode->pitch(Ogre::Degree(-0.8));
+	}
 };
 void func7(RenderManager* rm){
 	Ogre::SceneManager* sm = rm->getSceneManager();
 	Ogre::SceneNode* rotNode = sm->getSceneNode("Fox_transform");
+	rotNode->yaw(Ogre::Degree(0.8));
 };
 void func8(RenderManager* rm){
 	Ogre::SceneManager* sm = rm->getSceneManager();
 	Ogre::SceneNode* rotNode = sm->getSceneNode("camRot_node");
+	Ogre::Quaternion Quat = rotNode->getOrientation();
+	Ogre::Degree DegZ;
+	DegZ = (2 * Ogre::Degree(Ogre::Math::ACos(rotNode->getOrientation().w)).valueDegrees());
+	std::cout << DegZ.valueAngleUnits() << std::endl;
+	if(DegZ.valueAngleUnits() > 90.05){
+		rotNode->pitch(Ogre::Degree(0.8));
+	}
 };
 void func9(RenderManager* rm){
 	Ogre::SceneManager* sm = rm->getSceneManager();
 	Ogre::SceneNode* rotNode = sm->getSceneNode("Fox_transform");
-	rotNode->yaw(Ogre::Degree(0.5));
+		rotNode->yaw(Ogre::Degree(-0.8));
 };
 InputFunctionHandler::InputFunctionHandler(RenderManager* render_manager){
 	rm = render_manager;

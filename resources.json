@@ -30,7 +30,7 @@
 					"transform" : "-6.0,-7.15,-4.0",
 					"rotate" : "0.0,0.0,0.0",
 					"angle" : "180.0",
-					"scale" : "3.0,3.0,1.0",
+					"scale" : "3.0,3.0,3.0",
 					"defaultAnim" : "my_animation"
 				},
 				"Tree2" : {
@@ -38,7 +38,7 @@
 					"transform" : "6.0,-7.15,-4.0",
 					"rotate" : "0.0,0.0,0.0",
 					"angle" : "180.0",
-					"scale" : "3.0,3.0,1.0",
+					"scale" : "3.0,3.0,3.0",
 					"defaultAnim" : "my_animation"
 				},
 				"Sky" : {
