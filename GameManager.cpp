@@ -96,8 +96,8 @@ void GameManager::logProblem(std::string prob, std::string file, int line){
 	logManager->logProblem(prob, file, line);
 }
 void GameManager::leftJoystickAxisMoved(float north_south, float east_west){
-	
+	render_manager->leftJoystickAxisMoved(north_south, east_west);
 }
 void GameManager::rightJoystickAxisMoved(float north_south, float east_west){
-	
+	render_manager->rightJoystickAxisMoved(north_south, east_west);
 }

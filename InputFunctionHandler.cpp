@@ -30,7 +30,6 @@ void func6(RenderManager* rm){
 	Ogre::Quaternion Quat = rotNode->getOrientation();
 	Ogre::Degree DegZ;
 	DegZ = (2 * Ogre::Degree(Ogre::Math::ACos(rotNode->getOrientation().w)).valueDegrees());
-	std::cout << DegZ.valueAngleUnits() << std::endl;
 	if(DegZ.valueAngleUnits() <117.5){
 		rotNode->pitch(Ogre::Degree(-0.8));
 	}
@@ -46,7 +45,6 @@ void func8(RenderManager* rm){
 	Ogre::Quaternion Quat = rotNode->getOrientation();
 	Ogre::Degree DegZ;
 	DegZ = (2 * Ogre::Degree(Ogre::Math::ACos(rotNode->getOrientation().w)).valueDegrees());
-	std::cout << DegZ.valueAngleUnits() << std::endl;
 	if(DegZ.valueAngleUnits() > 90.05){
 		rotNode->pitch(Ogre::Degree(0.8));
 	}
@@ -102,5 +100,27 @@ void InputFunctionHandler::keyDownFunctions(){
 		if(bools[i]){
 			functions[i](rm);
 		}
+	}
+}
+void InputFunctionHandler::leftStickPressed(float y, float x){
+	Ogre::SceneManager* sm = rm->getSceneManager();
+	Ogre::SceneNode* mc = sm->getSceneNode("Fox_transform");
+	mc->translate(mc->getOrientation() * Ogre::Vector3(x/2,0,(0-y)/2));
+}
+void InputFunctionHandler::rightStickPressed(float y, float x){
+	x *= -1;
+	Ogre::SceneManager* sm = rm->getSceneManager();
+	Ogre::SceneNode* frotNode = sm->getSceneNode("Fox_transform");
+	frotNode->yaw(Ogre::Degree(x));
+
+	Ogre::SceneNode* rotNode = sm->getSceneNode("camRot_node");
+	Ogre::Quaternion Quat = rotNode->getOrientation();
+	Ogre::Degree DegZ;
+	DegZ = (2 * Ogre::Degree(Ogre::Math::ACos(rotNode->getOrientation().w)).valueDegrees());
+	if(DegZ.valueAngleUnits() <117.5 && y < 0){
+		rotNode->pitch(Ogre::Degree(y));
+	}
+	if(DegZ.valueAngleUnits() > 90.05 && y > 0){
+		rotNode->pitch(Ogre::Degree(y));
 	}
 }

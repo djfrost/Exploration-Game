@@ -13,6 +13,8 @@ class InputFunctionHandler{
 		InputFunctionHandler(RenderManager* render_manager);
 		virtual ~InputFunctionHandler();
 		void processInput(std::string game_key, bool released);
+		void leftStickPressed(float y, float x);
+		void rightStickPressed(float y, float x);
 		void keyDownFunctions();
 };
 

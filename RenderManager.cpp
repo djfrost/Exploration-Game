@@ -31,11 +31,11 @@ void RenderManager::stopRendering(){
 }
 
 void RenderManager::leftJoystickAxisMoved(float north_south, float east_west){
-	//Specify what to do on joystick moved
+	ifh->leftStickPressed(north_south, east_west);
 }
 
 void RenderManager::rightJoystickAxisMoved(float north_south, float east_west){
-	
+	ifh->rightStickPressed(north_south, east_west);
 }
 
 void RenderManager::init(){
