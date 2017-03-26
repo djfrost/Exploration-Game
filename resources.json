@@ -8,6 +8,8 @@
 					"name" : "GroundGrass",
 					"name" : "Tree",
 					"name" : "ToriiGate",
+					"name" : "Rock",
+					"name" : "Rock2",
 					"name" : "Tree2"
 				},					
 				"Fox" : {
@@ -50,12 +52,28 @@
 					"scale" : "50,50.0,1.0",
 					"defaultAnim" : "none"
 				},
+				"Rock" : {
+					"file" : "Rock.mesh",
+					"transform" : "-8.5,-7.0,6.0",
+					"rotate" : "0.0,0.0,0.0",
+					"angle" : "180.0",
+					"scale" : "3.0,3.0,3.0",
+					"defaultAnim" : "none"
+				},
+				"Rock2" : {
+					"file" : "Rock.mesh",
+					"transform" : "8.5,-7.0,6.0",
+					"rotate" : "0.0,1.0,0.0",
+					"angle" : "180.0",
+					"scale" : "3.0,3.0,3.0",
+					"defaultAnim" : "none"
+				},
 				"ToriiGate" : {
 					"file" : "ToriiGate.mesh",
-					"transform" : "0.0,9.0,10.0",
+					"transform" : "0.0,16.0,10.0",
 					"rotate" : "0.0,1.0,0.0",
 					"angle" : "90.0",
-					"scale" : "2.0,2.0,2.0",
+					"scale" : "2.0,3.0,2.0",
 					"defaultAnim" : "none"
 				},
 				"Animations" : {
