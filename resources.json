@@ -7,6 +7,7 @@
 					"name" : "Fox",
 					"name" : "GroundGrass",
 					"name" : "Tree",
+					"name" : "ToriiGate",
 					"name" : "Tree2"
 				},					
 				"Fox" : {
@@ -47,6 +48,14 @@
 					"rotate" : "0.0,0.0,1.0",
 					"angle" : "180.0",
 					"scale" : "50,50.0,1.0",
+					"defaultAnim" : "none"
+				},
+				"ToriiGate" : {
+					"file" : "ToriiGate.mesh",
+					"transform" : "0.0,9.0,10.0",
+					"rotate" : "0.0,1.0,0.0",
+					"angle" : "90.0",
+					"scale" : "2.0,2.0,2.0",
 					"defaultAnim" : "none"
 				},
 				"Animations" : {
@@ -92,6 +101,22 @@
 					"type" : "1",
 					"color" : "1.0,1.0,1.0",
 					"direction" : "0.0,-7.15,0.0"
+				}
+			},
+			"SFX" : {
+				"Names" : {
+					"Name" : "sound1",
+					"Name" : "music1"
+				},
+				"sound1" : {
+					"type" : "sample",
+					"file" : "./assets/Audio/sound1.mp3",
+					"name" : "torii-sound"
+				},
+				"music1" : {
+					"type" : "stream",
+					"file" : "./assets/Audio/music.mp3",
+					"name" : "bg-song"
 				}
 			},
 			"SkyMap" : "sky"
