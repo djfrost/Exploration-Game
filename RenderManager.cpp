@@ -68,6 +68,7 @@ void RenderManager::init(){
 	//the camera represents a view into an existing scene and the viewport represents a region into which an existing camera will render its contents
 	camera = scene_manager->createCamera("Camera");
 	scene_manager->setShadowTechnique(SHADOWTYPE_TEXTURE_MODULATIVE);
+	//scene_manager->setSceneBlending( Ogre::SceneBlendType::SBT_TRANSPARENT_COLOUR );
 	//z-order, left, top, width, height
 	viewport = window->addViewport(camera, 0, 0.0, 0.0, 1.0, 1.0);  //assign a camera to a viewport (can have many cameras and viewports in a single window)
 	viewport->setBackgroundColour(Ogre::ColourValue(0,0,0));

@@ -32,9 +32,9 @@ material GroundGrass
 
             texture_unit 
             {
-                texture grassMat.jpg
+                texture LeafTexture.jpg
                 tex_address_mode wrap
-                scale 0.033 0.033
+                scale 0.01 0.01
                 tex_coord_set 0
                 colour_op modulate
             }
