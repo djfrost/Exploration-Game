@@ -57,7 +57,8 @@ class RenderManager{
 		void startRendering();
 		void stopRendering();
 		void logComment(std::string comment);
-		void destroySceneNode( Ogre::SceneNode* node );
+		void destroySceneNode( Ogre::SceneNode* node);
+		void updateAudio(float time_step);
 };
 
 #endif

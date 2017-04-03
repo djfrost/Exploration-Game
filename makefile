@@ -1,14 +1,14 @@
 AutomatedMakefile = am
 CC = g++ -std=c++11
 
-INC_DIRS=-I./ -I$(OGRE_PATH)/OgreMain/include -I$(BOOST_PATH) -I$(OIS_PATH)/include -I$(LUA_PATH)/src -I$(LUA_PATH)/luawrapper
-LIB_DIRS=-L./ -L$(OGRE_PATH)/build/lib -L$(BOOST_PATH)/stage/lib -L$(OIS_PATH)/lib -L$(LUA_PATH)/lib
-LIBS=-lboost_system-mgw51-mt-1_63 -lois -llua -lOgreMain 
+INC_DIRS=-I./ -I$(OGRE_PATH)/OgreMain/include -I$(BOOST_PATH) -I$(OIS_PATH)/include -I$(LUA_PATH)/src -I$(LUA_PATH)/luawrapper -I$(BASS_PATH)
+LIB_DIRS=-L./ -L$(OGRE_PATH)/build/lib -L$(BOOST_PATH)/stage/lib -L$(OIS_PATH)/lib -L$(LUA_PATH)/lib -L$(BASS_PATH)
+LIBS=-lboost_system-mgw51-mt-1_63 -lois -llua -lbass -lOgreMain
 
 COMPILE = $(CC) $(INC_DIRS) -c
 LINK = $(CC) $(LIB_DIRS) -o
 
-FILES = InputRenderListener.o InputManager.o LevelLoader.o AnimationRenderListener.o RenderManager.o LogManager.o GameManager.o GameDriver.o RenderListener.o InputFunctionHandler.o
+FILES = GameResource.o PathResource.o InputRenderListener.o InputManager.o LevelLoader.o AnimationRenderListener.o RenderManager.o LogManager.o GameManager.o GameDriver.o RenderListener.o InputFunctionHandler.o AudioResource.o AudioPlayer.o AudioManager.o
 all: Ogre
 
 Ogre: 		$(FILES)
@@ -33,3 +33,13 @@ GameDriver.o:	GameDriver.cpp
 			$(COMPILE) GameDriver.cpp
 AnimationRenderListener.o: AnimationRenderListener.h AnimationRenderListener.cpp
 			$(COMPILE) AnimationRenderListener.cpp
+AudioResource.o: AudioResource.h AudioResource.cpp
+			$(COMPILE) AudioResource.cpp
+AudioPlayer.o: AudioPlayer.h AudioPlayer.cpp
+			$(COMPILE) AudioPlayer.cpp
+AudioManager.o: AudioManager.h AudioManager.cpp
+			$(COMPILE) AudioManager.cpp
+GameResource.o: GameResource.h GameResource.cpp
+			$(COMPILE) GameResource.cpp
+PathResource.o: PathResource.h PathResource.cpp
+			$(COMPILE) PathResource.cpp

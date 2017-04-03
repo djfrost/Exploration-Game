@@ -10,6 +10,9 @@
 using namespace std;
 using namespace Ogre;
 
+void RenderManager::updateAudio(float time_step){
+	game_manager->updateAudio(time_step);
+}
 void RenderManager::startRendering(){
 	ListArrayIterator<RenderListener>* render_listeners_iter = render_listeners->iterator();
 	while(render_listeners_iter->hasNext()){

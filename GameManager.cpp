@@ -3,6 +3,7 @@
 #include "LevelLoader.h"
 #include "LogManager.h"
 #include "InputManager.h"
+#include "AudioManager.h"
 #include <iostream>
 #include <string>
 //the problem is that in C++, it is not known when this initialization code will be called
@@ -23,6 +24,8 @@ void GameManager::init(){
 	std::string file = "resources.json";
 	levelLoader = new LevelLoader(this, file);
 	logComment("Level Loader loaded successfully");
+	audioManager = new AudioManager(this);
+	logComment("AudioManager Loaded successfully");
 }
 
 GameManager::GameManager(){
@@ -32,6 +35,8 @@ GameManager::GameManager(){
 
 GameManager::~GameManager(){
 	std::cout << "GameManager destructor called" << std::endl;
+	delete audioManager;
+	std::cout << "Deleted Audio Manager" << std::endl;
 	delete levelLoader;
 	std::cout << "Deleted Level Loader" << std::endl;
 	delete inputManager;
@@ -100,4 +105,22 @@ void GameManager::leftJoystickAxisMoved(float north_south, float east_west){
 }
 void GameManager::rightJoystickAxisMoved(float north_south, float east_west){
 	render_manager->rightJoystickAxisMoved(north_south, east_west);
+}
+void GameManager::loadSampleAudioResource(std::string audio_file_name, AudioResourceInfo* ar_info){
+	audioManager->loadSampleAudioResource(audio_file_name, ar_info);
+}
+void GameManager::loadStreamAudioResource(std::string audio_file_name, AudioResourceInfo* ar_info){
+	audioManager->loadStreamAudioResource(audio_file_name, ar_info);
+}
+void GameManager::unloadSampleAudioResource(AudioResourceInfo* ar_info){
+	audioManager->unloadSampleAudioResource(ar_info);
+}
+void GameManager::unloadStreamAudioResource(AudioResourceInfo* ar_info){
+	audioManager->unloadStreamAudioResource(ar_info);
+}
+void GameManager::updateAudio(float time_step){
+	audioManager->updateAudio(time_step);
+}
+AudioResourceInfo* GameManager::createAudioResourceInfo(){
+	return audioManager->createAudioResourceInfo();
 }

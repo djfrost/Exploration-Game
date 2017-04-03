@@ -7,6 +7,8 @@ class RenderManager;
 class LevelLoader;
 class LogManager;
 class InputManager;
+class AudioManager;
+struct AudioResourceInfo;
 //supplies communication between managers
 class GameManager{
 	private:
@@ -14,6 +16,7 @@ class GameManager{
 		LevelLoader* levelLoader;
 		LogManager* logManager;
 		InputManager* inputManager;
+		AudioManager* audioManager;
 		GameManager();
 		void init();
 
@@ -40,6 +43,12 @@ class GameManager{
 		void logProblem(std::string prob, std::string file, int line);
 		void leftJoystickAxisMoved(float north_south, float east_west);
 		void rightJoystickAxisMoved(float north_south, float east_west);
+		void loadSampleAudioResource(std::string audio_file_name, AudioResourceInfo* ar_info);
+		void loadStreamAudioResource(std::string audio_file_name, AudioResourceInfo* ar_info);
+		void unloadSampleAudioResource(AudioResourceInfo* ar_info);
+		void unloadStreamAudioResource(AudioResourceInfo* ar_info);
+		void updateAudio(float time_step);
+		AudioResourceInfo* createAudioResourceInfo();
 };
 
 #endif
