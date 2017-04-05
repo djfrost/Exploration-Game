@@ -23,5 +23,7 @@ bool AnimationRenderListener::frameStarted(const Ogre::FrameEvent& event){
 	return getRenderStatus();
 }
 
-bool AnimationRenderListener::frameRenderingQueued(const Ogre::FrameEvent& event){}
-bool AnimationRenderListener::frameEnded(const Ogre::FrameEvent& event){}
+bool AnimationRenderListener::frameRenderingQueued(const Ogre::FrameEvent& event){
+}
+bool AnimationRenderListener::frameEnded(const Ogre::FrameEvent& event){
+}

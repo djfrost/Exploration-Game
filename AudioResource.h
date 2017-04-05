@@ -13,14 +13,15 @@ class AudioResource : public GameResource{
 		AudioResourceInfo* ar_info;
 		AudioResourceType audio_resource_type;
 		std::string audio_resource_name;
-		
+		GameManager* game_manager;
+
 	public:
-		AudioResource(std::string level_name, std::string audio_file_name, std::string audio_name, AudioResourceType audio_type);
+		AudioResource(std::string level_name, std::string audio_file_name, std::string audio_name, AudioResourceType audio_type,GameManager* gm);
 		virtual ~AudioResource();
-		
-		virtual void load(GameManager* gm);
-		virtual void unload(GameManager* gm);
-		
+
+		void load();
+		void unload();
+
 		AudioResourceInfo* getAudioResourceInfo();
 		AudioResourceType getAudioResourceType();
 		std::string getAudioResourceName();

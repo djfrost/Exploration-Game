@@ -2,7 +2,7 @@
 
 AudioPlayer::AudioPlayer(AudioResource* audio_resource, int num_plays){
 	this->audio_resource = audio_resource;
-	this->num_repeats = num_plays -1 ; //
+	this->num_repeats = num_plays -1; //
 	this->repeat_count = 0;
 }
 AudioPlayer::~AudioPlayer(){
@@ -20,4 +20,7 @@ int AudioPlayer::getRepeatCount(){
 }
 void AudioPlayer::incRepeatCount(){
 	repeat_count++;
+}
+bool AudioPlayer::isAudioPlayerDone(){
+	return repeat_count > num_repeats;
 }

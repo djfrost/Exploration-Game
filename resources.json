@@ -1,7 +1,7 @@
 {
 	"levels":{
 		"level_1": {
-			"path": ["./assets/Models", "./assets/Materials/scripts", "./assets/Textures"],
+			"path": ["./assets/Models", "./assets/Materials/scripts", "./assets/Textures", "./assets/Audio"],
 			"meshes": {
 				"meshNames" : {
 					"name" : "Fox",
@@ -13,7 +13,7 @@
 					"name" : "Tree2",
 					"name" : "PinkTree",
 					"name" : "Tree3"
-				},					
+				},
 				"Fox" : {
 					"file" : "Fox.mesh",
 					"transform" : "0.0,0.0,-10.0",
@@ -21,7 +21,7 @@
 					"angle" : "90.0",
 					"scale" : "1.0,1.0,1.0",
 					"defaultAnim" : "none"
-				},					
+				},
 				"GroundGrass" : {
 					"file" : "GroundGrass.mesh",
 					"transform" : "0.0,-7.15,0.0",
@@ -146,12 +146,14 @@
 				},
 				"sound1" : {
 					"type" : "sample",
-					"file" : "./assets/Audio/sound1.mp3",
+					"file" : "C:/Game_Engine/Game/Assets/Audio/OurLastDawn.mp3",
+					"repeats" : "0",
 					"name" : "torii-sound"
 				},
 				"music1" : {
 					"type" : "stream",
-					"file" : "./assets/Audio/music.mp3",
+					"file" : "C:/Game_Engine/Game/Assets/Audio/WingsUnchained.mp3",
+					"repeats" : "-1",
 					"name" : "bg-song"
 				}
 			},

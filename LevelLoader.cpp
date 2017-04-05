@@ -13,12 +13,12 @@ LevelLoader::LevelLoader(GameManager* gameManager, std::string fileName){
 }
 
 LevelLoader::~LevelLoader(){
-	
+
 }
 
 void LevelLoader::ReadResources(std::string fileName){
 	std::ifstream jsonFile(fileName.c_str());
-    read_json(jsonFile, pt);
+	read_json(jsonFile, pt);
 	std::string output;
 	jsonFile.close();
 }
@@ -173,12 +173,37 @@ void LevelLoader::LoadLevel(std::string levelName)
 			}
 		}
 	}
+	ptree audioTree = levelTree.get_child("SFX");
+	std::vector<std::string> audioTypes;
+	std::vector<std::string> audioFiles;
+	std::vector<int> audioRepeats;
+	std::vector<std::string> audioNames;
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, audioTree.get_child("Names")){
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &t, audioTree.get_child(v.second.data())){
+			std::string type = t.first.data();
+			if(type == "type")
+			{
+				audioTypes.push_back(t.second.data());
+			}
+			else if(type == "file"){
+				audioFiles.push_back(t.second.data());
+			}
+			else if(type == "repeats"){
+				std::string valNotParsed = t.second.data();
+				audioRepeats.push_back(stof(valNotParsed));
+			}
+			else if(type == "name"){
+				audioNames.push_back(t.second.data());
+			}
+		}
+	}
 	std::string skybox = levelTree.get<std::string>("SkyMap");
 	// unload last scene load next scene
 	gm->loadLights(names,types, colors, directions);
 	gm->loadScene(nextScene, currScene, meshes, meshFiles, transforms, rotates, angle, scales, defaultAnims);
 	gm->loadCameras(positions, lookAts, nearclips, farclips, camRots, camAngle, parents);
 	gm->loadSkyBox(skybox);
+	handleAudioResources(audioTypes, audioFiles, audioRepeats, audioNames, levelName);
 	//gm->processAnims(objects, typesAnims, values, axis, timeSteps, start, begin);
 	currScene = levelName;
 	nextScene = "";
@@ -192,4 +217,25 @@ std::vector<float> LevelLoader::parseMultF(std::string floats){
 		floatVec.push_back(stof(tempFloat));
 	}
 	return floatVec;
+}
+void LevelLoader::unLoadCurrLevel(){
+	for(int i = 0; i < currentLevelAudio.size(); i++){
+		delete currentLevelAudio[i];
+	}
+	currentLevelAudio.clear();
+}
+void LevelLoader::handleAudioResources(std::vector<std::string> types, std::vector<std::string> files, std::vector<int> repeats, std::vector<std::string> names, std::string level){
+	for(int i = 0; i < types.size(); i++){
+		AudioResource* ar;
+		if("stream" == types[i]){
+			ar = new AudioResource(level, files[i], names[i], STREAM, gm);
+			ar->load();
+			std::cout << "\n\n\nLoaded audio resource\n\n\n" << std::endl;
+			gm->loadStreamAudioResource(ar->getAudioResourceName(), ar->getAudioResourceInfo());
+		}
+		else{
+			ar = new AudioResource(level, files[i], names[i], SAMPLE, gm);
+		}
+		currentLevelAudio.push_back(ar);
+	}
 }

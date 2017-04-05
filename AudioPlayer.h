@@ -3,21 +3,22 @@
 
 class AudioResource;
 
-class AudioPlayer{
+class AudioPlayer {
 	private:
 		AudioResource* audio_resource;
-		
-		int num_repeats;//0 play once, 1 play twice, etc.
+
+		int num_repeats;  //0 play once, 1 play twice, etc.
 		int repeat_count;
-		
+
 	public:
-		AudioPlayer(AudioResource* audio_resource, int num_plays);
+	AudioPlayer(AudioResource* audio_resource, int num_plays);
 		virtual ~AudioPlayer();
-		
+
 		int getNumRepeats();
 		int getRepeatCount();
 		void incRepeatCount();
 		AudioResource* getAudioResource();
-		
+		bool isAudioPlayerDone();
+
 };
 #endif
