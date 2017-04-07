@@ -3,7 +3,7 @@
 #include "AnimationRenderListener.h"
 #undef OGRE_MAX_NUM_BONES
 #define OGRE_MAX_NUM_BONES 20000
-#include <iostream>
+
 #include "CSC2110/ListArrayIterator.h"
 #include "InputRenderListener.h"
 #include "InputFunctionHandler.h"
@@ -45,7 +45,7 @@ void RenderManager::init(){
 	root = NULL;
 	window = NULL;
 	scene_manager = NULL;
-	
+
 	root = OGRE_NEW Ogre::Root("","");  //resource/config files go here
 	root->loadPlugin("RenderSystem_GL");  //prepares external dlls for later use
 
@@ -61,7 +61,7 @@ void RenderManager::init(){
 
 	//initialize render system
 	//automatically create the window and give it a title
-	window = root->initialise(true, "Explore");  
+	window = root->initialise(true, "Explore");
 
 	scene_manager = root->createSceneManager(Ogre::ST_GENERIC, "Default Scene Manager");
 	window->getCustomAttribute("WINDOW", &window_handle);
@@ -154,7 +154,7 @@ void RenderManager::buildSimpleScene(){
 	rgm.declareResource("Torus.mesh","Mesh","Level_1");
 	rgm.initialiseResourceGroup("Level_1");
 	rgm.loadResourceGroup("Level_1", true, true);
-	
+
 	camera->setPosition(Ogre::Vector3(0,0,10));
 	camera->lookAt(Ogre::Vector3(0,0,0));
 	camera->setNearClipDistance(2);
@@ -162,22 +162,22 @@ void RenderManager::buildSimpleScene(){
 	scene_manager->setAmbientLight(Ogre::ColourValue(.05,.05,.05));
 	Ogre::Light* light = scene_manager->createLight("Light");
 	light->setType(Ogre::Light::LT_DIRECTIONAL);
-	
+
 	light->setDiffuseColour(1.0,1.0,1.0);
 	light->setDirection(Ogre::Vector3(0.0,0.0,-1.0));
-	
+
 	Ogre::SceneNode* torus_node = scene_manager->createSceneNode("Torus_Node");
 	Ogre::SceneNode* fox_node = scene_manager->createSceneNode("Fox_Node");
-	
+
 	Ogre::Entity* torus_entity = scene_manager->createEntity("Torus_Entity","Torus.mesh");
 	Ogre::Entity* fox_entity = scene_manager->createEntity("Fox_Entity","Fox.mesh");
-	
+
 	torus_node->attachObject(torus_entity);
 	fox_node->attachObject(fox_entity);
 	Ogre::SceneNode* scene_root_node = scene_manager->getRootSceneNode();
 	scene_root_node->addChild(torus_node);
 	scene_root_node->addChild(fox_node);
-	
+
 	Vector3 vr(1,0,0);
 	Quaternion q(Degree(60),vr);
 	torus_node->rotate(q);
@@ -236,7 +236,7 @@ void RenderManager::loadScene(std::string sceneName, std::string lastScene, std:
 			animState->setEnabled(true);
 			anims.push_back(animState);
 		}
-		
+
 	}
 }
 void RenderManager::loadCameras(std::vector< std::vector< float > > positions, std::vector< std::vector < float > > lookAts, std::vector<float> nearclips, std::vector<float> farclips, std::vector<float> rotation, std::vector<float> angle, std::vector<std::string> parents){
@@ -270,20 +270,20 @@ void RenderManager::initialiseNewScene(){
 */
 bool RenderManager::groupExists( std::string group )
 {
-   Ogre::StringVector groupNameList = Ogre::ResourceGroupManager::getSingleton().getResourceGroups(); 
-   Ogre::StringVector::iterator resGroupIter = groupNameList.begin(); 
+   Ogre::StringVector groupNameList = Ogre::ResourceGroupManager::getSingleton().getResourceGroups();
+   Ogre::StringVector::iterator resGroupIter = groupNameList.begin();
 
    for(;resGroupIter < groupNameList.end();resGroupIter++)
-   { 
-      Ogre::String resGroupName = (*resGroupIter); 
+   {
+      Ogre::String resGroupName = (*resGroupIter);
       if( resGroupName == group )
       {
              return true;
-       } 
+       }
    }
    return false;
 }
-void RenderManager::loadSkyBox(std::string skyBoxMat){ 
+void RenderManager::loadSkyBox(std::string skyBoxMat){
 	scene_manager->setSkyBox(true, skyBoxMat);
 }
 void RenderManager::processAnims(std::vector<std::string> objects, std::vector<std::string> types, std::vector< std::vector < float > > values, std::vector< std::vector < float > >  axis, std::vector< std::vector < float > > timeSteps, std::vector< std::vector < float > > start, std::vector < std::vector<float> > begin){
@@ -349,3 +349,6 @@ void RenderManager::destroySceneNode( Ogre::SceneNode* node )
    node->removeAndDestroyAllChildren();
    node->getCreator()->destroySceneNode(node);
 }
+void RenderManager::mousePressed(int x_click, int y_click, std::string mouseButton){}
+void RenderManager::mouseReleased(int x_click, int y_click, std::string mouseButton){}
+void RenderManager::mouseMoved(int x_click, int y_click, int x_rel, int y_rel){}

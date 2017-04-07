@@ -4,7 +4,7 @@
 
 #include <sstream>
 #include <iostream>
-#include <math.h> 
+#include <math.h>
 using namespace std;
 
 //called on every frame
@@ -12,6 +12,7 @@ void InputManager::checkForInput(){
 	if(keyboard_ois){
 		keyboard_ois->capture();
 	}
+	if(mouse_ois){mouse_ois->capture();}
 	if(joystick_ois){
 		joystick_ois->capture();
 		OIS::JoyStickState joystick_state = joystick_ois->getJoyStickState();
@@ -20,6 +21,31 @@ void InputManager::checkForInput(){
 	}
 }
 
+bool InputManager::mousePressed(const OIS::MouseEvent& e, OIS::MouseButtonID id){
+	uint32 x_click = e.state.X.abs;
+	uint32 y_click = e.state.Y.abs;
+	//game_manager->mousePressed(x_click, y_click, mouseMap(id));
+	game_manager->mousePressed(x_click, y_click, " ");
+	return true;
+}
+bool InputManager::mouseReleased(const OIS::MouseEvent& e, OIS::MouseButtonID id){
+	uint32 x_click = e.state.X.abs;
+	uint32 y_click = e.state.Y.abs;
+	//game_manager->mouseReleased(x_click, y_click, mouseMap(id));
+	game_manager->mouseReleased(x_click, y_click, " ");
+	return true;
+
+}
+bool InputManager::mouseMoved(const OIS::MouseEvent& e){
+	e.state.width = window_width;
+	e.state.height = window_height;
+	uint32 x_click = e.state.X.abs;
+	uint32 y_click = e.state.Y.abs;
+	int x_rel = (int) e.state.X.rel;
+	int y_rel = (int) e.state.Y.rel;
+	game_manager->mouseMoved(x_click, y_click, x_rel, y_rel);
+	return true;
+}
 bool InputManager::keyPressed(const OIS::KeyEvent& e){
 	//cout << "KP" << endl;
 	game_manager->keyPressed(keyMap(e));
@@ -38,7 +64,7 @@ void InputManager::init(){
 		OIS::ParamList p1;
 		std::ostringstream windowHndStr;
 		size_t window_handle = game_manager->getRenderWindowHandle();
-		
+
 		size_t handle = window_handle;
 		windowHndStr << handle;
 		p1.insert(std::make_pair(std::string("WINDOW"),windowHndStr.str()));
@@ -72,9 +98,9 @@ InputManager::InputManager(GameManager* gm){
 	keyboard_ois = NULL;
 	mouse_ois = NULL;
 	joystick_ois = NULL;
-	
+
 	init();
-	
+
 	window_width = game_manager->getRenderWindowWidth();
 	window_height = game_manager->getRenderWindowHeight();
 }
@@ -96,7 +122,7 @@ InputManager::~InputManager(){
 std::string InputManager::keyMap(const OIS::KeyEvent& e){
 	std::string game_key = "INVALID_KEY";
 	OIS::KeyCode key_code = e.key;
-	
+
 	if(key_code == OIS::KC_ESCAPE){
 		game_key = "ESCAPE";
 	}
@@ -243,7 +269,7 @@ bool InputManager::axisMoved(const OIS::JoyStickEvent& e, int axis){
 		east_west = amount[1]/32767.0;
 	}
 	game_manager->leftJoystickAxisMoved(north_south, east_west);
-	
+
 	north_south = 0;
 	east_west = 0;
 	if(fabs(amount[2]) > TOL){
@@ -253,11 +279,11 @@ bool InputManager::axisMoved(const OIS::JoyStickEvent& e, int axis){
 		east_west = amount[1]/32767.0;
 	}
 	game_manager->rightJoystickAxisMoved(north_south, east_west);
-	
+
 	north_south = 0;
 	east_west = 0;
 	return true;
 }
 std::string InputManager::joystickAxisMap(int axis){
-	
+
 }

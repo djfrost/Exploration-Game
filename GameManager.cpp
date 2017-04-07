@@ -6,6 +6,7 @@
 #include "AudioManager.h"
 #include <iostream>
 #include <string>
+
 //the problem is that in C++, it is not known when this initialization code will be called
 //so we will use a function static variable that is initialized the first time the method is called
 //destructor automatically called?
@@ -21,11 +22,11 @@ void GameManager::init(){
 	logComment("Render Manager loaded successfully");
 	inputManager = new InputManager(this);
 	logComment("Input Manager loaded successfully");
+	audioManager = new AudioManager(this);
+	logComment("AudioManager Loaded successfully");
 	std::string file = "resources.json";
 	levelLoader = new LevelLoader(this, file);
 	logComment("Level Loader loaded successfully");
-	audioManager = new AudioManager(this);
-	logComment("AudioManager Loaded successfully");
 }
 
 GameManager::GameManager(){
@@ -118,9 +119,21 @@ void GameManager::unloadSampleAudioResource(AudioResourceInfo* ar_info){
 void GameManager::unloadStreamAudioResource(AudioResourceInfo* ar_info){
 	audioManager->unloadStreamAudioResource(ar_info);
 }
+void GameManager::playAudio(AudioResource* ar, int num_repeats){
+	audioManager->playAudio(ar, num_repeats);
+}
 void GameManager::updateAudio(float time_step){
 	audioManager->updateAudio(time_step);
 }
 AudioResourceInfo* GameManager::createAudioResourceInfo(){
 	return audioManager->createAudioResourceInfo();
+}
+void GameManager::mousePressed(int x_click, int y_click, std::string mouseButton){
+	render_manager->mousePressed(x_click, y_click, mouseButton);
+}
+void GameManager::mouseReleased(int x_click, int y_click, std::string mouseButton){
+	render_manager->mouseReleased(x_click, y_click, mouseButton);
+}
+void GameManager::mouseMoved(int x_click, int y_click, int x_rel, int y_rel){
+	render_manager->mouseMoved(x_click, y_click, x_rel, y_rel);
 }

@@ -146,15 +146,15 @@
 				},
 				"sound1" : {
 					"type" : "sample",
-					"file" : "C:/Game_Engine/Game/Assets/Audio/OurLastDawn.mp3",
+					"file" : "./Assets/Audio/OurLastDawn.mp3",
 					"repeats" : "0",
 					"name" : "torii-sound"
 				},
 				"music1" : {
 					"type" : "stream",
-					"file" : "C:/Game_Engine/Game/Assets/Audio/WingsUnchained.mp3",
-					"repeats" : "-1",
-					"name" : "bg-song"
+					"file" : "./Assets/Audio/WingsUnchained.mp3",
+					"repeats" : "2",
+					"name" : "bgsong"
 				}
 			},
 			"SkyMap" : "sky"

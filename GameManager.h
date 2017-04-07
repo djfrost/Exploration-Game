@@ -3,12 +3,14 @@
 
 #include <string>
 #include <vector>
+#include <stdint.h>
 class RenderManager;
 class LevelLoader;
 class LogManager;
 class InputManager;
 class AudioManager;
 struct AudioResourceInfo;
+class AudioResource;
 //supplies communication between managers
 class GameManager{
 	private:
@@ -47,8 +49,12 @@ class GameManager{
 		void loadStreamAudioResource(std::string audio_file_name, AudioResourceInfo* ar_info);
 		void unloadSampleAudioResource(AudioResourceInfo* ar_info);
 		void unloadStreamAudioResource(AudioResourceInfo* ar_info);
+		void playAudio(AudioResource* ar, int num_repeats);
 		void updateAudio(float time_step);
 		AudioResourceInfo* createAudioResourceInfo();
+		void mousePressed(int x_click, int y_click, std::string mouseButton);
+		void mouseReleased(int x_click, int y_click, std::string mouseButton);
+		void mouseMoved(int x_click, int y_click, int x_rel, int y_rel);
 };
 
 #endif

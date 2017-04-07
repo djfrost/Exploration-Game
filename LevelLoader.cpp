@@ -230,8 +230,8 @@ void LevelLoader::handleAudioResources(std::vector<std::string> types, std::vect
 		if("stream" == types[i]){
 			ar = new AudioResource(level, files[i], names[i], STREAM, gm);
 			ar->load();
-			std::cout << "\n\n\nLoaded audio resource\n\n\n" << std::endl;
-			gm->loadStreamAudioResource(ar->getAudioResourceName(), ar->getAudioResourceInfo());
+			gm->loadStreamAudioResource(files[i], ar->getAudioResourceInfo());
+			gm->playAudio(ar,repeats[i]);
 		}
 		else{
 			ar = new AudioResource(level, files[i], names[i], SAMPLE, gm);

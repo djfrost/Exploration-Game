@@ -16,9 +16,9 @@ material _missing_material_
 
 // PinkLeaf genrated by blender2ogre 0.5.9
 
-material PinkLeaf 
+material PinkLeaf
 {
-    receive_shadows on 
+    receive_shadows on
 
     technique
     {
@@ -31,11 +31,11 @@ material PinkLeaf
 
             alpha_to_coverage off
             colour_write on
-            cull_hardware clockwise
+            cull_hardware none
             depth_check on
             depth_func less_equal
             depth_write on
-            illumination_stage 
+            illumination_stage
             light_clip_planes off
             light_scissor off
             lighting on
@@ -46,7 +46,7 @@ material PinkLeaf
             shading gouraud
             transparent_sorting on
 
-            texture_unit 
+            texture_unit
             {
                 texture PinkLeafColor.jpg
                 tex_address_mode wrap
@@ -58,9 +58,9 @@ material PinkLeaf
 }
 // Bark3 genrated by blender2ogre 0.5.9
 
-material Bark3 
+material Bark3
 {
-    receive_shadows on 
+    receive_shadows on
 
     technique
     {
@@ -77,7 +77,7 @@ material Bark3
             depth_check on
             depth_func less_equal
             depth_write on
-            illumination_stage 
+            illumination_stage
             light_clip_planes off
             light_scissor off
             lighting on
@@ -88,7 +88,7 @@ material Bark3
             shading gouraud
             transparent_sorting on
 
-            texture_unit 
+            texture_unit
             {
                 texture bark_texture___5_by_agf81-d4cta4p.jpg
                 tex_address_mode wrap

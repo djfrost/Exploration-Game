@@ -16,9 +16,9 @@ material _missing_material_
 
 // Bark genrated by blender2ogre 0.5.9
 
-material Bark 
+material Bark
 {
-    receive_shadows on 
+    receive_shadows on
 	cast_shadows on
     technique
     {
@@ -31,11 +31,11 @@ material Bark
 
             alpha_to_coverage off
             colour_write on
-            cull_hardware clockwise
+            cull_hardware none
             depth_check on
             depth_func less_equal
             depth_write on
-            illumination_stage 
+            illumination_stage
             light_clip_planes off
             light_scissor off
             lighting on
@@ -46,7 +46,7 @@ material Bark
             shading gouraud
             transparent_sorting on
 
-            texture_unit 
+            texture_unit
             {
                 texture bark.png
                 tex_address_mode wrap
@@ -58,9 +58,9 @@ material Bark
 }
 // Leaves genrated by blender2ogre 0.5.9
 
-material Leaves 
+material Leaves
 {
-    receive_shadows on 
+    receive_shadows on
 	cast_shadows on
     technique
     {
@@ -70,7 +70,7 @@ material Leaves
 			scene_blend alpha_blend
 			depth_check off
             shading gouraud
-            texture_unit 
+            texture_unit
             {
                 texture leaves.png
                 scale 1.0 1.0
