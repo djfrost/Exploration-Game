@@ -4,6 +4,7 @@
 #include "LogManager.h"
 #include "InputManager.h"
 #include "AudioManager.h"
+#include "GUIManager.h"
 #include <iostream>
 #include <string>
 
@@ -24,6 +25,8 @@ void GameManager::init(){
 	logComment("Input Manager loaded successfully");
 	audioManager = new AudioManager(this);
 	logComment("AudioManager Loaded successfully");
+	guiManager = new GUIManager(render_manager);
+	logComment("GUI Manager loaded successfully");
 	std::string file = "resources.json";
 	levelLoader = new LevelLoader(this, file);
 	logComment("Level Loader loaded successfully");

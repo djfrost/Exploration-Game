@@ -11,14 +11,14 @@ class CEGUIEvent{
 		cegui_function_ptr event_function_ptr;
 		std::string event_key;
 		std::string event_script;
-	
+
 	public:
-		CEGUIEvent(std::string& event_key, cegui_function_ptr event_ptr);
+		CEGUIEvent(std::string event_key, cegui_function_ptr event_ptr);
 		virtual ~CEGUIEvent();
 		std::string* getEventKey();
 		std::string& getEventScript();
 		cegui_function_ptr getFunctionPtr();
-		
+
 		void setEventScript(std::string& script);
 };
 

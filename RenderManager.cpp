@@ -352,3 +352,4 @@ void RenderManager::destroySceneNode( Ogre::SceneNode* node )
 void RenderManager::mousePressed(int x_click, int y_click, std::string mouseButton){}
 void RenderManager::mouseReleased(int x_click, int y_click, std::string mouseButton){}
 void RenderManager::mouseMoved(int x_click, int y_click, int x_rel, int y_rel){}
+void RenderManager::playAudio(const char fileName[]){}

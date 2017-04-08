@@ -11,6 +11,7 @@ class InputManager;
 class AudioManager;
 struct AudioResourceInfo;
 class AudioResource;
+class GUIManager;
 //supplies communication between managers
 class GameManager{
 	private:
@@ -19,6 +20,7 @@ class GameManager{
 		LogManager* logManager;
 		InputManager* inputManager;
 		AudioManager* audioManager;
+		GUIManager* guiManager;
 		GameManager();
 		void init();
 
