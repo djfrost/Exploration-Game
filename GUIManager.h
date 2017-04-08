@@ -17,10 +17,11 @@ class GUIManager{
     CEGUI::GUIContext* gui_context;
     CEGUI::Window* root_window;
     void destroyGUIContext();
-    TableAVL<CEGUIEvent, std::string>* event_table;
+    std::vector<CEGUIEvent*> events;
+    // TableAVL<CEGUIEvent*, std::string>* event_table;
     void doNothing(const CEGUI::EventArgs& e);
     void playComboboxSample(const CEGUI::EventArgs& e);
-    CompareCEGUIEvent* comparator; //possibly CEGUIEvent* not CEGUIEvent
+    //CompareCEGUIEvent* comparator; //possibly CEGUIEvent* not CEGUIEvent
   public:
       GUIManager(RenderManager* rm);
       virtual ~GUIManager();
@@ -31,7 +32,7 @@ class GUIManager{
       void createGUIContext(std::string scheme,std::string font,std::string cursor,std::string tooltip,std::string layout);
       void mouseMoved(unsigned int mouse_x, unsigned int mouse_y, int mouse_rel_x, int mouse_rel_y);
       void mousePressed(unsigned int mouse_x, unsigned int mouse_y, unsigned int mouse_button);
-      void processEvent(std::string type_str, std::string name_str, std::string procedure_str);
+      void processEvent(std::string type_str, std::string name_str, int event);
       void buttonEvent(const CEGUI::EventArgs& e);
       void processCombobox(std::string name_str, std::string image_str, std::string * items, int num_items);
 };

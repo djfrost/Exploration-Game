@@ -79,13 +79,13 @@ void GUIManager::processCombobox(std::string name_str, std::string image_str, st
 	}
 }
 
-void GUIManager::processEvent(std::string type_str, std::string name_str, std::string procedure_str){
-	CEGUIEvent* cegui_event = event_table->tableRetrieve(&procedure_str);
+void GUIManager::processEvent(std::string type_str, std::string name_str, int event){
+	CEGUIEvent* cegui_event = events[event];
 	cegui_function_ptr event_function_ptr = cegui_event->getFunctionPtr();
 
-	if(type_str == "edit_box"){
+	if(type_str == "button"){
 		CEGUI::PushButton* push_button = static_cast<CEGUI::PushButton*>(root_window->getChild(name_str));
-		if(procedure_str == "buttonEvent"){
+		if(event == 1){
 			push_button->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(event_function_ptr, this));
 		}
 		/*else if(type_str == "edit_box"){
@@ -113,30 +113,20 @@ GUIManager::GUIManager(RenderManager* rm){
 		gui_context = NULL;
 		render_manager = rm;
 		cegui_ogre_renderer = getRenderer();
-		comparator = new CompareCEGUIEvent();
-		//event_table = new TableAVL<CEGUIEvent, std::string>(comparator);
-
-		cegui_function_ptr play_combobox_sample_func_ptr = &GUIManager::playComboboxSample;
-		CEGUIEvent* cegui_event = new CEGUIEvent("playComboboxSample", play_combobox_sample_func_ptr);
-		event_table->tableInsert(cegui_event);
-
 		cegui_function_ptr do_nothing_func_ptr = &GUIManager::doNothing;
-		cegui_event = new CEGUIEvent("doNothing", do_nothing_func_ptr);
-		event_table->tableInsert(cegui_event);
+		CEGUIEvent* cegui_event = new CEGUIEvent("doNothing", do_nothing_func_ptr);
+		events.push_back(cegui_event);
+		cegui_function_ptr play_combobox_sample_func_ptr = &GUIManager::playComboboxSample;
+		cegui_event = new CEGUIEvent("playComboboxSample", play_combobox_sample_func_ptr);
+		events.push_back(cegui_event);
 }
 
 GUIManager::~GUIManager(){
 	cegui_ogre_renderer = NULL;
-	AVLTreeIterator<CEGUIEvent>* event_iter = event_table->tableIterator();
-	while(event_iter->hasNext()){
-		CEGUIEvent* cegui_event = event_iter->next();
-		delete cegui_event;
+	for(int i = 0; i < events.size(); i++){
+		delete events[i];
+		events[i] = NULL;
 	}
-	delete event_iter;
-	delete event_table;
-	event_table = NULL;
-	delete comparator;
-	comparator = NULL;
 }
 
 void GUIManager::unloadLevel(){

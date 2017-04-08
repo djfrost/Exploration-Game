@@ -140,3 +140,6 @@ void GameManager::mouseReleased(int x_click, int y_click, std::string mouseButto
 void GameManager::mouseMoved(int x_click, int y_click, int x_rel, int y_rel){
 	render_manager->mouseMoved(x_click, y_click, x_rel, y_rel);
 }
+void GameManager::guiLoadLevel(std::string level_name, std::string scheme, std::string font, std::string cursor, std::string tooltip, std::string layout){
+	guiManager->loadLevel(level_name, scheme, font, cursor, tooltip, layout);
+}

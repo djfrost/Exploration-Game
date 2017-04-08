@@ -8,7 +8,7 @@ LIBS=-lboost_system-mgw51-mt-1_63 -lois -llua -lbass -lOgreMain -lCEGUIBase-0 -l
 COMPILE = $(CC) $(INC_DIRS) -c
 LINK = $(CC) $(LIB_DIRS) -o
 
-FILES = GameResource.o PathResource.o InputRenderListener.o InputManager.o LevelLoader.o AnimationRenderListener.o RenderManager.o LogManager.o GameManager.o GameDriver.o RenderListener.o InputFunctionHandler.o AudioResource.o AudioPlayer.o AudioManager.o CompareCEGUIEvent.o 
+FILES = GameResource.o PathResource.o InputRenderListener.o InputManager.o LevelLoader.o AnimationRenderListener.o RenderManager.o LogManager.o GameManager.o GameDriver.o RenderListener.o InputFunctionHandler.o AudioResource.o AudioPlayer.o AudioManager.o CompareCEGUIEvent.o  GUIManager.o CEGUIEvent.o
 all: Ogre
 
 Ogre: 		$(FILES)
@@ -47,3 +47,5 @@ CompareCEGUIEvent.o: CompareCEGUIEvent.h CompareCEGUIEvent.cpp
 			$(COMPILE) CompareCEGUIEvent.cpp
 GUIManager.o: GUIManager.h GUIManager.cpp
 			$(COMPILE) GUIManager.cpp
+CEGUIEvent.o: CEGUIEvent.h CEGUIEvent.cpp
+			$(COMPILE) CEGUIEvent.cpp

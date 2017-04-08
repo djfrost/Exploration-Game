@@ -57,6 +57,7 @@ class GameManager{
 		void mousePressed(int x_click, int y_click, std::string mouseButton);
 		void mouseReleased(int x_click, int y_click, std::string mouseButton);
 		void mouseMoved(int x_click, int y_click, int x_rel, int y_rel);
+		void guiLoadLevel(std::string level_name, std::string scheme, std::string font, std::string cursor, std::string tooltip, std::string layout);
 };
 
 #endif

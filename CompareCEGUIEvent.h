@@ -2,7 +2,7 @@
 #define COMPARECEGUIEVENT
 #include <string>
 #include "CEGUIEvent.h"
-#include "Comparator.h"
+#include "CSC2110/Comparator.h"
 class CompareCEGUIEvent :public Comparator<CEGUIEvent,std::string>{
   private:
   public:
