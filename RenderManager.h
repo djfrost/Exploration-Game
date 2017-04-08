@@ -60,8 +60,8 @@ class RenderManager{
 		void logComment(std::string comment);
 		void destroySceneNode( Ogre::SceneNode* node);
 		void updateAudio(float time_step);
-		void mousePressed(int x_click, int y_click, std::string mouseButton);
-		void mouseReleased(int x_click, int y_click, std::string mouseButton);
+		void mousePressed(int x_click, int y_click, int mouseButton);
+		void mouseReleased(int x_click, int y_click, int mouseButton);
 		void mouseMoved(int x_click, int y_click, int x_rel, int y_rel);
 		void playAudio(const char fileName[]);
 };

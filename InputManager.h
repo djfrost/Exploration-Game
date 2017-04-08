@@ -22,6 +22,7 @@ class InputManager: public OIS::KeyListener, public OIS::JoyStickListener{
 		std::string keyMap(const OIS::KeyEvent& e);
 		//uint32 mouseMap(const OIS::MouseButtonID id);
 		std::string joystickButtonMap(int button);
+		int mouseMap(const OIS::MouseEvent& id);
 	public:
 		InputManager(GameManager* gm);
 		virtual ~InputManager();

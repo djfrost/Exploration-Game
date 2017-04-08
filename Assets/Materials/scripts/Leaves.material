@@ -27,8 +27,8 @@ material Leaves
             scene_blend_op add
             shading gouraud
             transparent_sorting on
-			scene_blend alpha_blend
-			depth_check off
+      			scene_blend alpha_blend
+      			depth_check off
             texture_unit
             {
                 texture leaves.png

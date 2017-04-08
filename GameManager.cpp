@@ -131,14 +131,16 @@ void GameManager::updateAudio(float time_step){
 AudioResourceInfo* GameManager::createAudioResourceInfo(){
 	return audioManager->createAudioResourceInfo();
 }
-void GameManager::mousePressed(int x_click, int y_click, std::string mouseButton){
+void GameManager::mousePressed(unsigned int x_click,unsigned int y_click, int mouseButton){
 	render_manager->mousePressed(x_click, y_click, mouseButton);
+	guiManager->mousePressed(x_click, y_click, mouseButton);
 }
-void GameManager::mouseReleased(int x_click, int y_click, std::string mouseButton){
+void GameManager::mouseReleased(unsigned int x_click,unsigned int y_click, int mouseButton){
 	render_manager->mouseReleased(x_click, y_click, mouseButton);
 }
-void GameManager::mouseMoved(int x_click, int y_click, int x_rel, int y_rel){
+void GameManager::mouseMoved(unsigned int x_click,unsigned int y_click,unsigned int x_rel,unsigned int y_rel){
 	render_manager->mouseMoved(x_click, y_click, x_rel, y_rel);
+	guiManager->mouseMoved(x_click, y_click, x_rel, y_rel);
 }
 void GameManager::guiLoadLevel(std::string level_name, std::string scheme, std::string font, std::string cursor, std::string tooltip, std::string layout){
 	guiManager->loadLevel(level_name, scheme, font, cursor, tooltip, layout);

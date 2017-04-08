@@ -37,7 +37,7 @@ material LeavesStatic
                 tex_address_mode wrap
                 scale 1.0 1.0
                 colour_op alpha_blend
-				alpha_op_ex source1 src_texture src_texture
+	              alpha_op_ex source1 src_texture src_texture
             }
         }
     }

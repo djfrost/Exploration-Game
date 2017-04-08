@@ -197,12 +197,37 @@ void LevelLoader::LoadLevel(std::string levelName)
 			}
 		}
 	}
+	std::string scheme;
+	std::string font;
+	std::string cursor;
+	std::string tooltip;
+	std::string layout;
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &t, levelTree.get_child("GUIInfo")){
+		std::string type = t.first.data();
+		if(type == "scheme")
+		{
+			scheme = t.second.data();
+		}
+		else if(type == "font"){
+			font = t.second.data();
+		}
+		else if(type == "cursor"){
+			cursor = t.second.data();
+		}
+		else if(type == "tooltip"){
+			tooltip = t.second.data();
+		}
+		else if(type == "layout"){
+			layout = t.second.data();
+		}
+	}
 	std::string skybox = levelTree.get<std::string>("SkyMap");
 	// unload last scene load next scene
 	gm->loadLights(names,types, colors, directions);
 	gm->loadScene(nextScene, currScene, meshes, meshFiles, transforms, rotates, angle, scales, defaultAnims);
 	gm->loadCameras(positions, lookAts, nearclips, farclips, camRots, camAngle, parents);
 	gm->loadSkyBox(skybox);
+	gm->guiLoadLevel(levelName, scheme, font, cursor, tooltip, layout);
 	handleAudioResources(audioTypes, audioFiles, audioRepeats, audioNames, levelName);
 	//gm->processAnims(objects, typesAnims, values, axis, timeSteps, start, begin);
 	currScene = levelName;

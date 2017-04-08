@@ -24,15 +24,15 @@ void InputManager::checkForInput(){
 bool InputManager::mousePressed(const OIS::MouseEvent& e, OIS::MouseButtonID id){
 	uint32 x_click = e.state.X.abs;
 	uint32 y_click = e.state.Y.abs;
-	//game_manager->mousePressed(x_click, y_click, mouseMap(id));
-	game_manager->mousePressed(x_click, y_click, " ");
+	game_manager->mousePressed(x_click, y_click, mouseMap(e));
+	//game_manager->mousePressed(x_click, y_click, 2);
 	return true;
 }
 bool InputManager::mouseReleased(const OIS::MouseEvent& e, OIS::MouseButtonID id){
 	uint32 x_click = e.state.X.abs;
 	uint32 y_click = e.state.Y.abs;
-	//game_manager->mouseReleased(x_click, y_click, mouseMap(id));
-	game_manager->mouseReleased(x_click, y_click, " ");
+	game_manager->mouseReleased(x_click, y_click, mouseMap(e));
+	//game_manager->mouseReleased(x_click, y_click, " ");
 	return true;
 
 }
@@ -286,4 +286,14 @@ bool InputManager::axisMoved(const OIS::JoyStickEvent& e, int axis){
 }
 std::string InputManager::joystickAxisMap(int axis){
 
+}
+int InputManager::mouseMap(const OIS::MouseEvent& id){
+	int mouseKey = 0;
+	if(id.state.buttonDown(OIS::MB_Left)){
+		mouseKey = 1;
+	}
+	else if(id.state.buttonDown(OIS::MB_Right)){
+		mouseKey = 2;
+	}
+	return mouseKey;
 }

@@ -30,7 +30,7 @@ class GUIManager{
       void unloadLevel();
       void keyPressed(std::string game_key);
       void createGUIContext(std::string scheme,std::string font,std::string cursor,std::string tooltip,std::string layout);
-      void mouseMoved(unsigned int mouse_x, unsigned int mouse_y, int mouse_rel_x, int mouse_rel_y);
+      void mouseMoved(unsigned int mouse_x, unsigned int mouse_y,unsigned int mouse_rel_x,unsigned int mouse_rel_y);
       void mousePressed(unsigned int mouse_x, unsigned int mouse_y, unsigned int mouse_button);
       void processEvent(std::string type_str, std::string name_str, int event);
       void buttonEvent(const CEGUI::EventArgs& e);

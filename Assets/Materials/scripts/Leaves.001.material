@@ -1,14 +1,15 @@
 // Leaves.001 genrated by blender2ogre 0.5.9
 
-material Leaves.001 
+material Leaves.001
 {
-    receive_shadows on 
+    receive_shadows on
 	cast_shadows on
     technique
     {
         pass Leaves.001
         {
-            texture_unit 
+            cull_hardware none
+            texture_unit
             {
                 texture leaves.png
                 scale 1.0 1.0

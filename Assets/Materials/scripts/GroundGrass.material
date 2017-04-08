@@ -1,8 +1,8 @@
 // GroundGrass genrated by blender2ogre 0.5.9
 
-material GroundGrass 
+material GroundGrass
 {
-    receive_shadows on 
+    receive_shadows on
 	cast_shadows on
     technique
     {
@@ -15,11 +15,11 @@ material GroundGrass
 
             alpha_to_coverage off
             colour_write on
-            cull_hardware clockwise
+            cull_hardware none
             depth_check on
             depth_func less_equal
             depth_write on
-            illumination_stage 
+            illumination_stage
             light_clip_planes off
             light_scissor off
             lighting on
@@ -30,7 +30,7 @@ material GroundGrass
             shading gouraud
             transparent_sorting on
 
-            texture_unit 
+            texture_unit
             {
                 texture LeafTexture.jpg
                 tex_address_mode wrap

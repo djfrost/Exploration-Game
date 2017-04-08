@@ -1,7 +1,7 @@
 {
 	"levels":{
 		"level_1": {
-			"path": ["./assets/Models", "./assets/Materials/scripts", "./assets/Textures", "./assets/Audio"],
+			"path": ["./assets/Models", "./assets/Materials/scripts", "./assets/Textures", "./assets/Audio", "./Assets/cegui"],
 			"meshes": {
 				"meshNames" : {
 					"name" : "Fox",
@@ -32,7 +32,7 @@
 				},
 				"Tree" : {
 					"file" : "Mesh.004.mesh",
-					"transform" : "-6.0,-7.15,-4.0",
+					"transform" : "-16.0,-7.15.0,6.0",
 					"rotate" : "0.0,0.0,0.0",
 					"angle" : "180.0",
 					"scale" : "3.0,3.0,3.0",
@@ -40,10 +40,10 @@
 				},
 				"Tree2" : {
 					"file" : "Mesh.004.mesh",
-					"transform" : "6.0,-7.15,-4.0",
+					"transform" : "16.0,-7.15.0,6.0",
 					"rotate" : "0.0,0.0,0.0",
 					"angle" : "180.0",
-					"scale" : "3.0,3.0,3.0",
+					"scale" : "3.2,3.2,3.2",
 					"defaultAnim" : "my_animation"
 				},
 				"Tree3" : {
@@ -157,8 +157,19 @@
 					"name" : "bgsong"
 				}
 			},
+			"GUIComponents" : {
+				 "combobox" : "combobox"
+			},
+			"GUIInfo" : {
+				"scheme" : "TaharezLook",
+				"font" : "DejaVuSans-14",
+				"cursor" : "TaharezLook/MouseArrow",
+				"tooltip" : "TaharezLook/tooltip",
+				"layout" : "MyDemo"
+			},
 			"SkyMap" : "sky"
 		}
+
 	},
 	"first_level": "level_1"
 }
