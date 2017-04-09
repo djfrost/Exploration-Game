@@ -161,7 +161,7 @@
 				"scheme" : "TaharezLook",
 				"font" : "DejaVuSans-14",
 				"cursor" : "TaharezLook/MouseArrow",
-				"tooltip" : "TaharezLook/tooltip",
+				"tooltip" : "TaharezLook/Tooltip",
 				"layout" : "MyDemo"
 			},
 			"SkyMap" : "sky"

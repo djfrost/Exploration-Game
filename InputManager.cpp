@@ -12,7 +12,9 @@ void InputManager::checkForInput(){
 	if(keyboard_ois){
 		keyboard_ois->capture();
 	}
-	if(mouse_ois){mouse_ois->capture();}
+	if(mouse_ois){
+		mouse_ois->capture();
+	}
 	if(joystick_ois){
 		joystick_ois->capture();
 		OIS::JoyStickState joystick_state = joystick_ois->getJoyStickState();
@@ -73,7 +75,7 @@ void InputManager::init(){
 			keyboard_ois = static_cast<OIS::Keyboard*>(input_manager_ois->createInputObject(OIS::OISKeyboard, true));
 			keyboard_ois->setEventCallback(this); //forwards the information to all registered listeners
 		}
-		
+
 		if(input_manager_ois->getNumberOfDevices(OIS::OISMouse) > 0){
 			mouse_ois = static_cast<OIS::Mouse*>(input_manager_ois->createInputObject(OIS::OISMouse, true));
 			mouse_ois->setEventCallback(this);

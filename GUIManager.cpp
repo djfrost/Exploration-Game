@@ -45,6 +45,8 @@ void GUIManager::mousePressed(unsigned int x_click, unsigned int y_click, unsign
 }
 
 void GUIManager::mouseMoved(unsigned int x_click, unsigned int y_click,unsigned int x_rel,unsigned int y_rel){
+	std::cout << "\n" << x_rel << "\n" << y_rel << std::endl;
+
 	gui_context->injectMouseMove(x_rel, y_rel);
 }
 CEGUI::OgreRenderer* GUIManager::getRenderer(){
