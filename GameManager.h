@@ -55,7 +55,7 @@ class GameManager{
 		AudioResourceInfo* createAudioResourceInfo();
 		void mousePressed(unsigned int x_click,unsigned int y_click, int mouseButton);
 		void mouseReleased(unsigned int x_click,unsigned int y_click, int mouseButton);
-		void mouseMoved(unsigned int x_click,unsigned int y_click,unsigned int x_rel,unsigned int y_rel);
+		void mouseMoved(unsigned int x_click,unsigned int y_click,float x_rel,float y_rel);
 		void guiLoadLevel(std::string level_name, std::string scheme, std::string font, std::string cursor, std::string tooltip, std::string layout);
 };
 

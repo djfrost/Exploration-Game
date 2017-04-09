@@ -43,8 +43,8 @@ bool InputManager::mouseMoved(const OIS::MouseEvent& e){
 	e.state.height = window_height;
 	uint32 x_click = e.state.X.abs;
 	uint32 y_click = e.state.Y.abs;
-	int x_rel = (int) e.state.X.rel;
-	int y_rel = (int) e.state.Y.rel;
+	float x_rel = e.state.X.rel;
+	float y_rel = e.state.Y.rel;
 	game_manager->mouseMoved(x_click, y_click, x_rel, y_rel);
 	return true;
 }
@@ -250,6 +250,9 @@ std::string InputManager::keyMap(const OIS::KeyEvent& e){
 	}
 	else if(key_code == OIS::KC_RETURN){
 		game_key = "ENTER";
+	}
+	else if(key_code == OIS::KC_BACK){
+		game_key = "BACK";
 	}
 	return game_key;
 }

@@ -97,6 +97,7 @@ void GameManager::checkForInput(float time_step){
 }
 void GameManager::keyPressed(std::string keyPressed){
 	render_manager->processKeyboardInput(keyPressed, false);
+	guiManager->keyPressed(keyPressed);
 }
 bool GameManager::keyReleased(std::string keyUp){
 	render_manager->processKeyboardInput(keyUp, true);
@@ -138,7 +139,7 @@ void GameManager::mousePressed(unsigned int x_click,unsigned int y_click, int mo
 void GameManager::mouseReleased(unsigned int x_click,unsigned int y_click, int mouseButton){
 	render_manager->mouseReleased(x_click, y_click, mouseButton);
 }
-void GameManager::mouseMoved(unsigned int x_click,unsigned int y_click,unsigned int x_rel,unsigned int y_rel){
+void GameManager::mouseMoved(unsigned int x_click,unsigned int y_click,float x_rel,float y_rel){
 	render_manager->mouseMoved(x_click, y_click, x_rel, y_rel);
 	guiManager->mouseMoved(x_click, y_click, x_rel, y_rel);
 }

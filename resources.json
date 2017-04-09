@@ -165,6 +165,74 @@
 				"layout" : "MyDemo"
 			},
 			"SkyMap" : "sky"
+		},
+		"Level_2" : {
+			"meshNames" : {
+				"name" : "Fox"
+			},
+			"Fox" : {
+				"file" : "Fox.mesh",
+				"transform" : "0.0,0.0,-10.0",
+				"rotate" : "0.0,1.0,0.0",
+				"angle" : "90.0",
+				"scale" : "1.0,1.0,1.0",
+				"defaultAnim" : "none"
+			},
+			"Cameras" : {
+				"Names" : {
+					"Name" : "1"
+				},
+				"1" : {
+					"position" : "0.0,0.0,30.0",
+					"lookat" : "0.0,0.0,0.0",
+					"nearclip" : "2.0",
+					"farclip" : "0.0",
+					"rotation" : "0.0,1.0,0.0",
+					"angle" : "90.0",
+					"childOf" : "Fox"
+				}
+			},
+			"Lights" : {
+				"Names" : {
+					"Name" : "BaseLight",
+					"Name" : "TopLight"
+				},
+				"BaseLight" : {
+					"type" : "1",
+					"color" : "1.0,1.0,1.0",
+					"direction" : "0.0,-4.0,-1.0"
+				},
+				"TopLight" : {
+					"type" : "1",
+					"color" : "1.0,1.0,1.0",
+					"direction" : "0.0,-7.15,0.0"
+				}
+			},
+			"SFX" : {
+				"Names" : {
+					"Name" : "sound1",
+					"Name" : "music1"
+				},
+				"sound1" : {
+					"type" : "sample",
+					"file" : "./Assets/Audio/OurLastDawn.mp3",
+					"repeats" : "0",
+					"name" : "torii-sound"
+				},
+				"music1" : {
+					"type" : "stream",
+					"file" : "./Assets/Audio/WingsUnchained.mp3",
+					"repeats" : "2",
+					"name" : "bgsong"
+				}
+			},
+			"GUIInfo" : {
+				"scheme" : "TaharezLook",
+				"font" : "DejaVuSans-14",
+				"cursor" : "TaharezLook/MouseArrow",
+				"tooltip" : "TaharezLook/Tooltip",
+				"layout" : "MyDemo"
+			}
 		}
 
 	},

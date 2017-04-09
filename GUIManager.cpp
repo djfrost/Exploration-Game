@@ -44,7 +44,7 @@ void GUIManager::mousePressed(unsigned int x_click, unsigned int y_click, unsign
 	gui_context->injectMouseButtonUp(mouse_enum);
 }
 
-void GUIManager::mouseMoved(unsigned int x_click, unsigned int y_click,unsigned int x_rel,unsigned int y_rel){
+void GUIManager::mouseMoved(unsigned int x_click, unsigned int y_click,float x_rel,float y_rel){
 	std::cout << "\n" << x_rel << "\n" << y_rel << std::endl;
 
 	gui_context->injectMouseMove(x_rel, y_rel);
