@@ -53,15 +53,19 @@ CEGUI::OgreRenderer* GUIManager::getRenderer(){
 }
 
 void GUIManager::createGUIContext(std::string scheme,std::string font,std::string cursor,std::string tooltip,std::string layout){
+
 	CEGUI::SchemeManager::getSingleton().createFromFile(scheme + ".scheme");
+	std::cout << "\n\n\n\nInside of gui context" << std::endl;
 	CEGUI::FontManager::getSingleton().createFromFile(font + ".font");
 	CEGUI::System& system = CEGUI::System::getSingleton();
+	std::cout << "\n\n\n\ncreating gui context" << std::endl;
 	gui_context = &system.createGUIContext(cegui_ogre_renderer->getDefaultRenderTarget());
 	gui_context->setDefaultFont(font);
 	gui_context->getMouseCursor().setDefaultImage(cursor);
 	gui_context->setDefaultTooltipType(tooltip);
+	std::cout << "\n\n\n\nLoading Layout file" << std::endl;
 	CEGUI::WindowManager* wmgr = &CEGUI::WindowManager::getSingleton();
-	root_window = wmgr->loadLayoutFromFile(layout+ ".layout");
+	root_window = wmgr->loadLayoutFromFile(layout + ".layout");
 	gui_context->setRootWindow(root_window);
 }
 
@@ -137,7 +141,7 @@ void GUIManager::unloadLevel(){
 }
 
 void GUIManager::loadLevel(std::string level_name, std::string scheme, std::string font, std::string cursor, std::string tooltip, std::string layout){
-	if(gui_context != NULL){
+	if(gui_context == NULL){
 		CEGUI::ImageManager::setImagesetDefaultResourceGroup(level_name);
 		CEGUI::Scheme::setDefaultResourceGroup(level_name);
 		CEGUI::Font::setDefaultResourceGroup(level_name);

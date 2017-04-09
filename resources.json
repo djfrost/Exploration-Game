@@ -1,7 +1,7 @@
 {
 	"levels":{
 		"level_1": {
-			"path": ["./assets/Models", "./assets/Materials/scripts", "./assets/Textures", "./assets/Audio", "./Assets/cegui"],
+			"path": ["./assets/Models", "./assets/Materials/scripts", "./assets/Textures", "./assets/Audio", "./Assets/cegui/layouts", "./Assets/cegui/fonts", "./Assets/cegui/schemes", "./Assets/cegui/imagesets", "./Assets/cegui/looknfeel", "./Assets/cegui/animations", "./Assets/cegui/lua_scripts", "./Assets/cegui/xml_schemas"],
 			"meshes": {
 				"meshNames" : {
 					"name" : "Fox",
@@ -156,9 +156,6 @@
 					"repeats" : "2",
 					"name" : "bgsong"
 				}
-			},
-			"GUIComponents" : {
-				 "combobox" : "combobox"
 			},
 			"GUIInfo" : {
 				"scheme" : "TaharezLook",

@@ -73,12 +73,12 @@ void InputManager::init(){
 			keyboard_ois = static_cast<OIS::Keyboard*>(input_manager_ois->createInputObject(OIS::OISKeyboard, true));
 			keyboard_ois->setEventCallback(this); //forwards the information to all registered listeners
 		}
-		/*
+		
 		if(input_manager_ois->getNumberOfDevices(OIS::OISMouse) > 0){
 			mouse_ois = static_cast<OIS::Mouse*>(input_manager_ois->createInputObject(OIS::OISMouse, true));
 			mouse_ois->setEventCallback(this);
 		}
-		*/
+
 		if(input_manager_ois->getNumberOfDevices(OIS::OISJoyStick) > 0){
 			joystick_ois = static_cast<OIS::JoyStick*>(input_manager_ois->createInputObject(OIS::OISJoyStick, true));
 			joystick_ois->setEventCallback(this);

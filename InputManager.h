@@ -6,7 +6,7 @@
 #include <iostream>
 
 class GameManager;
-class InputManager: public OIS::KeyListener, public OIS::JoyStickListener{
+class InputManager: public OIS::KeyListener, public OIS::JoyStickListener, OIS::MouseListener{
 	private:
 		OIS::InputManager* input_manager_ois;
 
