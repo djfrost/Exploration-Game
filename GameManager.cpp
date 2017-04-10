@@ -146,3 +146,23 @@ void GameManager::mouseMoved(unsigned int x_click,unsigned int y_click,float x_r
 void GameManager::guiLoadLevel(std::string level_name, std::string scheme, std::string font, std::string cursor, std::string tooltip, std::string layout){
 	guiManager->loadLevel(level_name, scheme, font, cursor, tooltip, layout);
 }
+void GameManager::guiProcessEvents(std::vector<std::string> types, std::vector<std::string> names, std::vector<std::string> funcs){
+	for(int i = 0; i < types.size(); i++){
+		guiManager->processEvent(types[i], names[i], funcs[i]);
+	}
+}
+void GameManager::changeLevel(std::string newLevel){
+	levelLoader->unLoadCurrLevel();
+	std::cout << "Unloaded levelloader scene" << std::endl;
+	// unload from other places
+	render_manager->stopRendering();
+	std::cout << "Stopped rendering" << std::endl;
+	audioManager->unloadLevel();
+	std::cout << "Unloaded audioManager scene" << std::endl;
+	guiManager->unloadLevel();
+	std::cout << "Unloaded guiManager scene" << std::endl;
+	levelLoader->LoadLevel(newLevel);
+	std::cout << "Loaded levelloader scene" << std::endl;
+	//render_manager->startRendering();
+	//std::cout << "Resumed rendering" << std::endl;
+}

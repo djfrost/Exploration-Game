@@ -36,5 +36,6 @@ class LevelLoader{
 		//Loads a level given it's name
 		void LoadLevel(std::string levelName);
 		void unLoadCurrLevel();
+		std::string getLoadedLevelName();
 };
 #endif

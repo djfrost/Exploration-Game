@@ -122,3 +122,11 @@ void AudioManager::updateAudio(float time_step){
 		}
 	}
 }
+void AudioManager::unloadLevel(){
+	ListArrayIterator<AudioPlayer>* iter = audio_players->iterator();
+	while(iter->hasNext()) {
+		AudioPlayer* ap = iter->next();
+		delete ap;
+	}
+	delete iter;
+}

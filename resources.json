@@ -164,19 +164,46 @@
 				"tooltip" : "TaharezLook/Tooltip",
 				"layout" : "MyDemo"
 			},
+			"GUIEvents" : {
+				"Events" : {
+				},
+				"1" : {
+					"type" : "button",
+					"name" : "StartButton",
+					"procedure" : "levelButton"
+				}
+			},
 			"SkyMap" : "sky"
 		},
 		"Level_2" : {
-			"meshNames" : {
-				"name" : "Fox"
-			},
-			"Fox" : {
-				"file" : "Fox.mesh",
-				"transform" : "0.0,0.0,-10.0",
-				"rotate" : "0.0,1.0,0.0",
-				"angle" : "90.0",
-				"scale" : "1.0,1.0,1.0",
-				"defaultAnim" : "none"
+			"path": ["./assets/Models", "./assets/Materials/scripts", "./assets/Textures", "./assets/Audio", "./Assets/cegui/layouts", "./Assets/cegui/fonts", "./Assets/cegui/schemes", "./Assets/cegui/imagesets", "./Assets/cegui/looknfeel", "./Assets/cegui/animations", "./Assets/cegui/lua_scripts", "./Assets/cegui/xml_schemas"],
+
+			"meshes" : {
+				"meshNames" : {
+					"name" : "Crystal"
+				},
+				"Crystal" : {
+					"file" : "Crystal.mesh",
+					"transform" : "0.0,0.0,-10.0",
+					"rotate" : "-1.0,-1.0,1.0",
+					"angle" : "90.0",
+					"scale" : "2.0,1.0,1.0",
+					"defaultAnim" : "none"
+				},
+				"Animations" : {
+					"AnimNames" : {
+						"Name" : "CrystalRot"
+					},
+					"CrystalRot" : {
+						"object" : "Crystal",
+						"type" : "rot",
+						"value" : "89",
+						"axis" : "0.0,0.0,0.0",
+						"timestep" : "3",
+						"start" : "0",
+						"begin" : "0"
+					}
+				}
 			},
 			"Cameras" : {
 				"Names" : {
@@ -187,24 +214,24 @@
 					"lookat" : "0.0,0.0,0.0",
 					"nearclip" : "2.0",
 					"farclip" : "0.0",
-					"rotation" : "0.0,1.0,0.0",
+					"rotation" : "-1.0,-1.0,-1.0",
 					"angle" : "90.0",
-					"childOf" : "Fox"
+					"childOf" : "Crystal"
 				}
 			},
 			"Lights" : {
 				"Names" : {
-					"Name" : "BaseLight",
-					"Name" : "TopLight"
+					"Name" : "lightOne",
+					"Name" : "lightTwo"
 				},
-				"BaseLight" : {
+				"lightOne" : {
 					"type" : "1",
-					"color" : "1.0,1.0,1.0",
+					"color" : "0.5,0.5,1.0",
 					"direction" : "0.0,-4.0,-1.0"
 				},
-				"TopLight" : {
+				"lightTwo" : {
 					"type" : "1",
-					"color" : "1.0,1.0,1.0",
+					"color" : "0.5,0.5,1.0",
 					"direction" : "0.0,-7.15,0.0"
 				}
 			},
@@ -215,13 +242,13 @@
 				},
 				"sound1" : {
 					"type" : "sample",
-					"file" : "./Assets/Audio/OurLastDawn.mp3",
+					"file" : "./Assets/Audio/WingsUnchained.mp3",
 					"repeats" : "0",
 					"name" : "torii-sound"
 				},
 				"music1" : {
 					"type" : "stream",
-					"file" : "./Assets/Audio/WingsUnchained.mp3",
+					"file" : "./Assets/Audio/OurLastDawn.mp3",
 					"repeats" : "2",
 					"name" : "bgsong"
 				}
@@ -231,10 +258,21 @@
 				"font" : "DejaVuSans-14",
 				"cursor" : "TaharezLook/MouseArrow",
 				"tooltip" : "TaharezLook/Tooltip",
-				"layout" : "MyDemo"
-			}
+				"layout" : "InitialScene"
+			},
+			"GUIEvents" : {
+				"Events" : {
+					"EventName" : "1"
+				},
+				"1" : {
+					"type" : "button",
+					"name" : "StartButton",
+					"procedure" : "levelButton"
+				}
+			},
+			"SkyMap" : "sky"
 		}
 
 	},
-	"first_level": "level_1"
+	"first_level": "Level_2"
 }

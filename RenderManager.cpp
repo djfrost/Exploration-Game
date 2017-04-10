@@ -14,13 +14,15 @@ void RenderManager::updateAudio(float time_step){
 	game_manager->updateAudio(time_step);
 }
 void RenderManager::startRendering(){
-
+	std::cout << "Getting iterator" << std::endl;
 	ListArrayIterator<RenderListener>* render_listeners_iter = render_listeners->iterator();
 	while(render_listeners_iter->hasNext()){
+		std::cout << "Processing next listener" << std::endl;
 		RenderListener* render_listener = render_listeners_iter->next();
 		render_listener->startRendering();
 	}
 	delete render_listeners_iter;
+	std::cout << "Starting root render" << std::endl;
 	root->startRendering();
 }
 
@@ -30,6 +32,7 @@ void RenderManager::stopRendering(){
 		RenderListener* render_listener = render_listeners_iter->next();
 		render_listener->stopRendering();
 	}
+	render_listeners->removeAll();
 	delete render_listeners_iter;
 	//root->stopRendering();
 }
@@ -202,14 +205,28 @@ void RenderManager::addMesh(std::string mesh, std::string resourceGroup, std::st
 //destroy old scene nodes, and unloads resource gruop if the scene exists.
 void RenderManager::unloadScene(std::string currScene){
 	if(groupExists(currScene)){
+		scene_manager->destroyAllCameras();
 		Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
 		rgm.unloadResourceGroup(currScene.c_str());
-		currSceneNode->removeAndDestroyAllChildren();
+		scene_manager->getRootSceneNode()->removeAndDestroyAllChildren();
+		scene_manager->destroyAllCameras();
+		camera = scene_manager->createCamera("Camera");
+		scene_manager->setShadowTechnique(SHADOWTYPE_TEXTURE_MODULATIVE);
+		//scene_manager->setSceneBlending( Ogre::SceneBlendType::SBT_TRANSPARENT_COLOUR );
+		//z-order, left, top, width, height
+		window->removeAllViewports();
+		viewport = window->addViewport(camera, 0, 0.0, 0.0, 1.0, 1.0);  //assign a camera to a viewport (can have many cameras and viewports in a single window)
+		viewport->setBackgroundColour(Ogre::ColourValue(0,0,0));
+		float actual_width = Ogre::Real(viewport->getActualWidth());
+		float actual_height = Ogre::Real(viewport->getActualHeight());
+		float aspect_ratio = 16/9;
+		camera->setAspectRatio(aspect_ratio);
 	}
 }
 //Unload the last scene, then initialise the current resource group and load it.
 void RenderManager::loadScene(std::string sceneName, std::string lastScene, std::vector<std::string> meshNames, std::vector<std::string> meshFiles, std::vector< std::vector<float> >transforms, std::vector < std::vector<float> > rotates, std::vector<float> angle, std::vector < std::vector<float> > scales, std::vector<std::string> animNames ){
 	//Temp code
+	std::cout << "Loading scene " << std::endl;
 	scene_manager->setAmbientLight(Ogre::ColourValue(.30,.30,.30));
 	//End of temp code
 	Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
@@ -245,13 +262,16 @@ void RenderManager::loadCameras(std::vector< std::vector< float > > positions, s
 	camera->lookAt(Ogre::Vector3(lookAts[0][0], lookAts[0][1], lookAts[0][2]));
 	camera->setNearClipDistance(nearclips[0]);
 	camera->setFarClipDistance(0);
-	Ogre::SceneNode* parentNode = scene_manager->getSceneNode(parents[0] + "_node");
-	Ogre::SceneNode* rotNode = parentNode->createChildSceneNode("camRot_node");
-	Ogre::SceneNode* cameraNode = rotNode->createChildSceneNode("CameraNode");
-	cameraNode->attachObject(camera);
-	Vector3 vr(rotation[0],rotation[1],rotation[2]);
-	Quaternion q(Degree(angle[0]),vr);
-	rotNode->rotate(q);
+	std::cout << "Parents[0]" << parents[0] << std::endl;
+	if(parents[0] != "none"){
+			Ogre::SceneNode* parentNode = scene_manager->getSceneNode(parents[0] + "_node");
+			Ogre::SceneNode* rotNode = parentNode->createChildSceneNode("camRot_node");
+			Ogre::SceneNode* cameraNode = rotNode->createChildSceneNode("CameraNode");
+			cameraNode->attachObject(camera);
+			Vector3 vr(rotation[0],rotation[1],rotation[2]);
+			Quaternion q(Degree(angle[0]),vr);
+			rotNode->rotate(q);
+		}
 }
 void RenderManager::loadLights(std::vector<std::string> names, std::vector<float> types, std::vector< std::vector < float > > colors, std::vector< std::vector < float > > directions){
 	for(int i = 0; i < types.size(); i++){
@@ -354,3 +374,6 @@ void RenderManager::mousePressed(int x_click, int y_click, int mouseButton){}
 void RenderManager::mouseReleased(int x_click, int y_click, int mouseButton){}
 void RenderManager::mouseMoved(int x_click, int y_click, int x_rel, int y_rel){}
 void RenderManager::playAudio(const char fileName[]){}
+void RenderManager::changeLevel(std::string level){
+	game_manager->changeLevel(level);
+}

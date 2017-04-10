@@ -41,6 +41,7 @@ class AudioManager {
 		void loadStreamAudioResource(std::string file_name, AudioResourceInfo* ar_info);
 		void unloadSampleAudioResource(AudioResourceInfo* ar_info);
 		void unloadStreamAudioResource(AudioResourceInfo* ar_info);
+		void unloadLevel();
 };
 
 #endif

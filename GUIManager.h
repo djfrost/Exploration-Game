@@ -32,7 +32,7 @@ class GUIManager{
       void createGUIContext(std::string scheme,std::string font,std::string cursor,std::string tooltip,std::string layout);
       void mouseMoved(unsigned int mouse_x, unsigned int mouse_y,float mouse_rel_x,float mouse_rel_y);
       void mousePressed(unsigned int mouse_x, unsigned int mouse_y, unsigned int mouse_button);
-      void processEvent(std::string type_str, std::string name_str, int event);
+      void processEvent(std::string type_str, std::string name_str, std::string event);
       void buttonEvent(const CEGUI::EventArgs& e);
       void processCombobox(std::string name_str, std::string image_str, std::string * items, int num_items);
 };

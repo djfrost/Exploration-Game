@@ -13,6 +13,8 @@ void GUIManager::playComboboxSample(const CEGUI::EventArgs& e){
 	render_manager->playAudio(combo_box_text.c_str());
 }
 void GUIManager::buttonEvent(const CEGUI::EventArgs& e){
+	render_manager->changeLevel("level_1");
+	std::cout << "Changed level" << std::endl;
 }
 
 void GUIManager::keyPressed(std::string game_key){
@@ -85,14 +87,19 @@ void GUIManager::processCombobox(std::string name_str, std::string image_str, st
 	}
 }
 
-void GUIManager::processEvent(std::string type_str, std::string name_str, int event){
-	CEGUIEvent* cegui_event = events[event];
+void GUIManager::processEvent(std::string type_str, std::string name_str, std::string event){
+	int eventNum = 0;
+	if(event == "LevelButton"){
+		eventNum = 0;
+	}
+	CEGUIEvent* cegui_event = events[eventNum];
 	cegui_function_ptr event_function_ptr = cegui_event->getFunctionPtr();
 
 	if(type_str == "button"){
 		CEGUI::PushButton* push_button = static_cast<CEGUI::PushButton*>(root_window->getChild(name_str));
-		if(event == 1){
+		if(eventNum == 0){
 			push_button->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(event_function_ptr, this));
+			std::cout << "Successfully got event" << std::endl;
 		}
 		/*else if(type_str == "edit_box"){
 			CEGUI::Editbox* edit_box = static_cast<CEGUI::Editbox*>(root_window->getChild(name_str));
@@ -119,8 +126,8 @@ GUIManager::GUIManager(RenderManager* rm){
 		gui_context = NULL;
 		render_manager = rm;
 		cegui_ogre_renderer = getRenderer();
-		cegui_function_ptr do_nothing_func_ptr = &GUIManager::doNothing;
-		CEGUIEvent* cegui_event = new CEGUIEvent("doNothing", do_nothing_func_ptr);
+		cegui_function_ptr button_func_ptr = &GUIManager::buttonEvent;
+		CEGUIEvent* cegui_event = new CEGUIEvent("buttonEvent", button_func_ptr);
 		events.push_back(cegui_event);
 		cegui_function_ptr play_combobox_sample_func_ptr = &GUIManager::playComboboxSample;
 		cegui_event = new CEGUIEvent("playComboboxSample", play_combobox_sample_func_ptr);

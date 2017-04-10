@@ -27,7 +27,7 @@ void LevelLoader::LoadLevel(std::string levelName)
 {
 	nextScene = levelName;
 	ptree levelTree;
-	gm->initialiseNewScene();
+
 	std::string level = "levels." + levelName;
 	levelTree = pt.get_child(level);
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, levelTree.get_child("path")){
@@ -197,6 +197,25 @@ void LevelLoader::LoadLevel(std::string levelName)
 			}
 		}
 	}
+	ptree GUIEvents = levelTree.get_child("GUIEvents");
+	std::vector<std::string> gui_types;
+	std::vector<std::string> gui_names;
+	std::vector<std::string> gui_functions;
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, GUIEvents.get_child("Events")){
+		BOOST_FOREACH(boost::property_tree::ptree::value_type &t, GUIEvents.get_child(v.second.data())){
+			std::string type = t.first.data();
+			if(type == "type")
+			{
+				gui_types.push_back(t.second.data());
+			}
+			else if(type == "name"){
+				gui_names.push_back(t.second.data());
+			}
+			else if(type == "procedure"){
+				gui_functions.push_back(t.second.data());
+			}
+		}
+	}
 	std::string scheme;
 	std::string font;
 	std::string cursor;
@@ -223,11 +242,19 @@ void LevelLoader::LoadLevel(std::string levelName)
 	}
 	std::string skybox = levelTree.get<std::string>("SkyMap");
 	// unload last scene load next scene
-	gm->loadLights(names,types, colors, directions);
+	std::cout << "Called gm->loadScene()" << std::endl;
 	gm->loadScene(nextScene, currScene, meshes, meshFiles, transforms, rotates, angle, scales, defaultAnims);
+	std::cout << "Called gm->loadLights()" << std::endl;
+	gm->loadLights(names,types, colors, directions);
+	std::cout << "Called gm->loadCameras()" << std::endl;
 	gm->loadCameras(positions, lookAts, nearclips, farclips, camRots, camAngle, parents);
+	std::cout << "Called gm->loadSkyBox()" << std::endl;
 	gm->loadSkyBox(skybox);
+	std::cout << "Called gm->loadLevel()" << std::endl;
 	gm->guiLoadLevel(levelName, scheme, font, cursor, tooltip, layout);
+	std::cout << "Called gm->processEvents()" << std::endl;
+	gm->guiProcessEvents(gui_types, gui_names, gui_functions);
+	std::cout << "Called handleAudioResources" << std::endl;
 	handleAudioResources(audioTypes, audioFiles, audioRepeats, audioNames, levelName);
 	//gm->processAnims(objects, typesAnims, values, axis, timeSteps, start, begin);
 	currScene = levelName;
@@ -263,4 +290,7 @@ void LevelLoader::handleAudioResources(std::vector<std::string> types, std::vect
 		}
 		currentLevelAudio.push_back(ar);
 	}
+}
+std::string LevelLoader::getLoadedLevelName(){
+	return currScene;
 }
