@@ -23,7 +23,10 @@ void RenderManager::startRendering(){
 	}
 	delete render_listeners_iter;
 	std::cout << "Starting root render" << std::endl;
-	root->startRendering();
+	if(!rootRendering){
+		rootRendering = true;
+		root->startRendering();
+	}
 }
 
 void RenderManager::stopRendering(){
@@ -32,7 +35,6 @@ void RenderManager::stopRendering(){
 		RenderListener* render_listener = render_listeners_iter->next();
 		render_listener->stopRendering();
 	}
-	render_listeners->removeAll();
 	delete render_listeners_iter;
 	//root->stopRendering();
 }
@@ -46,11 +48,14 @@ void RenderManager::rightJoystickAxisMoved(float north_south, float east_west){
 }
 
 void RenderManager::init(){
+	rootRendering = false;
 	root = NULL;
 	window = NULL;
 	scene_manager = NULL;
-
+	std::cout << "Set rootRendering to false" << std::endl;
+	std::cout << "complete" << std::endl;
 	root = OGRE_NEW Ogre::Root("","");  //resource/config files go here
+	std::cout << "Ogre root initialised" << std::endl;
 	root->loadPlugin("RenderSystem_GL");  //prepares external dlls for later use
 
 	Ogre::RenderSystem* render_system = root->getRenderSystemByName("OpenGL Rendering Subsystem"); //just returns a pointer to an uninialized render system

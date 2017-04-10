@@ -25,7 +25,6 @@ class GUIManager{
   public:
       GUIManager(RenderManager* rm);
       virtual ~GUIManager();
-
       void loadLevel(std::string level_name, std::string scheme, std::string font, std::string cursor, std::string tooltip, std::string layout);
       void unloadLevel();
       void keyPressed(std::string game_key);

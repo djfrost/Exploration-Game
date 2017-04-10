@@ -29,6 +29,7 @@ class RenderManager{
 		std::vector<Ogre::AnimationState* > anims;
 		ListArray<RenderListener>* render_listeners;
 		InputFunctionHandler* ifh;
+		bool rootRendering;
 		void destroyAllAttachedMovableObjects( Ogre::SceneNode* node );
 	public:
 		RenderManager(GameManager* game_manager);

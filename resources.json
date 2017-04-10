@@ -166,10 +166,11 @@
 			},
 			"GUIEvents" : {
 				"Events" : {
+					"EventName" : "1"
 				},
 				"1" : {
 					"type" : "button",
-					"name" : "StartButton",
+					"name" : "Button",
 					"procedure" : "levelButton"
 				}
 			},
