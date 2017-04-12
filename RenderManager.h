@@ -69,6 +69,7 @@ class RenderManager{
 		void playAudio(const char fileName[]);
 		void changeLevel(std::string level);
 		void changeMainSong(std::string song);
+		void playSample(std::string sample);
 };
 
 #endif

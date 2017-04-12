@@ -141,7 +141,8 @@
 			"SFX" : {
 				"Names" : {
 					"Name" : "sound1",
-					"Name" : "music1"
+					"Name" : "music1",
+					"Name" : "Hit"
 				},
 				"sound1" : {
 					"type" : "stream",
@@ -156,6 +157,13 @@
 					"repeats" : "2",
 					"name" : "bgsong",
 					"play" : "yes"
+				},
+				"Hit" : {
+					"type" : "sample",
+					"file" : "./Assets/Audio/Hit.mp3",
+					"repeats" : "2",
+					"name" : "Hit",
+					"play" : "yes"
 				}
 			},
 			"GUIInfo" : {
@@ -168,7 +176,8 @@
 			"GUIEvents" : {
 				"Events" : {
 					"EventName" : "1",
-					"EventName" : "2"
+					"EventName" : "2",
+					"EventName" : "3"
  				},
 				"1" : {
 					"type" : "button",
@@ -179,6 +188,11 @@
 					"type" : "button",
 					"name" : "OurLastDawn",
 					"procedure" : "OurLastDawn"
+				},
+				"3" : {
+					"type" : "button",
+					"name" : "Hit",
+					"procedure" : "Hit"
 				}
 			},
 			"SkyMap" : "sky"
@@ -283,5 +297,5 @@
 		}
 
 	},
-	"first_level": "Level_2"
+	"first_level": "level_1"
 }

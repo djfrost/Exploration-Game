@@ -5,18 +5,30 @@
     <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
     <Property name="MaxSize" value="{{1,0},{1,0}}" />
     <Window type="TaharezLook/FrameWindow" name="FrameWindow" >
-      <Property name="Area" value="{{0.0,0},{0.0,0},{0.225,0},{0.4,0}}" />
+      <Property name="Area" value="{{0.0,0},{0.0,0},{0.225,0},{0.5,0}}" />
       <Property name="Text" value="Window" />
       <Window type="TaharezLook/Button" name="WingsUnchained">
-        <Property name="Area" value="{{1,-160},{1,-43},{1,-15},{1,-11}}" />
+        <Property name="Area" value="{{1,-160},{0,10},{1,-15},{0,42}}" />
         <Property name="Text" value="WingsUnchained"/>
       </Window>
       <Window type="TaharezLook/Button" name="OurLastDawn">
-        <Property name="Area" value="{{1,-160},{0,8},{1,-10},{0,40}}" />
+        <Property name="Area" value="{{1,-160},{0,58},{1,-15},{0,90}}" />
         <Property name="Text" value="OurLastDawn"/>
       </Window>
+      <Window type="TaharezLook/Button" name="Hit">
+        <Property name="Area" value="{{1,-160},{0,106},{1,-15},{0,138}}" />
+        <Property name="Text" value="Hit"/>
+      </Window>
+      <Window type="TaharezLook/Button" name="Laser">
+        <Property name="Area" value="{{1,-160},{0,154},{1,-15},{0,186}}" />
+        <Property name="Text" value="Laser"/>
+      </Window>
+      <Window type="TaharezLook/Button" name="Powerup">
+        <Property name="Area" value="{{1,-160},{0,202},{1,-15},{0,234}}" />
+        <Property name="Text" value="Powerup"/>
+      </Window>
       <!--<Window type="TaharezLook/Editbox" name="Editbox">
-        <Property name="Area" value="{{0,10},{0,8},{1,-10},{0,40}}" />
+        <Property name="Area" value="{{0,10},{0,8},{1,-10},{0,100}}" />
         <Property name="Text" value="Text"/>
       </Window>-->
     </Window>

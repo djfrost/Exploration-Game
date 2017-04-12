@@ -25,6 +25,10 @@ void GUIManager::changeSongToDawn(const CEGUI::EventArgs& e){
 	render_manager->changeMainSong("torii-sound");
 	std::cout << "Our Last Dawn button " << std::endl;
 }
+void GUIManager::loadHitSample(const CEGUI::EventArgs& e){
+	std::cout << "Hit sample" << std::endl;
+	render_manager->playSample("Hit");
+}
 void GUIManager::keyPressed(std::string game_key){
 	if(game_key == "ENTER"){
 		gui_context->injectKeyDown(CEGUI::Key::Return);
@@ -107,6 +111,9 @@ void GUIManager::processEvent(std::string type_str, std::string name_str, std::s
 	else if(event == "OurLastDawn"){
 		eventNum = 2;
 	}
+	else if(event == "Hit"){
+		eventNum = 3;
+	}
 	CEGUIEvent* cegui_event = events[eventNum];
 	cegui_function_ptr event_function_ptr = cegui_event->getFunctionPtr();
 
@@ -146,6 +153,9 @@ GUIManager::GUIManager(RenderManager* rm){
 		events.push_back(cegui_event);
 		cegui_function_ptr dawn_sample_func_ptr = &GUIManager::changeSongToDawn;
 		cegui_event = new CEGUIEvent("OurLastDawn", dawn_sample_func_ptr);
+		events.push_back(cegui_event);
+		cegui_function_ptr hit_sample_func_ptr = &GUIManager::loadHitSample;
+		cegui_event = new CEGUIEvent("Hit", hit_sample_func_ptr);
 		events.push_back(cegui_event);
 }
 

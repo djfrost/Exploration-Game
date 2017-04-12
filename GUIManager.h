@@ -23,6 +23,7 @@ class GUIManager{
     void playComboboxSample(const CEGUI::EventArgs& e);
     void changeSongToUnchained(const CEGUI::EventArgs& e);
     void changeSongToDawn(const CEGUI::EventArgs& e);
+    void loadHitSample(const CEGUI::EventArgs& e);
     //CompareCEGUIEvent* comparator; //possibly CEGUIEvent* not CEGUIEvent
   public:
       GUIManager(RenderManager* rm);

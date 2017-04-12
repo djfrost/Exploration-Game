@@ -395,3 +395,6 @@ void RenderManager::changeLevel(std::string level){
 void RenderManager::changeMainSong(std::string song){
 	game_manager->changeMainSong(song);
 }
+void RenderManager::playSample(std::string sample){
+	game_manager->playSample(sample);
+}

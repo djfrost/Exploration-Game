@@ -61,6 +61,7 @@ class GameManager{
 		void changeLevel(std::string newLevel);
 		void changeMainSong(std::string song);
 		void unloadMainStream();
+		void playSample(std::string sample);
 };
 
 #endif

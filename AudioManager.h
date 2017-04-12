@@ -44,6 +44,7 @@ class AudioManager {
 		void unloadLevel();
 		void stopAudio(std::string name);
 		void unloadMainStream();
+		void playSample(AudioResource* ar);
 };
 
 #endif

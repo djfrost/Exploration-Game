@@ -39,5 +39,6 @@ class LevelLoader{
 		void unLoadCurrLevel();
 		std::string getLoadedLevelName();
 		void changeMainSong(std::string song);
+		AudioResource* getResource(std::string res);
 };
 #endif

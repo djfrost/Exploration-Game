@@ -170,3 +170,6 @@ void GameManager::changeMainSong(std::string song){
 void GameManager::unloadMainStream(){
 	audioManager->unloadMainStream();
 }
+void GameManager::playSample(std::string sample){
+	audioManager->playSample(levelLoader->getResource(sample));
+}

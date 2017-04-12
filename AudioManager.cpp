@@ -99,6 +99,9 @@ void AudioManager::playAudio(AudioResource* ar, uint32 num_repeats){
 	std::cout << "\n\n\n\nPlaying audio from " << audio_resource->getResourceFileName() << std::endl;
 	BASS_ChannelPlay(ar_info->channel_data, true);
 }
+void AudioManager::playSample(AudioResource* ar){
+	playAudio(ar, 0);
+}
 void AudioManager::addAudioPlayer(AudioPlayer* audio_player){
 	audio_players->add(audio_player);
 }

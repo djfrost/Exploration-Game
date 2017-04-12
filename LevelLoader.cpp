@@ -314,3 +314,12 @@ void LevelLoader::changeMainSong(std::string song){
 		}
 	}
 }
+AudioResource* LevelLoader::getResource(std::string res){
+	AudioResource* ar = NULL;
+	for(int i=0; i<currentLevelAudio.size(); i++){
+		if(currentLevelAudio[i]->getAudioResourceName() == res){
+			ar = currentLevelAudio[i];
+		}
+	}
+	return ar;
+}
