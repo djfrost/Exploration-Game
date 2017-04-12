@@ -100,6 +100,7 @@ void AudioManager::playAudio(AudioResource* ar, uint32 num_repeats){
 	BASS_ChannelPlay(ar_info->channel_data, true);
 }
 void AudioManager::playSample(AudioResource* ar){
+	ar->load();
 	playAudio(ar, 0);
 }
 void AudioManager::addAudioPlayer(AudioPlayer* audio_player){

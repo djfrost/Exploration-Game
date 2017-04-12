@@ -24,6 +24,9 @@ class GUIManager{
     void changeSongToUnchained(const CEGUI::EventArgs& e);
     void changeSongToDawn(const CEGUI::EventArgs& e);
     void loadHitSample(const CEGUI::EventArgs& e);
+    void loadLaserSample(const CEGUI::EventArgs& e);
+    void loadPowerupSample(const CEGUI::EventArgs& e);
+
     //CompareCEGUIEvent* comparator; //possibly CEGUIEvent* not CEGUIEvent
   public:
       GUIManager(RenderManager* rm);

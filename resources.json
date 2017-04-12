@@ -142,7 +142,9 @@
 				"Names" : {
 					"Name" : "sound1",
 					"Name" : "music1",
-					"Name" : "Hit"
+					"Name" : "Hit",
+					"Name" : "Laser",
+					"Name" : "Powerup"
 				},
 				"sound1" : {
 					"type" : "stream",
@@ -164,6 +166,20 @@
 					"repeats" : "2",
 					"name" : "Hit",
 					"play" : "yes"
+				},
+				"Laser" : {
+					"type" : "sample",
+					"file" : "./Assets/Audio/Laser.mp3",
+					"repeats" : "2",
+					"name" : "Laser",
+					"play" : "yes"
+				},
+				"Powerup" : {
+					"type" : "sample",
+					"file" : "./Assets/Audio/Powerup.mp3",
+					"repeats" : "2",
+					"name" : "Powerup",
+					"play" : "yes"
 				}
 			},
 			"GUIInfo" : {
@@ -177,7 +193,9 @@
 				"Events" : {
 					"EventName" : "1",
 					"EventName" : "2",
-					"EventName" : "3"
+					"EventName" : "3",
+					"EventName" : "4",
+					"EventName" : "5"
  				},
 				"1" : {
 					"type" : "button",
@@ -193,6 +211,16 @@
 					"type" : "button",
 					"name" : "Hit",
 					"procedure" : "Hit"
+				},
+				"4" : {
+					"type" : "button",
+					"name" : "Laser",
+					"procedure" : "Laser"
+				},
+				"5" : {
+					"type" : "button",
+					"name" : "Powerup",
+					"procedure" : "Powerup"
 				}
 			},
 			"SkyMap" : "sky"
@@ -297,5 +325,5 @@
 		}
 
 	},
-	"first_level": "level_1"
+	"first_level": "Level_2"
 }

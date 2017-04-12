@@ -29,6 +29,14 @@ void GUIManager::loadHitSample(const CEGUI::EventArgs& e){
 	std::cout << "Hit sample" << std::endl;
 	render_manager->playSample("Hit");
 }
+void GUIManager::loadLaserSample(const CEGUI::EventArgs& e){
+	std::cout << "Laser sample" << std::endl;
+	render_manager->playSample("Laser");
+}
+void GUIManager::loadPowerupSample(const CEGUI::EventArgs& e){
+	std::cout << "Hit Powerup" << std::endl;
+	render_manager->playSample("Powerup");
+}
 void GUIManager::keyPressed(std::string game_key){
 	if(game_key == "ENTER"){
 		gui_context->injectKeyDown(CEGUI::Key::Return);
@@ -114,6 +122,12 @@ void GUIManager::processEvent(std::string type_str, std::string name_str, std::s
 	else if(event == "Hit"){
 		eventNum = 3;
 	}
+	else if(event == "Laser"){
+		eventNum = 4;
+	}
+	else if(event == "Powerup"){
+		eventNum = 5;
+	}
 	CEGUIEvent* cegui_event = events[eventNum];
 	cegui_function_ptr event_function_ptr = cegui_event->getFunctionPtr();
 
@@ -157,6 +171,12 @@ GUIManager::GUIManager(RenderManager* rm){
 		cegui_function_ptr hit_sample_func_ptr = &GUIManager::loadHitSample;
 		cegui_event = new CEGUIEvent("Hit", hit_sample_func_ptr);
 		events.push_back(cegui_event);
+		cegui_function_ptr laser_sample_func_ptr = &GUIManager::loadLaserSample;
+		cegui_event = new CEGUIEvent("Laser", laser_sample_func_ptr);
+		events.push_back(cegui_event);
+		cegui_function_ptr powerup_sample_func_ptr = &GUIManager::loadPowerupSample;
+		cegui_event = new CEGUIEvent("Powerup", powerup_sample_func_ptr);
+		events.push_back(cegui_event);
 }
 
 GUIManager::~GUIManager(){
@@ -183,6 +203,15 @@ void GUIManager::unloadLevel(){
 		events.push_back(cegui_event);
 		cegui_function_ptr dawn_sample_func_ptr = &GUIManager::changeSongToDawn;
 		cegui_event = new CEGUIEvent("OurLastDawn", dawn_sample_func_ptr);
+		events.push_back(cegui_event);
+		cegui_function_ptr hit_sample_func_ptr = &GUIManager::loadHitSample;
+		cegui_event = new CEGUIEvent("Hit", hit_sample_func_ptr);
+		events.push_back(cegui_event);
+		cegui_function_ptr laser_sample_func_ptr = &GUIManager::loadLaserSample;
+		cegui_event = new CEGUIEvent("Laser", laser_sample_func_ptr);
+		events.push_back(cegui_event);
+		cegui_function_ptr powerup_sample_func_ptr = &GUIManager::loadPowerupSample;
+		cegui_event = new CEGUIEvent("Powerup", powerup_sample_func_ptr);
 		events.push_back(cegui_event);
 	}
 }
