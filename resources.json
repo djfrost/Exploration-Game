@@ -166,11 +166,18 @@
 			},
 			"GUIEvents" : {
 				"Events" : {
-				},
+					"EventName" : "1",
+					"EventName" : "2"
+ 				},
 				"1" : {
 					"type" : "button",
-					"name" : "Button",
-					"procedure" : "levelButton"
+					"name" : "WingsUnchained",
+					"procedure" : "WingsUnchained"
+				},
+				"2" : {
+					"type" : "button",
+					"name" : "OurLastDawn",
+					"procedure" : "OurLastDawn"
 				}
 			},
 			"SkyMap" : "sky"

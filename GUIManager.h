@@ -21,6 +21,8 @@ class GUIManager{
     // TableAVL<CEGUIEvent*, std::string>* event_table;
     void doNothing(const CEGUI::EventArgs& e);
     void playComboboxSample(const CEGUI::EventArgs& e);
+    void changeSongToUnchained(const CEGUI::EventArgs& e);
+    void changeSongToDawn(const CEGUI::EventArgs& e);
     //CompareCEGUIEvent* comparator; //possibly CEGUIEvent* not CEGUIEvent
   public:
       GUIManager(RenderManager* rm);

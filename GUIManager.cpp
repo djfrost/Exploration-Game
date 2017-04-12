@@ -17,6 +17,12 @@ void GUIManager::buttonEvent(const CEGUI::EventArgs& e){
 	std::cout << "Changed level" << std::endl;
 }
 
+void GUIManager::changeSongToUnchained(const CEGUI::EventArgs& e){
+	std::cout << "Wings Unchained button" << std::endl;
+}
+void GUIManager::changeSongToDawn(const CEGUI::EventArgs& e){
+	std::cout << "Our Last Dawn button " << std::endl;
+}
 void GUIManager::keyPressed(std::string game_key){
 	if(game_key == "ENTER"){
 		gui_context->injectKeyDown(CEGUI::Key::Return);
@@ -89,26 +95,30 @@ void GUIManager::processCombobox(std::string name_str, std::string image_str, st
 
 void GUIManager::processEvent(std::string type_str, std::string name_str, std::string event){
 	int eventNum = 0;
+	std::cout << "Event! From " << name_str << std::endl;
 	if(event == "LevelButton"){
 		eventNum = 0;
+	}
+	else if(event == "WingsUnchained"){
+		eventNum = 1;
+	}
+	else if(event == "OurLastDawn"){
+		eventNum = 2;
 	}
 	CEGUIEvent* cegui_event = events[eventNum];
 	cegui_function_ptr event_function_ptr = cegui_event->getFunctionPtr();
 
 	if(type_str == "button"){
-		CEGUI::PushButton* push_button = static_cast<CEGUI::PushButton*>(root_window->getChild(name_str));
 		if(eventNum == 0){
+			CEGUI::PushButton* push_button = static_cast<CEGUI::PushButton*>(root_window->getChild(name_str));
 			push_button->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(event_function_ptr, this));
 			std::cout << "Successfully got event" << std::endl;
 		}
-		/*else if(type_str == "edit_box"){
-			CEGUI::Editbox* edit_box = static_cast<CEGUI::Editbox*>(root_window->getChild(name_str));
-			if(procedure_str == "editboxEvent"){
-				event_function_ptr = &GUIManager::editboxEvent;
-				edit_box->subscribeEvent(CEGUI::Editbox::EventTextAccepted, CEGUI::Event::Subscriber(&GUIManager::buttonEvent, this));
-			}
-		}*/
-		//push_button->
+		else{
+			CEGUI::PushButton* push_button = static_cast<CEGUI::PushButton*>(root_window->getChild("FrameWindow")->getChild(name_str));
+			push_button->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(event_function_ptr, this));
+			std::cout << "Successfully got event 2" << std::endl;
+		}
 	}
 }
 void GUIManager::destroyGUIContext(){
@@ -129,8 +139,11 @@ GUIManager::GUIManager(RenderManager* rm){
 		cegui_function_ptr button_func_ptr = &GUIManager::buttonEvent;
 		CEGUIEvent* cegui_event = new CEGUIEvent("buttonEvent", button_func_ptr);
 		events.push_back(cegui_event);
-		cegui_function_ptr play_combobox_sample_func_ptr = &GUIManager::playComboboxSample;
-		cegui_event = new CEGUIEvent("playComboboxSample", play_combobox_sample_func_ptr);
+		cegui_function_ptr unchained_sample_func_ptr = &GUIManager::changeSongToUnchained;
+		cegui_event = new CEGUIEvent("WingsUnchained", unchained_sample_func_ptr);
+		events.push_back(cegui_event);
+		cegui_function_ptr dawn_sample_func_ptr = &GUIManager::changeSongToDawn;
+		cegui_event = new CEGUIEvent("OurLastDawn", dawn_sample_func_ptr);
 		events.push_back(cegui_event);
 }
 
@@ -150,6 +163,15 @@ void GUIManager::unloadLevel(){
 			delete events[i];
 		}
 		events.clear();
+		cegui_function_ptr button_func_ptr = &GUIManager::buttonEvent;
+		CEGUIEvent* cegui_event = new CEGUIEvent("buttonEvent", button_func_ptr);
+		events.push_back(cegui_event);
+		cegui_function_ptr unchained_sample_func_ptr = &GUIManager::changeSongToUnchained;
+		cegui_event = new CEGUIEvent("WingsUnchained", unchained_sample_func_ptr);
+		events.push_back(cegui_event);
+		cegui_function_ptr dawn_sample_func_ptr = &GUIManager::changeSongToDawn;
+		cegui_event = new CEGUIEvent("OurLastDawn", dawn_sample_func_ptr);
+		events.push_back(cegui_event);
 	}
 }
 

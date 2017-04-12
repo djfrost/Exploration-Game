@@ -155,8 +155,6 @@ void GameManager::changeLevel(std::string newLevel){
 	levelLoader->unLoadCurrLevel();
 	std::cout << "Unloaded levelloader scene" << std::endl;
 	// unload from other places
-	//render_manager->stopRendering();
-	//std::cout << "Stopped rendering" << std::endl;
 	audioManager->unloadLevel();
 	std::cout << "Unloaded audioManager scene" << std::endl;
 	guiManager->unloadLevel();

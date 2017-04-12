@@ -5,16 +5,20 @@
     <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
     <Property name="MaxSize" value="{{1,0},{1,0}}" />
     <Window type="TaharezLook/FrameWindow" name="FrameWindow" >
-      <Property name="Area" value="{{0.01,0},{0.01,0},{0.4,0},{0.4,0}}" />
+      <Property name="Area" value="{{0.0,0},{0.0,0},{0.225,0},{0.4,0}}" />
       <Property name="Text" value="Window" />
-      <Window type="TaharezLook/Button" name="Button">
+      <Window type="TaharezLook/Button" name="WingsUnchained">
         <Property name="Area" value="{{1,-160},{1,-43},{1,-15},{1,-11}}" />
-        <Property name="Text" value="Button"/>
+        <Property name="Text" value="WingsUnchained"/>
       </Window>
-      <Window type="TaharezLook/Editbox" name="Editbox">
+      <Window type="TaharezLook/Button" name="OurLastDawn">
+        <Property name="Area" value="{{1,-160},{0,8},{1,-10},{0,40}}" />
+        <Property name="Text" value="OurLastDawn"/>
+      </Window>
+      <!--<Window type="TaharezLook/Editbox" name="Editbox">
         <Property name="Area" value="{{0,10},{0,8},{1,-10},{0,40}}" />
         <Property name="Text" value="Text"/>
-      </Window>
+      </Window>-->
     </Window>
   </Window>
 </GUILayout>

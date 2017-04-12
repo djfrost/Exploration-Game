@@ -137,3 +137,18 @@ void AudioManager::unloadLevel(){
 	delete iter;
 	audio_players->removeAll();
 }
+void AudioManager::stopAudio(std::string name){
+	for(int i = 0; i < audio_players->size(); i++){
+		AudioPlayer* ap = audio_players->get(i);
+		if(ap->getAudioResource()->getAudioResourceName() == name){
+			if(ap->getAudioResource()->getAudioResourceType() == STREAM){
+				unloadStreamAudioResource(ap->getAudioResource()->getAudioResourceInfo());
+			}
+			else{
+				unloadSampleAudioResource(ap->getAudioResource()->getAudioResourceInfo());
+			}
+		}
+		audio_players->remove(i);
+		i--;
+	}
+}
