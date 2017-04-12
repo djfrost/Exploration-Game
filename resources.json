@@ -96,7 +96,6 @@
 				},
 				"Animations" : {
 					"AnimNames" : {
-						"Name" : "FoxRot"
 					},
 					"FoxRot" : {
 						"object" : "Fox",
@@ -145,16 +144,18 @@
 					"Name" : "music1"
 				},
 				"sound1" : {
-					"type" : "sample",
+					"type" : "stream",
 					"file" : "./Assets/Audio/OurLastDawn.mp3",
 					"repeats" : "0",
-					"name" : "torii-sound"
+					"name" : "torii-sound",
+					"play" : "no"
 				},
 				"music1" : {
 					"type" : "stream",
 					"file" : "./Assets/Audio/WingsUnchained.mp3",
 					"repeats" : "2",
-					"name" : "bgsong"
+					"name" : "bgsong",
+					"play" : "yes"
 				}
 			},
 			"GUIInfo" : {
@@ -199,7 +200,6 @@
 				},
 				"Animations" : {
 					"AnimNames" : {
-						"Name" : "CrystalRot"
 					},
 					"CrystalRot" : {
 						"object" : "Crystal",
@@ -251,13 +251,15 @@
 					"type" : "sample",
 					"file" : "./Assets/Audio/WingsUnchained.mp3",
 					"repeats" : "0",
-					"name" : "torii-sound"
+					"name" : "torii-sound",
+					"play" : "no"
 				},
 				"music1" : {
 					"type" : "stream",
 					"file" : "./Assets/Audio/OurLastDawn.mp3",
 					"repeats" : "2",
-					"name" : "bgsong"
+					"name" : "bgsong",
+					"play" : "yes"
 				}
 			},
 			"GUIInfo" : {

@@ -43,6 +43,7 @@ class AudioManager {
 		void unloadStreamAudioResource(AudioResourceInfo* ar_info);
 		void unloadLevel();
 		void stopAudio(std::string name);
+		void unloadMainStream();
 };
 
 #endif

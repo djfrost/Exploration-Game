@@ -164,3 +164,9 @@ void GameManager::changeLevel(std::string newLevel){
 	render_manager->startRendering();
 	std::cout << "Resumed rendering" << std::endl;
 }
+void GameManager::changeMainSong(std::string song){
+	levelLoader->changeMainSong(song);
+}
+void GameManager::unloadMainStream(){
+	audioManager->unloadMainStream();
+}

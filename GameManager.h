@@ -59,6 +59,8 @@ class GameManager{
 		void guiLoadLevel(std::string level_name, std::string scheme, std::string font, std::string cursor, std::string tooltip, std::string layout);
 		void guiProcessEvents(std::vector<std::string> types, std::vector<std::string> names, std::vector<std::string> funcs);
 		void changeLevel(std::string newLevel);
+		void changeMainSong(std::string song);
+		void unloadMainStream();
 };
 
 #endif

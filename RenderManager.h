@@ -68,6 +68,7 @@ class RenderManager{
 		void mouseMoved(int x_click, int y_click, int x_rel, int y_rel);
 		void playAudio(const char fileName[]);
 		void changeLevel(std::string level);
+		void changeMainSong(std::string song);
 };
 
 #endif

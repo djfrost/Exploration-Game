@@ -27,7 +27,8 @@ class LevelLoader{
 		std::string nextScene;
 		std::vector<float> parseMultF(std::string floats);
 		std::vector<AudioResource*> currentLevelAudio;
-		void handleAudioResources(std::vector<std::string> types, std::vector<std::string> files, std::vector<int> repeats, std::vector<std::string> names, std::string level);
+		std::vector<std::string> audioFiles;
+		void handleAudioResources(std::vector<std::string> types, std::vector<std::string> files, std::vector<int> repeats, std::vector<std::string> names, std::string level, std::vector<std::string> audioPlay);
 	public:
 		//Loads the json file, and stores a reference to the game manager
 		LevelLoader(GameManager* gameManager, std::string fileName);
@@ -37,5 +38,6 @@ class LevelLoader{
 		void LoadLevel(std::string levelName);
 		void unLoadCurrLevel();
 		std::string getLoadedLevelName();
+		void changeMainSong(std::string song);
 };
 #endif

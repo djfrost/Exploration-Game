@@ -178,6 +178,7 @@ void LevelLoader::LoadLevel(std::string levelName)
 	std::vector<std::string> audioFiles;
 	std::vector<int> audioRepeats;
 	std::vector<std::string> audioNames;
+	std::vector<std::string> audioPlay;
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, audioTree.get_child("Names")){
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &t, audioTree.get_child(v.second.data())){
 			std::string type = t.first.data();
@@ -194,6 +195,9 @@ void LevelLoader::LoadLevel(std::string levelName)
 			}
 			else if(type == "name"){
 				audioNames.push_back(t.second.data());
+			}
+			else if(type == "play"){
+				audioPlay.push_back(t.second.data());
 			}
 		}
 	}
@@ -255,8 +259,10 @@ void LevelLoader::LoadLevel(std::string levelName)
 	std::cout << "Called gm->processEvents()" << std::endl;
 	gm->guiProcessEvents(gui_types, gui_names, gui_functions);
 	std::cout << "Called handleAudioResources" << std::endl;
-	handleAudioResources(audioTypes, audioFiles, audioRepeats, audioNames, levelName);
-	//gm->processAnims(objects, typesAnims, values, axis, timeSteps, start, begin);
+	handleAudioResources(audioTypes, audioFiles, audioRepeats, audioNames, levelName, audioPlay);
+	if(typesAnims.size() > 0){
+		gm->processAnims(objects, typesAnims, values, axis, timeSteps, start, begin);
+	}
 	currScene = levelName;
 	nextScene = "";
 }
@@ -276,14 +282,18 @@ void LevelLoader::unLoadCurrLevel(){
 	}
 	currentLevelAudio.clear();
 }
-void LevelLoader::handleAudioResources(std::vector<std::string> types, std::vector<std::string> files, std::vector<int> repeats, std::vector<std::string> names, std::string level){
+void LevelLoader::handleAudioResources(std::vector<std::string> types, std::vector<std::string> files, std::vector<int> repeats, std::vector<std::string> names, std::string level, std::vector<std::string> audioPlay){
 	for(int i = 0; i < types.size(); i++){
 		AudioResource* ar;
+		audioFiles.push_back(files[i]);
 		if("stream" == types[i]){
 			ar = new AudioResource(level, files[i], names[i], STREAM, gm);
-			ar->load();
-			gm->loadStreamAudioResource(files[i], ar->getAudioResourceInfo());
-			gm->playAudio(ar,repeats[i]);
+			std::cout << i << std::endl;
+			if(audioPlay[i] == "yes"){
+				ar->load();
+				//gm->loadStreamAudioResource(files[i], ar->getAudioResourceInfo());
+				gm->playAudio(ar,repeats[i]);
+			}
 		}
 		else{
 			ar = new AudioResource(level, files[i], names[i], SAMPLE, gm);
@@ -293,4 +303,14 @@ void LevelLoader::handleAudioResources(std::vector<std::string> types, std::vect
 }
 std::string LevelLoader::getLoadedLevelName(){
 	return currScene;
+}
+void LevelLoader::changeMainSong(std::string song){
+	gm->unloadMainStream();
+	for(int i=0; i<currentLevelAudio.size(); i++){
+		if(currentLevelAudio[i]->getAudioResourceName() == song){
+			currentLevelAudio[i]->load();
+			//gm->loadStreamAudioResource(audioFiles[i], currentLevelAudio[i]->getAudioResourceInfo());
+			gm->playAudio(currentLevelAudio[i],1);
+		}
+	}
 }

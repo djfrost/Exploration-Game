@@ -18,9 +18,11 @@ void GUIManager::buttonEvent(const CEGUI::EventArgs& e){
 }
 
 void GUIManager::changeSongToUnchained(const CEGUI::EventArgs& e){
+	render_manager->changeMainSong("bgsong");
 	std::cout << "Wings Unchained button" << std::endl;
 }
 void GUIManager::changeSongToDawn(const CEGUI::EventArgs& e){
+	render_manager->changeMainSong("torii-sound");
 	std::cout << "Our Last Dawn button " << std::endl;
 }
 void GUIManager::keyPressed(std::string game_key){

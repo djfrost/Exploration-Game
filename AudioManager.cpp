@@ -149,6 +149,22 @@ void AudioManager::stopAudio(std::string name){
 			}
 		}
 		audio_players->remove(i);
+		delete ap;
+		i--;
+	}
+}
+void AudioManager::unloadMainStream(){
+	std::cout << "Inside unloadMainStream" << std::endl;
+	for(int i = 0; i < audio_players->size(); i++){
+		AudioPlayer* ap = audio_players->get(i+1);
+		std::cout << "Before if " <<  audio_players->size() << std::endl;
+		if(ap->getAudioResource()->getAudioResourceType() == STREAM){
+			std::cout << "Unloading stream" << std::endl;
+			unloadStreamAudioResource(ap->getAudioResource()->getAudioResourceInfo());
+			std::cout << "Stream unloaded" << std::endl;
+		}
+		audio_players->remove(i+1);
+		delete ap;
 		i--;
 	}
 }

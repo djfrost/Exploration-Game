@@ -392,3 +392,6 @@ void RenderManager::changeLevel(std::string level){
 	levelChange = true;
 	newLevel = level;
 }
+void RenderManager::changeMainSong(std::string song){
+	game_manager->changeMainSong(song);
+}
