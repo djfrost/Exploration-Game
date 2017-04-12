@@ -1,0 +1,328 @@
+Compiler error: unknown error in Leaves.001.material(6): token "cast_shadows" is not recognized
+Parsing script Crystal.material
+Parsing script Tree2NonAnim.material
+Finished parsing scripts for resource group level_1
+Creating resources for group level_1
+All done
+Possibly bad 
+level_1
+Printing after it
+Loading resource group 'level_1' - Resources: 1 World Geometry: 1
+Texture: mossrock.jpg: Loading 1 faces(PF_R8G8B8,1024x1024x1) with 10 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,1024x1024x1.
+Texture: Shingle.jpg: Loading 1 faces(PF_R8G8B8,256x128x1) with 8 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,256x128x1.
+Texture: DarkWood.jpg: Loading 1 faces(PF_R8G8B8,256x256x1) with 8 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,256x256x1.
+Texture: red.png: Loading 1 faces(PF_R8G8B8,1x1x1) with 1 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,1x1x1.
+Texture: ToriiText.jpg: Loading 1 faces(PF_R8G8B8,256x256x1) with 8 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,256x256x1.
+Texture: bark.png: Loading 1 faces(PF_R8G8B8,1920x1440x1) with 10 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,1920x1440x1.
+Texture: LeafTexture.jpg: Loading 1 faces(PF_R8G8B8,1024x1024x1) with 10 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,1024x1024x1.
+Error loading texture skybox_fr.png. Texture layer will be blank. Loading the texture failed with the following exception: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource skybox_fr.png in resource group Level_2 or any other group. in ResourceGroupManager::openResource at /build/ogre-1.9-mqY1wq/ogre-1.9-1.9.0+dfsg1/OgreMain/src/OgreResourceGroupManager.cpp (line 756)
+Texture: leaves.png: Loading 1 faces(PF_R8G8B8,32x32x1) with 5 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,32x32x1.
+Texture: billboardgrass0002.png: Loading 1 faces(PF_A8R8G8B8,1024x1024x1) with 10 hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,1024x1024x1.
+Texture: billboardgrass0002Bump.png: Loading 1 faces(PF_A8R8G8B8,1024x1024x1) with 10 hardware generated mipmaps from Image. Internal format is PF_A8R8G8B8,1024x1024x1.
+Texture: skybox_FR.png: Loading 1 faces(PF_R8G8B8,256x256x1) with 8 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,256x256x1.
+Texture: PinkLeafColor.jpg: Loading 1 faces(PF_R8G8B8,1x1x1) with 1 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,1x1x1.
+Texture: bark_texture___5_by_agf81-d4cta4p.jpg: Loading 1 faces(PF_R8G8B8,900x1350x1) with 10 hardware generated mipmaps from Image. Internal format is PF_X8R8G8B8,900x1350x1.
+Error loading texture Leaf. Texture layer will be blank. Loading the texture failed with the following exception: OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource Leaf in resource group Level_2 or any other group. in ResourceGroupManager::openResource at /build/ogre-1.9-mqY1wq/ogre-1.9-1.9.0+dfsg1/OgreMain/src/OgreResourceGroupManager.cpp (line 756)
+Mesh: Loading Fox.mesh.
+Mesh: Loading GroundGrass.mesh.
+Mesh: Loading Mesh.004.mesh.
+Skeleton: Loading Mesh.004.skeleton
+==3834== Conditional jump or move depends on uninitialised value(s)
+==3834==    at 0x51C4704: Ogre::SkeletonSerializer::readAnimationTrack(Ogre::SharedPtr<Ogre::DataStream>&, Ogre::Animation*, Ogre::Skeleton*) (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x51C4900: Ogre::SkeletonSerializer::readAnimation(Ogre::SharedPtr<Ogre::DataStream>&, Ogre::Skeleton*) (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x51C4C35: Ogre::SkeletonSerializer::importSkeleton(Ogre::SharedPtr<Ogre::DataStream>&, Ogre::Skeleton*) (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x5417FB4: Ogre::Skeleton::loadImpl() (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x516C51A: Ogre::Resource::load(bool) (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x53D182C: Ogre::ResourceManager::load(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool, Ogre::ManualResourceLoader*, std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, Ogre::STLAllocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, Ogre::CategorisedAllocPolicy<(Ogre::MemoryCategory)0> > > const*, bool) (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x5439C52: Ogre::Mesh::setSkeletonName(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x538BE6E: ??? (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x538DD76: ??? (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x5390574: ??? (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x5331046: Ogre::MeshSerializer::importMesh(Ogre::SharedPtr<Ogre::DataStream>&, Ogre::Mesh*) (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x543E6A5: Ogre::Mesh::loadImpl() (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834== 
+Mesh: Loading ToriiGate.mesh.
+Mesh: Loading Rock.mesh.
+Mesh: Loading Rock.mesh.
+Mesh: Loading Mesh.004.mesh.
+Mesh: Loading PinkTree.mesh.
+Mesh: Loading leaves.mesh.
+Finished loading resource group level_1
+WARNING: the mesh 'Mesh.004.mesh' includes vertices without bone assignments. Those vertices will transform to wrong position when skeletal animation enabled. To eliminate this, assign at least one bone assignment per vertex on your mesh.
+Called gm->loadLights()
+Called gm->loadCameras()
+Parents[0]Fox
+Called gm->loadSkyBox()
+Called gm->loadLevel()
+
+
+
+
+Inside of gui context
+
+
+
+
+creating gui context
+
+
+
+
+Loading Layout file
+Called gm->processEvents()
+Called handleAudioResources
+
+
+
+
+
+
+
+./Assets/Audio/WingsUnchained.mp3
+Setting channel_data 
+
+
+
+
+
+
+
+./Assets/Audio/WingsUnchained.mp3
+Setting channel_data 
+
+
+
+
+Playing audio from ./Assets/Audio/WingsUnchained.mp3
+Loaded levelloader scene
+Getting iterator
+Processing next listener
+Starting root render
+Resumed rendering
+Changed level
+==3834== Invalid read of size 1
+==3834==    at 0x5B74DAE: CEGUI::GUIContext::injectMouseButtonUp(CEGUI::MouseButton) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x40B451: GUIManager::mousePressed(unsigned int, unsigned int, unsigned int) (GUIManager.cpp:48)
+==3834==    by 0x41498C: GameManager::mousePressed(unsigned int, unsigned int, int) (GameManager.cpp:137)
+==3834==    by 0x41C371: InputManager::mousePressed(OIS::MouseEvent const&, OIS::MouseButtonID) (InputManager.cpp:29)
+==3834==    by 0x57F5B42: OIS::LinuxMouse::_processXEvents() (LinuxMouse.cpp:234)
+==3834==    by 0x57F60B1: OIS::LinuxMouse::capture() (LinuxMouse.cpp:116)
+==3834==    by 0x41C1FD: InputManager::checkForInput() (InputManager.cpp:16)
+==3834==    by 0x41448C: GameManager::checkForInput(float) (GameManager.cpp:96)
+==3834==    by 0x452C57: RenderManager::checkForInput(float) (RenderManager.cpp:349)
+==3834==    by 0x41FE93: InputRenderListener::frameStarted(Ogre::FrameEvent const&) (InputRenderListener.cpp:18)
+==3834==    by 0x53A5E93: Ogre::Root::_fireFrameStarted(Ogre::FrameEvent&) (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x53A6420: Ogre::Root::_fireFrameStarted() (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==  Address 0x11e61234 is 340 bytes inside a block of size 384 free'd
+==3834==    at 0x4C2F24B: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3834==    by 0x5B9060F: CEGUI::XMLAttributes::~XMLAttributes() (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x2B9C387A: CEGUI::ExpatParser::startElement(void*, char const*, char const**) (in /usr/lib/cegui-0.8/libCEGUIExpatParser.so)
+==3834==    by 0x2BBCF67F: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD038B: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD1CAD: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD2404: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD470A: XML_ParseBuffer (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2B9C26E0: CEGUI::ExpatParser::parseXML(CEGUI::XMLHandler&, CEGUI::RawDataContainer const&, CEGUI::String const&) (in /usr/lib/cegui-0.8/libCEGUIExpatParser.so)
+==3834==    by 0x5C3C3F6: CEGUI::XMLParser::parseXMLFile(CEGUI::XMLHandler&, CEGUI::String const&, CEGUI::String const&, CEGUI::String const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x5D468D8: CEGUI::WidgetLookManager::parseLookNFeelSpecificationFromFile(CEGUI::String const&, CEGUI::String const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x5BE97D5: CEGUI::Scheme::loadLookNFeels() (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==  Block was alloc'd at
+==3834==    at 0x4C2E0EF: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3834==    by 0x5B9112F: std::map<CEGUI::String, CEGUI::String, CEGUI::StringFastLessCompare, std::allocator<std::pair<CEGUI::String const, CEGUI::String> > >::operator[](CEGUI::String const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x5B9065F: CEGUI::XMLAttributes::add(CEGUI::String const&, CEGUI::String const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x2B9C3689: CEGUI::ExpatParser::startElement(void*, char const*, char const**) (in /usr/lib/cegui-0.8/libCEGUIExpatParser.so)
+==3834==    by 0x2BBCF67F: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD038B: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD1CAD: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD2404: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD470A: XML_ParseBuffer (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2B9C26E0: CEGUI::ExpatParser::parseXML(CEGUI::XMLHandler&, CEGUI::RawDataContainer const&, CEGUI::String const&) (in /usr/lib/cegui-0.8/libCEGUIExpatParser.so)
+==3834==    by 0x5C3C3F6: CEGUI::XMLParser::parseXMLFile(CEGUI::XMLHandler&, CEGUI::String const&, CEGUI::String const&, CEGUI::String const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x5D468D8: CEGUI::WidgetLookManager::parseLookNFeelSpecificationFromFile(CEGUI::String const&, CEGUI::String const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834== 
+==3834== Invalid read of size 4
+==3834==    at 0x5B74DC6: CEGUI::GUIContext::injectMouseButtonUp(CEGUI::MouseButton) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x40B451: GUIManager::mousePressed(unsigned int, unsigned int, unsigned int) (GUIManager.cpp:48)
+==3834==    by 0x41498C: GameManager::mousePressed(unsigned int, unsigned int, int) (GameManager.cpp:137)
+==3834==    by 0x41C371: InputManager::mousePressed(OIS::MouseEvent const&, OIS::MouseButtonID) (InputManager.cpp:29)
+==3834==    by 0x57F5B42: OIS::LinuxMouse::_processXEvents() (LinuxMouse.cpp:234)
+==3834==    by 0x57F60B1: OIS::LinuxMouse::capture() (LinuxMouse.cpp:116)
+==3834==    by 0x41C1FD: InputManager::checkForInput() (InputManager.cpp:16)
+==3834==    by 0x41448C: GameManager::checkForInput(float) (GameManager.cpp:96)
+==3834==    by 0x452C57: RenderManager::checkForInput(float) (RenderManager.cpp:349)
+==3834==    by 0x41FE93: InputRenderListener::frameStarted(Ogre::FrameEvent const&) (InputRenderListener.cpp:18)
+==3834==    by 0x53A5E93: Ogre::Root::_fireFrameStarted(Ogre::FrameEvent&) (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x53A6420: Ogre::Root::_fireFrameStarted() (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==  Address 0x11e61238 is 344 bytes inside a block of size 384 free'd
+==3834==    at 0x4C2F24B: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3834==    by 0x5B9060F: CEGUI::XMLAttributes::~XMLAttributes() (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x2B9C387A: CEGUI::ExpatParser::startElement(void*, char const*, char const**) (in /usr/lib/cegui-0.8/libCEGUIExpatParser.so)
+==3834==    by 0x2BBCF67F: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD038B: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD1CAD: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD2404: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD470A: XML_ParseBuffer (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2B9C26E0: CEGUI::ExpatParser::parseXML(CEGUI::XMLHandler&, CEGUI::RawDataContainer const&, CEGUI::String const&) (in /usr/lib/cegui-0.8/libCEGUIExpatParser.so)
+==3834==    by 0x5C3C3F6: CEGUI::XMLParser::parseXMLFile(CEGUI::XMLHandler&, CEGUI::String const&, CEGUI::String const&, CEGUI::String const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x5D468D8: CEGUI::WidgetLookManager::parseLookNFeelSpecificationFromFile(CEGUI::String const&, CEGUI::String const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x5BE97D5: CEGUI::Scheme::loadLookNFeels() (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==  Block was alloc'd at
+==3834==    at 0x4C2E0EF: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3834==    by 0x5B9112F: std::map<CEGUI::String, CEGUI::String, CEGUI::StringFastLessCompare, std::allocator<std::pair<CEGUI::String const, CEGUI::String> > >::operator[](CEGUI::String const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x5B9065F: CEGUI::XMLAttributes::add(CEGUI::String const&, CEGUI::String const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x2B9C3689: CEGUI::ExpatParser::startElement(void*, char const*, char const**) (in /usr/lib/cegui-0.8/libCEGUIExpatParser.so)
+==3834==    by 0x2BBCF67F: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD038B: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD1CAD: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD2404: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD470A: XML_ParseBuffer (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2B9C26E0: CEGUI::ExpatParser::parseXML(CEGUI::XMLHandler&, CEGUI::RawDataContainer const&, CEGUI::String const&) (in /usr/lib/cegui-0.8/libCEGUIExpatParser.so)
+==3834==    by 0x5C3C3F6: CEGUI::XMLParser::parseXMLFile(CEGUI::XMLHandler&, CEGUI::String const&, CEGUI::String const&, CEGUI::String const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x5D468D8: CEGUI::WidgetLookManager::parseLookNFeelSpecificationFromFile(CEGUI::String const&, CEGUI::String const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834== 
+==3834== Syscall param write(buf) points to uninitialised byte(s)
+==3834==    at 0x6BD26FD: ??? (syscall-template.S:84)
+==3834==    by 0x6B54BFE: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1263)
+==3834==    by 0x6B56408: new_do_write (fileops.c:518)
+==3834==    by 0x6B56408: _IO_do_write@@GLIBC_2.2.5 (fileops.c:494)
+==3834==    by 0x6B543FF: _IO_file_sync@@GLIBC_2.2.5 (fileops.c:874)
+==3834==    by 0x6B4981E: fflush (iofflush.c:40)
+==3834==    by 0x1039F21B: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x103A1606: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x1039DCBB: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x10392C54: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x10392FC1: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x10393744: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x10538E3D: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==  Address 0x11278f75 is 1,221 bytes inside a block of size 4,096 alloc'd
+==3834==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3834==    by 0x6B491D4: _IO_file_doallocate (filedoalloc.c:127)
+==3834==    by 0x6B57593: _IO_doallocbuf (genops.c:398)
+==3834==    by 0x6B5509B: _IO_file_xsgetn (fileops.c:1375)
+==3834==    by 0x6B4A235: fread (iofread.c:38)
+==3834==    by 0x1039E58F: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x1039F636: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x1039F7D5: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x103A1494: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x103A17C1: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x1039DF76: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x10392E21: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834== 
+==3834== Syscall param write(buf) points to uninitialised byte(s)
+==3834==    at 0x6BD26FD: ??? (syscall-template.S:84)
+==3834==    by 0x6B54BFE: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1263)
+==3834==    by 0x6B56408: new_do_write (fileops.c:518)
+==3834==    by 0x6B56408: _IO_do_write@@GLIBC_2.2.5 (fileops.c:494)
+==3834==    by 0x6B5547C: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1331)
+==3834==    by 0x6B4A7BA: fwrite (iofwrite.c:39)
+==3834==    by 0x1039F209: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x103A1606: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x1039DCBB: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x10392C54: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x10392FC1: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x10393744: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x10538E3D: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==  Address 0x1127967c is 3,020 bytes inside a block of size 4,096 alloc'd
+==3834==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3834==    by 0x6B491D4: _IO_file_doallocate (filedoalloc.c:127)
+==3834==    by 0x6B57593: _IO_doallocbuf (genops.c:398)
+==3834==    by 0x6B5509B: _IO_file_xsgetn (fileops.c:1375)
+==3834==    by 0x6B4A235: fread (iofread.c:38)
+==3834==    by 0x1039E58F: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x1039F636: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x1039F7D5: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x103A1494: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x103A17C1: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x1039DF76: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834==    by 0x10392E21: ??? (in /usr/lib/nvidia-375/libnvidia-glcore.so.375.39)
+==3834== 
+==3834== Invalid read of size 8
+==3834==    at 0x40AA14: AudioPlayer::getAudioResource() (AudioPlayer.cpp:13)
+==3834==    by 0x40A203: AudioManager::updateAudio(float) (AudioManager.cpp:109)
+==3834==    by 0x414923: GameManager::updateAudio(float) (GameManager.cpp:130)
+==3834==    by 0x44EA93: RenderManager::updateAudio(float) (RenderManager.cpp:14)
+==3834==    by 0x41FE71: InputRenderListener::frameStarted(Ogre::FrameEvent const&) (InputRenderListener.cpp:17)
+==3834==    by 0x53A5E93: Ogre::Root::_fireFrameStarted(Ogre::FrameEvent&) (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x53A6420: Ogre::Root::_fireFrameStarted() (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x53A6588: Ogre::Root::renderOneFrame() (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x53A65E4: Ogre::Root::startRendering() (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x44EB80: RenderManager::startRendering() (RenderManager.cpp:28)
+==3834==    by 0x413617: GameManager::GameManager() (GameManager.cpp:37)
+==3834==    by 0x412F9D: GameManager::getGameManager() (GameManager.cpp:15)
+==3834==  Address 0x12af23f8 is 8 bytes inside a block of size 24 free'd
+==3834==    at 0x4C2F24B: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3834==    by 0x5D235E6: CEGUI::ComponentArea::~ComponentArea() (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x5D56414: CEGUI::Falagard_xmlHandler::elementAreaEnd() (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x2B9C2083: CEGUI::ExpatParser::endElement(void*, char const*) (in /usr/lib/cegui-0.8/libCEGUIExpatParser.so)
+==3834==    by 0x2BBCFA7B: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD038B: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD1CAD: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD2404: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD470A: XML_ParseBuffer (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2B9C26E0: CEGUI::ExpatParser::parseXML(CEGUI::XMLHandler&, CEGUI::RawDataContainer const&, CEGUI::String const&) (in /usr/lib/cegui-0.8/libCEGUIExpatParser.so)
+==3834==    by 0x5C3C3F6: CEGUI::XMLParser::parseXMLFile(CEGUI::XMLHandler&, CEGUI::String const&, CEGUI::String const&, CEGUI::String const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x5D468D8: CEGUI::WidgetLookManager::parseLookNFeelSpecificationFromFile(CEGUI::String const&, CEGUI::String const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==  Block was alloc'd at
+==3834==    at 0x4C2E0EF: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3834==    by 0x5D116C2: CEGUI::UnifiedDim::clone() const (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x5D1130B: CEGUI::Dimension::operator=(CEGUI::Dimension const&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x5D5892B: CEGUI::Falagard_xmlHandler::assignAreaDimension(CEGUI::Dimension&) (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x5D58B8C: CEGUI::Falagard_xmlHandler::elementAnyDimEnd() (in /usr/lib/libCEGUIBase-0.so.2.3.0)
+==3834==    by 0x2B9C2083: CEGUI::ExpatParser::endElement(void*, char const*) (in /usr/lib/cegui-0.8/libCEGUIExpatParser.so)
+==3834==    by 0x2BBCF3CA: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD038B: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD1CAD: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD2404: ??? (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2BBD470A: XML_ParseBuffer (in /lib/x86_64-linux-gnu/libexpat.so.1.6.0)
+==3834==    by 0x2B9C26E0: CEGUI::ExpatParser::parseXML(CEGUI::XMLHandler&, CEGUI::RawDataContainer const&, CEGUI::String const&) (in /usr/lib/cegui-0.8/libCEGUIExpatParser.so)
+==3834== 
+==3834== Invalid read of size 8
+==3834==    at 0x40AE06: AudioResource::getAudioResourceInfo() (AudioResource.cpp:35)
+==3834==    by 0x40A213: AudioManager::updateAudio(float) (AudioManager.cpp:110)
+==3834==    by 0x414923: GameManager::updateAudio(float) (GameManager.cpp:130)
+==3834==    by 0x44EA93: RenderManager::updateAudio(float) (RenderManager.cpp:14)
+==3834==    by 0x41FE71: InputRenderListener::frameStarted(Ogre::FrameEvent const&) (InputRenderListener.cpp:17)
+==3834==    by 0x53A5E93: Ogre::Root::_fireFrameStarted(Ogre::FrameEvent&) (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x53A6420: Ogre::Root::_fireFrameStarted() (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x53A6588: Ogre::Root::renderOneFrame() (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x53A65E4: Ogre::Root::startRendering() (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x44EB80: RenderManager::startRendering() (RenderManager.cpp:28)
+==3834==    by 0x413617: GameManager::GameManager() (GameManager.cpp:37)
+==3834==    by 0x412F9D: GameManager::getGameManager() (GameManager.cpp:15)
+==3834==  Address 0xc0a000003f800050 is not stack'd, malloc'd or (recently) free'd
+==3834== 
+==3834== 
+==3834== Process terminating with default action of signal 11 (SIGSEGV)
+==3834==  General Protection Fault
+==3834==    at 0x40AE06: AudioResource::getAudioResourceInfo() (AudioResource.cpp:35)
+==3834==    by 0x40A213: AudioManager::updateAudio(float) (AudioManager.cpp:110)
+==3834==    by 0x414923: GameManager::updateAudio(float) (GameManager.cpp:130)
+==3834==    by 0x44EA93: RenderManager::updateAudio(float) (RenderManager.cpp:14)
+==3834==    by 0x41FE71: InputRenderListener::frameStarted(Ogre::FrameEvent const&) (InputRenderListener.cpp:17)
+==3834==    by 0x53A5E93: Ogre::Root::_fireFrameStarted(Ogre::FrameEvent&) (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x53A6420: Ogre::Root::_fireFrameStarted() (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x53A6588: Ogre::Root::renderOneFrame() (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x53A65E4: Ogre::Root::startRendering() (in /usr/lib/x86_64-linux-gnu/libOgreMain.so.1.9.0)
+==3834==    by 0x44EB80: RenderManager::startRendering() (RenderManager.cpp:28)
+==3834==    by 0x413617: GameManager::GameManager() (GameManager.cpp:37)
+==3834==    by 0x412F9D: GameManager::getGameManager() (GameManager.cpp:15)
+==3834== 
+==3834== HEAP SUMMARY:
+==3834==     in use at exit: 86,724,312 bytes in 30,851 blocks
+==3834==   total heap usage: 251,529 allocs, 220,678 frees, 930,866,497 bytes allocated
+==3834== 
+==3834== LEAK SUMMARY:
+==3834==    definitely lost: 12 bytes in 1 blocks
+==3834==    indirectly lost: 0 bytes in 0 blocks
+==3834==      possibly lost: 76,829,831 bytes in 5,414 blocks
+==3834==    still reachable: 9,894,469 bytes in 25,436 blocks
+==3834==                       of which reachable via heuristic:
+==3834==                         newarray           : 16 bytes in 1 blocks
+==3834==                         multipleinheritance: 23,720 bytes in 13 blocks
+==3834==         suppressed: 0 bytes in 0 blocks
+==3834== Rerun with --leak-check=full to see details of leaked memory
+==3834== 
+==3834== For counts of detected and suppressed errors, rerun with: -v
+==3834== Use --track-origins=yes to see where uninitialised values come from
+==3834== ERROR SUMMARY: 17 errors from 7 contexts (suppressed: 0 from 0)
+

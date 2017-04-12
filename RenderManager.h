@@ -12,6 +12,9 @@ class RenderListener;
 class InputFunctionHandler;
 class RenderManager{
 	private:
+		bool rootRendering;
+		bool levelChange;
+		std::string newLevel;
 		Ogre::Root* root;
 		Ogre::RenderWindow* window;
 		Ogre::SceneManager* scene_manager;
@@ -29,7 +32,6 @@ class RenderManager{
 		std::vector<Ogre::AnimationState* > anims;
 		ListArray<RenderListener>* render_listeners;
 		InputFunctionHandler* ifh;
-		bool rootRendering;
 		void destroyAllAttachedMovableObjects( Ogre::SceneNode* node );
 	public:
 		RenderManager(GameManager* game_manager);

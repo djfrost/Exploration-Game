@@ -212,8 +212,11 @@ std::string InputManager::keyMap(const OIS::KeyEvent& e){
 	else if(key_code == OIS::KC_N){
 		game_key = "N";
 	}
-	else if(key_code == OIS::KC_P){
+	else if(key_code == OIS::KC_O){
 		game_key = "O";
+	}
+	else if(key_code == OIS::KC_P){
+		game_key = "P";
 	}
 	else if(key_code == OIS::KC_Q){
 		game_key = "Q";

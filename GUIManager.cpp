@@ -146,6 +146,10 @@ void GUIManager::unloadLevel(){
 	if(gui_context != NULL){
 		destroyGUIContext();
 		gui_context = NULL;
+		for(int i = 0; i < events.size(); i++){
+			delete events[i];
+		}
+		events.clear();
 	}
 }
 

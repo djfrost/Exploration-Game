@@ -100,6 +100,7 @@ void RenderManager::init(){
 }
 
 RenderManager::RenderManager(GameManager* gm){
+	levelChange = false;
 	game_manager = gm;
 	init();
 }
@@ -240,6 +241,9 @@ void RenderManager::loadScene(std::string sceneName, std::string lastScene, std:
 		rgm.declareResource(meshFiles[i], "Mesh", sceneName);
 	}
 	rgm.initialiseResourceGroup(sceneName);
+	std::cout << "Possibly bad " << std::endl;
+	std::cout << sceneName << std::endl;
+	std::cout << "Printing after it" << std::endl;
 	rgm.loadResourceGroup(sceneName, true, true);
 	Ogre::SceneNode* scene_root_node = scene_manager->getRootSceneNode();
 	for(int i = 0; i < meshFiles.size(); i++){
@@ -338,6 +342,11 @@ void RenderManager::processAnimations(float timestep){
 		anims[i]->addTime(timestep);
 	}
 	ifh->keyDownFunctions();
+	if(levelChange){
+		levelChange = false;
+		game_manager->changeLevel(newLevel);
+		std::cout <<"Returned from changeLevel" << std::endl;
+	}
 }
 void RenderManager::processKeyboardInput(std::string keyName, bool released){
 	ifh->processInput(keyName, released);
@@ -380,5 +389,6 @@ void RenderManager::mouseReleased(int x_click, int y_click, int mouseButton){}
 void RenderManager::mouseMoved(int x_click, int y_click, int x_rel, int y_rel){}
 void RenderManager::playAudio(const char fileName[]){}
 void RenderManager::changeLevel(std::string level){
-	game_manager->changeLevel(level);
+	levelChange = true;
+	newLevel = level;
 }

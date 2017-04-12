@@ -126,7 +126,14 @@ void AudioManager::unloadLevel(){
 	ListArrayIterator<AudioPlayer>* iter = audio_players->iterator();
 	while(iter->hasNext()) {
 		AudioPlayer* ap = iter->next();
+		if(ap->getAudioResource()->getAudioResourceType() == STREAM){
+			unloadStreamAudioResource(ap->getAudioResource()->getAudioResourceInfo());
+		}
+		else{
+			unloadSampleAudioResource(ap->getAudioResource()->getAudioResourceInfo());
+		}
 		delete ap;
 	}
 	delete iter;
+	audio_players->removeAll();
 }

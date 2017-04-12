@@ -6,7 +6,7 @@ class AudioResource;
 class AudioPlayer {
 	private:
 		AudioResource* audio_resource;
-
+		bool stream;
 		int num_repeats;  //0 play once, 1 play twice, etc.
 		int repeat_count;
 
