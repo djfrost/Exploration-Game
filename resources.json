@@ -12,7 +12,9 @@
 					"name" : "Rock2",
 					"name" : "Tree2",
 					"name" : "PinkTree",
-					"name" : "Tree3"
+					"name" : "Tree3",
+					"name" : "Pool",
+					"name" : "Water"
 				},
 				"Fox" : {
 					"file" : "Fox.mesh",
@@ -92,6 +94,22 @@
 					"rotate" : "0.0,1.0,0.0",
 					"angle" : "90.0",
 					"scale" : "2.0,3.0,2.0",
+					"defaultAnim" : "none"
+				},
+				"Water" : {
+					"file" : "Water.mesh",
+					"transform" : "0.0,-7.0,25.0",
+					"rotate" : "1.0,0.0,0.0",
+					"angle" : "180.0",
+					"scale" : "8.0,2.8,8.0",
+					"defaultAnim" : "none"
+				},
+				"Pool" : {
+					"file" : "Pool.mesh",
+					"transform" : "0.0,-7.0,25.0",
+					"rotate" : "1.0,0.0,0.0",
+					"angle" : "180.0",
+					"scale" : "8.3,3.0,8.3",
 					"defaultAnim" : "none"
 				},
 				"Animations" : {
@@ -325,5 +343,5 @@
 		}
 
 	},
-	"first_level": "Level_2"
+	"first_level": "level_1"
 }
