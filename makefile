@@ -1,14 +1,14 @@
 AutomatedMakefile = am
 CC = g++ -std=c++11
 
-INC_DIRS=-I./ -I$(OGRE_PATH)/OgreMain/include -I$(BOOST_PATH) -I$(OIS_PATH)/include -I$(LUA_PATH)/src -I$(LUA_PATH)/luawrapper -I$(BASS_PATH) -I$(CEGUI_PATH)/include
+INC_DIRS=-I./ -I$(OGRE_PATH)/OgreMain/include -I$(BOOST_PATH) -I$(OIS_PATH)/include -I$(LUA_PATH)/src -I$(LUA_PATH)/luawrapper -I$(BASS_PATH) -I$(CEGUI_PATH)/include 
 LIB_DIRS=-L./ -L$(OGRE_PATH)/build/lib -L$(BOOST_PATH)/stage/lib -L$(OIS_PATH)/lib -L$(LUA_PATH)/lib -L$(BASS_PATH) -L$(CEGUI_PATH)/lib
 LIBS=-lboost_system-mgw51-mt-1_63 -lois -llua -lbass -lOgreMain -lCEGUIBase-0 -lCEGUIOgreRenderer-0
 
 COMPILE = $(CC) $(INC_DIRS) -c
 LINK = $(CC) $(LIB_DIRS) -o
 
-FILES = GameResource.o PathResource.o InputRenderListener.o InputManager.o LevelLoader.o AnimationRenderListener.o RenderManager.o LogManager.o GameManager.o GameDriver.o RenderListener.o InputFunctionHandler.o AudioResource.o AudioPlayer.o AudioManager.o CompareCEGUIEvent.o  GUIManager.o CEGUIEvent.o
+FILES = GameResource.o PathResource.o InputRenderListener.o InputManager.o LevelLoader.o AnimationRenderListener.o RenderManager.o LogManager.o GameManager.o GameDriver.o RenderListener.o InputFunctionHandler.o AudioResource.o AudioPlayer.o AudioManager.o CompareCEGUIEvent.o  GUIManager.o CEGUIEvent.o ScriptManager.o
 all: Ogre
 
 Ogre: 		$(FILES)
@@ -49,3 +49,5 @@ GUIManager.o: GUIManager.h GUIManager.cpp
 			$(COMPILE) GUIManager.cpp
 CEGUIEvent.o: CEGUIEvent.h CEGUIEvent.cpp
 			$(COMPILE) CEGUIEvent.cpp
+ScriptManager.o: ScriptManager.h ScriptManager.cpp
+			$(COMPILE) ScriptManager.cpp

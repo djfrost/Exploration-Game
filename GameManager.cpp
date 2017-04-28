@@ -21,6 +21,8 @@ void GameManager::init(){
 	logComment("Loading Render Manager");
 	render_manager = new RenderManager(this);  //calls render manager's init, sets up the frame listener
 	logComment("Render Manager loaded successfully");
+	scriptManager = new ScriptManager(render_manager);
+	logComment("Script Manager loaded successfully");
 	inputManager = new InputManager(this);
 	logComment("Input Manager loaded successfully");
 	audioManager = new AudioManager(this);
@@ -45,11 +47,14 @@ GameManager::~GameManager(){
 	std::cout << "Deleted Level Loader" << std::endl;
 	delete inputManager;
 	std::cout << "Deleted Input Manager" << std::endl;
+	delete scriptManager;
+	std::cout << "Deleted Script Manager" << std::endl;
 	delete logManager;
 	std::cout << "Deleted Log Manager" << std::endl;
 	delete render_manager;
 	std::cout << "Deleted Render Manager" << std::endl;
 	render_manager = NULL;
+
 }
 
 size_t GameManager::getRenderWindowHandle(){

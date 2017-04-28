@@ -31,7 +31,8 @@ material PinkLeaf
 
             alpha_to_coverage off
             colour_write on
-            cull_hardware none
+			cull_hardware none
+			cull_software none
             depth_check on
             depth_func less_equal
             depth_write on

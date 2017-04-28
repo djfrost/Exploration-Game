@@ -1,6 +1,6 @@
 #if !defined GAME_MANAGER
 #define GAME_MANAGER
-
+#include "ScriptManager.h"
 #include <string>
 #include <vector>
 #include <stdint.h>
@@ -11,6 +11,7 @@ class InputManager;
 class AudioManager;
 struct AudioResourceInfo;
 class AudioResource;
+class ScriptManager;
 class GUIManager;
 //supplies communication between managers
 class GameManager{
@@ -21,6 +22,7 @@ class GameManager{
 		InputManager* inputManager;
 		AudioManager* audioManager;
 		GUIManager* guiManager;
+		ScriptManager* scriptManager;
 		GameManager();
 		void init();
 	public:
@@ -62,6 +64,7 @@ class GameManager{
 		void changeMainSong(std::string song);
 		void unloadMainStream();
 		void playSample(std::string sample);
+		void loadLevel(std::string name);
 };
 
 #endif

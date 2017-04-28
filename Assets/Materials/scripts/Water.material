@@ -1,48 +1,52 @@
 
 material _missing_material_
 {
-    receive_shadows off
-    technique
-    {
-        pass
-        {
-            ambient 0.1 0.1 0.1 1.0
-            diffuse 0.8 0.0 0.0 1.0
-            specular 0.5 0.5 0.5 1.0 12.5
-            emissive 0.3 0.3 0.3 1.0
-        }
-    }
+	receive_shadows off
+	technique
+	{
+		pass
+		{
+			ambient 0.1 0.1 0.1 1.0
+			diffuse 0.8 0.0 0.0 1.0
+			specular 0.5 0.5 0.5 1.0 12.5
+			emissive 0.3 0.3 0.3 1.0
+		}
+	}
 }
 
 // Water genrated by blender2ogre 0.5.9
 fragment_program Water_FP_GLSL glsl
 {
-   source Water.frag
+	source Water.frag
 }
 
 vertex_program Water_VP_GLSL glsl
 {
-   source Water.vert
+	source Water.vert
 }
 
 material Water
 {
-  receive_shadows on
+	receive_shadows on
+	technique
+	{
+		pass Water
+		{
+			scene_blend alpha_blend
+			depth_write off
+			cull_hardware none
+			cull_software none
+			vertex_program_ref Water_VP_GLSL
+			{
+				param_named_auto worldViewProj worldviewproj_matrix
+				param_named_auto currTime time
+				param_named_auto waveHeight float 0.5
+			}
 
-  technique
-  {
-    pass Water
-    {
-      vertex_program_ref Water_VP_GLSL
-      {
-        param_named_auto worldViewProj worldviewproj_matrix
-      }
-
-      fragment_program_ref Water_FP_GLSL
-      {
-        param_named SEA_WATER_COLOR float3 0.3 0.4 0.7
-      }
-
-    }
-  }
+			fragment_program_ref Water_FP_GLSL
+			{
+				param_named SEA_WATER_COLOR float4 0.3 0.4 0.7 0.5
+			}
+		}
+	}
 }

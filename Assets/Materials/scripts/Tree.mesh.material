@@ -61,12 +61,12 @@ material Bark
 material Leaves
 {
     receive_shadows on
-    cast_shadows on
     technique
     {
         pass Leaves
         {
-            cull_hardware none
+			cull_hardware none
+			cull_software none
             depth_check on
             depth_write off
             lighting off

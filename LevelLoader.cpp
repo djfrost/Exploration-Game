@@ -2,6 +2,7 @@
 #include <boost/foreach.hpp>
 #include "GameManager.h"
 #include <sstream>
+
 LevelLoader::LevelLoader(GameManager* gameManager, std::string fileName){
 	gm = gameManager;
 	ReadResources(fileName);
@@ -11,7 +12,6 @@ LevelLoader::LevelLoader(GameManager* gameManager, std::string fileName){
 	nextScene = "";
 	LoadLevel(levelOne);
 }
-
 LevelLoader::~LevelLoader(){
 
 }

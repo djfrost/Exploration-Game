@@ -98,7 +98,7 @@
 				},
 				"Water" : {
 					"file" : "Water.mesh",
-					"transform" : "0.0,-7.0,25.0",
+					"transform" : "0.0,-4.5,25.0",
 					"rotate" : "1.0,0.0,0.0",
 					"angle" : "180.0",
 					"scale" : "8.0,2.8,8.0",
@@ -106,7 +106,7 @@
 				},
 				"Pool" : {
 					"file" : "Pool.mesh",
-					"transform" : "0.0,-7.0,25.0",
+					"transform" : "0.0,-4.5,25.0",
 					"rotate" : "1.0,0.0,0.0",
 					"angle" : "180.0",
 					"scale" : "8.3,3.0,8.3",

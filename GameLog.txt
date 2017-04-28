@@ -1,24 +1,28 @@
 ****COMMENT****
-15:37:34
+17:51:20
 Loading Render Manager
 ***************
 ****COMMENT****
-15:37:36
+17:51:21
 Render Manager loaded successfully
 ***************
 ****COMMENT****
-15:37:36
+17:51:21
+Script Manager loaded successfully
+***************
+****COMMENT****
+17:51:21
 Input Manager loaded successfully
 ***************
 ****COMMENT****
-15:37:36
+17:51:21
 AudioManager Loaded successfully
 ***************
 ****COMMENT****
-15:37:36
+17:51:21
 GUI Manager loaded successfully
 ***************
 ****COMMENT****
-15:37:38
+17:51:23
 Level Loader loaded successfully
 ***************
