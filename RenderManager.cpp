@@ -48,6 +48,7 @@ void RenderManager::rightJoystickAxisMoved(float north_south, float east_west){
 }
 
 void RenderManager::init(){
+	shadow_technique = SHADOWTYPE_TEXTURE_ADDITIVE ;
 	rootRendering = false;
 	root = NULL;
 	window = NULL;
@@ -79,7 +80,7 @@ void RenderManager::init(){
 	//by default, the size of the viewport matches the size of the window, but the viewport can be cropped
 	//the camera represents a view into an existing scene and the viewport represents a region into which an existing camera will render its contents
 	camera = scene_manager->createCamera("Camera");
-	scene_manager->setShadowTechnique(SHADOWTYPE_TEXTURE_MODULATIVE);
+	scene_manager->setShadowTechnique(shadow_technique);
 	//scene_manager->setSceneBlending( Ogre::SceneBlendType::SBT_TRANSPARENT_COLOUR );
 	//z-order, left, top, width, height
 	viewport = window->addViewport(camera, 0, 0.0, 0.0, 1.0, 1.0);  //assign a camera to a viewport (can have many cameras and viewports in a single window)
@@ -210,14 +211,35 @@ void RenderManager::addMesh(std::string mesh, std::string resourceGroup, std::st
 }
 //destroy old scene nodes, and unloads resource gruop if the scene exists.
 void RenderManager::unloadScene(std::string currScene){
+	game_manager->logComment("Level is being unloaded");
+	std::cout << currScene << "Is being unloaded" << std::endl;
 	if(groupExists(currScene)){
 		scene_manager->destroyAllCameras();
 		Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
 		rgm.unloadResourceGroup(currScene.c_str());
+		Ogre::SceneNode::ChildNodeIterator itChild = scene_manager->getRootSceneNode()->getChildIterator();
+
+	    while ( itChild.hasMoreElements() )
+	    {
+	       Ogre::SceneNode* pChildNode = static_cast<SceneNode*>(itChild.getNext());
+	       destroyAllAttachedMovableObjects( pChildNode );
+		}
+		for(int i = 0; i < anims.size(); i++){
+		   anims[i] = NULL;
+		}
+		anims.clear();
+		rgm.destroyResourceGroup(currScene.c_str());
+		scene_manager->destroyAllEntities();
+		scene_manager->destroyAllAnimations();
+		scene_manager->destroyAllAnimationStates();
+		scene_manager->destroyAllInstancedGeometry();
+		scene_manager->destroyAllMovableObjects();
+		scene_manager->destroyAllStaticGeometry();
+		scene_manager->destroyAllLights();
 		scene_manager->getRootSceneNode()->removeAndDestroyAllChildren();
 		scene_manager->destroyAllCameras();
 		camera = scene_manager->createCamera("Camera");
-		scene_manager->setShadowTechnique(SHADOWTYPE_TEXTURE_MODULATIVE);
+		scene_manager->setShadowTechnique(shadow_technique);
 		//scene_manager->setSceneBlending( Ogre::SceneBlendType::SBT_TRANSPARENT_COLOUR );
 		//z-order, left, top, width, height
 		window->removeAllViewports();
@@ -241,9 +263,6 @@ void RenderManager::loadScene(std::string sceneName, std::string lastScene, std:
 		rgm.declareResource(meshFiles[i], "Mesh", sceneName);
 	}
 	rgm.initialiseResourceGroup(sceneName);
-	std::cout << "Possibly bad " << std::endl;
-	std::cout << sceneName << std::endl;
-	std::cout << "Printing after it" << std::endl;
 	rgm.loadResourceGroup(sceneName, true, true);
 	Ogre::SceneNode* scene_root_node = scene_manager->getRootSceneNode();
 	for(int i = 0; i < meshFiles.size(); i++){

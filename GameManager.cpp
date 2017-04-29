@@ -21,14 +21,14 @@ void GameManager::init(){
 	logComment("Loading Render Manager");
 	render_manager = new RenderManager(this);  //calls render manager's init, sets up the frame listener
 	logComment("Render Manager loaded successfully");
-	scriptManager = new ScriptManager(render_manager);
-	logComment("Script Manager loaded successfully");
 	inputManager = new InputManager(this);
 	logComment("Input Manager loaded successfully");
 	audioManager = new AudioManager(this);
 	logComment("AudioManager Loaded successfully");
 	guiManager = new GUIManager(render_manager);
 	logComment("GUI Manager loaded successfully");
+	scriptManager = new ScriptManager(this);
+	logComment("Script Manager loaded successfully");
 	std::string file = "resources.json";
 	levelLoader = new LevelLoader(this, file);
 	logComment("Level Loader loaded successfully");
@@ -41,14 +41,14 @@ GameManager::GameManager(){
 
 GameManager::~GameManager(){
 	std::cout << "GameManager destructor called" << std::endl;
+	delete scriptManager;
+	std::cout << "Deleted Script Manager" << std::endl;
 	delete audioManager;
 	std::cout << "Deleted Audio Manager" << std::endl;
 	delete levelLoader;
 	std::cout << "Deleted Level Loader" << std::endl;
 	delete inputManager;
 	std::cout << "Deleted Input Manager" << std::endl;
-	delete scriptManager;
-	std::cout << "Deleted Script Manager" << std::endl;
 	delete logManager;
 	std::cout << "Deleted Log Manager" << std::endl;
 	delete render_manager;
@@ -97,11 +97,19 @@ void GameManager::initialiseNewScene(){
 void GameManager::logComment(std::string comment){
 	logManager->logComment(comment);
 }
+void GameManager::loadKeyScripts(std::vector<std::string> scriptKeys, std::vector<std::string> keyScripts){
+	inputManager->loadKeyScripts(scriptKeys, keyScripts);
+}
 void GameManager::checkForInput(float time_step){
 	inputManager->checkForInput();
 }
 void GameManager::keyPressed(std::string keyPressed){
 	render_manager->processKeyboardInput(keyPressed, false);
+	guiManager->keyPressed(keyPressed);
+}
+void GameManager::keyPressed(std::string keyPressed, std::string script){
+	render_manager->processKeyboardInput(keyPressed, false);
+	scriptManager->executeScript(script);
 	guiManager->keyPressed(keyPressed);
 }
 bool GameManager::keyReleased(std::string keyUp){
@@ -157,6 +165,7 @@ void GameManager::guiProcessEvents(std::vector<std::string> types, std::vector<s
 	}
 }
 void GameManager::changeLevel(std::string newLevel){
+	logComment("ChangeLevel Called");
 	levelLoader->unLoadCurrLevel();
 	std::cout << "Unloaded levelloader scene" << std::endl;
 	// unload from other places
@@ -164,6 +173,8 @@ void GameManager::changeLevel(std::string newLevel){
 	std::cout << "Unloaded audioManager scene" << std::endl;
 	guiManager->unloadLevel();
 	std::cout << "Unloaded guiManager scene" << std::endl;
+	//renderManager->unloadLevel("current");
+	//std::cout << "Unloaded renderManager scene" << std::endl;
 	levelLoader->LoadLevel(newLevel);
 	std::cout << "Loaded levelloader scene" << std::endl;
 	render_manager->startRendering();
@@ -177,4 +188,10 @@ void GameManager::unloadMainStream(){
 }
 void GameManager::playSample(std::string sample){
 	audioManager->playSample(levelLoader->getResource(sample));
+}
+LevelLoader* GameManager::getLevelLoader(){
+	return levelLoader;
+}
+void GameManager::callScript(std::string scriptName, std::string functionName){
+	scriptManager->executeScript(scriptName, functionName);
 }

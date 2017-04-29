@@ -2,11 +2,10 @@
    #define NULL 0
 #endif
 
-#if !defined AVL_TREE_H
-#define AVL_TREE_H
+#if !defined (AVLTREE_H)
+#define AVLTREE_H
 
 #include "AVLTreeIterator.h"
-#include "Comparator.h"
 
 #include <iostream>
 using namespace std;
@@ -17,10 +16,11 @@ class AVLTree
    
    private:
       AVLTreeNode<T>* root;
-      bool avl_flag;
+      bool avlFlag;
       int sze;
 
-      Comparator<T,U>* comparator;
+      int (*compare_item) (T* item_1, T* item_2);
+      int (*compare_key) (U* key, T* item);
 
       void setRootNode(AVLTreeNode<T>* tNode);
       AVLTreeNode<T>* getRootNode();
@@ -49,8 +49,7 @@ class AVLTree
       AVLTreeNode<T>* DRL(AVLTreeNode<T>* tNode, AVLTreeNode<T>* right);
 
    public:
-      //AVLTree(int (*comp_item) (T* item_1, T* item_2), int (*comp_key) (U* key, T* item));
-	  AVLTree(Comparator<T,U>* comparator);
+      AVLTree(int (*comp_item) (T* item_1, T* item_2), int (*comp_key) (U* key, T* item));
       ~AVLTree();
 
       int size();
@@ -69,19 +68,19 @@ class AVLTree
 };
 
 template < class T, class U >
-AVLTree<T,U>::AVLTree(Comparator<T,U>* comp)
+AVLTree<T,U>::AVLTree(int (*comp_item) (T* item_1, T* item_2), int (*comp_key) (U* key, T* item))
 {
    root = NULL;
    sze = 0;
 
-   comparator = comp;
+   compare_item = comp_item;
+   compare_key = comp_key;
 }
 
 template < class T, class U >
 AVLTree<T,U>::~AVLTree()
 {
    destroy();
-   delete comparator;
 }
 
 template < class T, class U >
@@ -154,8 +153,7 @@ T* AVLTree<T,U>::retrieve(U* sk)
    while (tNode != NULL)
    {
       T* node_item = tNode->getItem();
-	  int comp = comparator->compare(sk, node_item);
-      //int comp = (*compare_key) (sk, node_item);
+      int comp = (*compare_key) (sk, node_item);
       if (comp == 0)
       {
          return node_item;
@@ -177,7 +175,7 @@ template < class T, class U >
 void AVLTree<T,U>::insert(T* item)
 {
    root = insertItem(root, item);
-   avl_flag = false;
+   avlFlag = false;
 } 
 
 template < class T, class U >
@@ -187,15 +185,14 @@ AVLTreeNode<T>* AVLTree<T,U>::insertItem(AVLTreeNode<T>* tNode, T* item)
    {
       tNode = new AVLTreeNode<T>(item);
       tNode->setBalanceFactor(BALANCED);
-      avl_flag = true; //need to check
+      avlFlag = true; //need to check
       sze++;
       return tNode;
    } 
 
    AVLTreeNode<T>* subtree;
    T* node_item = tNode->getItem();
-   int comp = comparator->compare(item, node_item);
-   //int comp = (*compare_item) (item, node_item);
+   int comp = (*compare_item) (item, node_item);
 
    if (comp == 0)
    {
@@ -208,7 +205,7 @@ AVLTreeNode<T>* AVLTree<T,U>::insertItem(AVLTreeNode<T>* tNode, T* item)
       tNode->setLeft(subtree);
 
       //check balance factor and rotate if necessary
-      if (avl_flag)  //still need to check
+      if (avlFlag)  //still need to check
       {
          tNode = avlFixAddLeft(tNode);  //came from the left
       }
@@ -219,7 +216,7 @@ AVLTreeNode<T>* AVLTree<T,U>::insertItem(AVLTreeNode<T>* tNode, T* item)
       tNode->setRight(subtree);
 
       //check balance factor and rotate if necessary
-      if (avl_flag)
+      if (avlFlag)
       {
          tNode = avlFixAddRight(tNode);  //came from the right
       }
@@ -231,7 +228,7 @@ template < class T, class U >
 void AVLTree<T,U>::remove(U* sk)
 {
    root = removeItem(root, sk);
-   avl_flag = false;
+   avlFlag = false;
 }
 
 template < class T, class U >
@@ -244,14 +241,13 @@ AVLTreeNode<T>* AVLTree<T,U>::removeItem(AVLTreeNode<T>* tNode, U* sk)
    }
 
    T* node_item = tNode->getItem();
-   int comp = comparator->compare(sk, node_item);
-   //int comp = (*compare_key) (sk, node_item);
+   int comp = (*compare_key) (sk, node_item);
 
    if (comp == 0) 
    {
       //item is in the root of some subtree
-      //found something to remove so set avl_flag to true
-      avl_flag = true;
+      //found something to remove so set avlFlag to true
+      avlFlag = true;
       tNode = removeNode(tNode);  // delete the item
       sze--;
    }
@@ -259,7 +255,7 @@ AVLTreeNode<T>* AVLTree<T,U>::removeItem(AVLTreeNode<T>* tNode, U* sk)
    {
       subtree = removeItem(tNode->getLeft(), sk);
       tNode->setLeft(subtree);
-      if (avl_flag)
+      if (avlFlag)
       {
          tNode = avlFixRemoveLeft(tNode);  //came from left
       }
@@ -268,7 +264,7 @@ AVLTreeNode<T>* AVLTree<T,U>::removeItem(AVLTreeNode<T>* tNode, U* sk)
    { 
       subtree = removeItem(tNode->getRight(), sk);
       tNode->setRight(subtree);
-      if (avl_flag)
+      if (avlFlag)
       {
          tNode = avlFixRemoveRight(tNode);  //came from right
       }
@@ -312,7 +308,7 @@ AVLTreeNode<T>* AVLTree<T,U>::removeNode(AVLTreeNode<T>* tNode)
       replacement_item = findLeftMost(tNode->getRight());
       tNode->setItem(replacement_item);
       tNode->setRight(removeLeftMost(tNode->getRight()));
-      if (avl_flag)
+      if (avlFlag)
       {
          tNode = avlFixRemoveRight(tNode);  //came from right
       }
@@ -337,7 +333,7 @@ AVLTreeNode<T>* AVLTree<T,U>::removeLeftMost(AVLTreeNode<T>* tNode)
 
    if (tNode->getLeft() == NULL) 
    {
-      avl_flag = true;
+      avlFlag = true;
       subtree = tNode->getRight();
       delete tNode;
       return subtree;
@@ -346,7 +342,7 @@ AVLTreeNode<T>* AVLTree<T,U>::removeLeftMost(AVLTreeNode<T>* tNode)
    {
       subtree = removeLeftMost(tNode->getLeft());
       tNode->setLeft(subtree);
-      if (avl_flag)
+      if (avlFlag)
       {
          tNode = avlFixRemoveLeft(tNode);  //came from left
       }
@@ -524,7 +520,7 @@ AVLTreeNode<T>* AVLTree<T,U>::avlFixAddLeft(AVLTreeNode<T>* tNode)
 
    if (factor == BALANCED)
    {
-      avl_flag = false; //no more to do this time around
+      avlFlag = false; //no more to do this time around
    }
    else if (factor == LEFT_UNBALANCED)
    {
@@ -546,7 +542,7 @@ AVLTreeNode<T>* AVLTree<T,U>::avlFixAddLeft(AVLTreeNode<T>* tNode)
          //cout << "SR" << endl;
       }
 
-      avl_flag = false; //basically, stop checking (return the replacement node for this position)
+      avlFlag = false; //basically, stop checking (return the replacement node for this position)
    }
   
    return tNode;
@@ -560,7 +556,7 @@ AVLTreeNode<T>* AVLTree<T,U>::avlFixAddRight(AVLTreeNode<T>* tNode)
 
    if (factor == BALANCED)
    {
-      avl_flag = false; //no more to do this time around
+      avlFlag = false; //no more to do this time around
    }
    else if (factor == RIGHT_UNBALANCED)
    {
@@ -583,7 +579,7 @@ AVLTreeNode<T>* AVLTree<T,U>::avlFixAddRight(AVLTreeNode<T>* tNode)
          //cout << "SL" << endl;
       }
 
-      avl_flag = false; //basically, stop checking (return the replacement node for this position)
+      avlFlag = false; //basically, stop checking (return the replacement node for this position)
    }
 
    return tNode;
@@ -597,7 +593,7 @@ AVLTreeNode<T>* AVLTree<T,U>::avlFixRemoveLeft(AVLTreeNode<T>* tNode)
 
    if (factor == RIGHT_HEAVY)  //was BALANCED, so completely done for this delete
    {
-      avl_flag = false;
+      avlFlag = false;
    }
    else if (factor == RIGHT_UNBALANCED)
    {
@@ -612,7 +608,7 @@ AVLTreeNode<T>* AVLTree<T,U>::avlFixRemoveLeft(AVLTreeNode<T>* tNode)
          tNode->setBalanceFactor(RIGHT_HEAVY);
          right->setBalanceFactor(LEFT_HEAVY);
          tNode = rotateLeft(tNode);
-         avl_flag = false;  //STOP
+         avlFlag = false;  //STOP
          //cout << "SL0" << endl;
       }
       else if (RBF == RIGHT_HEAVY)
@@ -638,7 +634,7 @@ AVLTreeNode<T>* AVLTree<T,U>::avlFixRemoveRight(AVLTreeNode<T>* tNode)
 
    if (factor == LEFT_HEAVY)  //was BALANCED, so completely done for this delete
    {
-      avl_flag = false;
+      avlFlag = false;
    }
    else if (factor == LEFT_UNBALANCED)
    {
@@ -653,7 +649,7 @@ AVLTreeNode<T>* AVLTree<T,U>::avlFixRemoveRight(AVLTreeNode<T>* tNode)
          tNode->setBalanceFactor(LEFT_HEAVY);
          left->setBalanceFactor(RIGHT_HEAVY);
          tNode = rotateRight(tNode);
-         avl_flag = false;  //STOP
+         avlFlag = false;  //STOP
          //cout << "SR0" << endl;
       }
       else if (LBF == LEFT_HEAVY)

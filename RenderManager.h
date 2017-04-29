@@ -25,6 +25,7 @@ class RenderManager{
 		void init();
 		size_t window_handle;
 		Ogre::Real time_since_last_frame;
+		Ogre::ShadowTechnique shadow_technique;
 		//Curr and next scene
 		Ogre::SceneNode* currSceneNode;
 		Ogre::SceneNode* nextSceneNode;

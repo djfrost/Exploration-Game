@@ -1,7 +1,7 @@
 AutomatedMakefile = am
 CC = g++ -std=c++11
 
-INC_DIRS=-I./ -I$(OGRE_PATH)/OgreMain/include -I$(BOOST_PATH) -I$(OIS_PATH)/include -I$(LUA_PATH)/src -I$(LUA_PATH)/luawrapper -I$(BASS_PATH) -I$(CEGUI_PATH)/include 
+INC_DIRS=-I./ -I$(OGRE_PATH)/OgreMain/include -I$(BOOST_PATH) -I$(OIS_PATH)/include -I$(LUA_PATH)/src -I$(LUA_PATH)/LuaBridge -I$(BASS_PATH) -I$(CEGUI_PATH)/include 
 LIB_DIRS=-L./ -L$(OGRE_PATH)/build/lib -L$(BOOST_PATH)/stage/lib -L$(OIS_PATH)/lib -L$(LUA_PATH)/lib -L$(BASS_PATH) -L$(CEGUI_PATH)/lib
 LIBS=-lboost_system-mgw51-mt-1_63 -lois -llua -lbass -lOgreMain -lCEGUIBase-0 -lCEGUIOgreRenderer-0
 

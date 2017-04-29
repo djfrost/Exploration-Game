@@ -241,9 +241,14 @@
 					"procedure" : "Powerup"
 				}
 			},
+			"Scripts" : {
+				"KeyScripts" : {
+					"Z" : "./Assets/Lua/LoadTitle.lua"
+				}
+			},
 			"SkyMap" : "sky"
 		},
-		"Level_2" : {
+		"Title" : {
 			"path": ["./Assets/Models", "./Assets/Materials/scripts", "./Assets/Textures", "./Assets/Audio", "./Assets/cegui/layouts", "./Assets/cegui/fonts", "./Assets/cegui/schemes", "./Assets/cegui/imagesets", "./Assets/cegui/looknfeel", "./Assets/cegui/animations", "./Assets/cegui/lua_scripts", "./Assets/cegui/xml_schemas"],
 
 			"meshes" : {
@@ -337,6 +342,11 @@
 					"type" : "button",
 					"name" : "StartButton",
 					"procedure" : "levelButton"
+				}
+			},
+			"Scripts" : {
+				"KeyScripts" : {
+					"Z" : "./Assets/Lua/LoadLevel1.lua"
 				}
 			},
 			"SkyMap" : "sky"

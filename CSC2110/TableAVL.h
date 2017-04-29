@@ -1,5 +1,5 @@
-#if !defined (TABLEAVL_H)
-#define TABLEAVL_H
+#if !defined TABLE_AVL_H
+#define TABLE_AVL_H
 
 #include "AVLTree.h"
 
@@ -11,7 +11,7 @@ class TableAVL
       AVLTree<T,U>* avl;
 
    public:
-      TableAVL(int (*comp_item) (T* item_1, T* item_2), int (*comp_key) (U* key, T* item));
+      TableAVL(Comparator<T,U>* comparator);
       ~TableAVL();
 
       bool tableIsEmpty();
@@ -24,9 +24,9 @@ class TableAVL
 };
 
 template < class T, class U >
-TableAVL<T,U>::TableAVL(int (*comp_item) (T* item_1, T* item_2), int (*comp_key) (U* key, T* item)) 
+TableAVL<T,U>::TableAVL(Comparator<T,U>* comparator) 
 {
-   avl = new AVLTree<T,U>(comp_item, comp_key);
+   avl = new AVLTree<T,U>(comparator);
 }  
 
 template < class T, class U >

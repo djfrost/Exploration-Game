@@ -1,7 +1,6 @@
 
 material _missing_material_
 {
-    receive_shadows off
     technique
     {
         pass
@@ -10,15 +9,16 @@ material _missing_material_
             diffuse 0.8 0.0 0.0 1.0
             specular 0.5 0.5 0.5 1.0 12.5
             emissive 0.3 0.3 0.3 1.0
+			receive_shadows off
+			cast_shadows on
         }
     }
 }
 
 // Shingle genrated by blender2ogre 0.5.9
 
-material Shingle 
+material Shingle
 {
-    receive_shadows on 
 
     technique
     {
@@ -28,14 +28,15 @@ material Shingle
             diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
             specular 0.5 0.5 0.5 1.0 12.5
             emissive 0.0 0.0 0.0 1.0
-
+			receive_shadows off
+			cast_shadows on
             alpha_to_coverage off
             colour_write on
             cull_hardware clockwise
             depth_check on
             depth_func less_equal
             depth_write on
-            illumination_stage 
+            illumination_stage
             light_clip_planes off
             light_scissor off
             lighting on
@@ -46,7 +47,7 @@ material Shingle
             shading gouraud
             transparent_sorting on
 
-            texture_unit 
+            texture_unit
             {
                 texture Shingle.jpg
                 tex_address_mode wrap
@@ -58,10 +59,8 @@ material Shingle
 }
 // WoodDark genrated by blender2ogre 0.5.9
 
-material WoodDark 
+material WoodDark
 {
-    receive_shadows on 
-
     technique
     {
         pass WoodDark
@@ -70,14 +69,15 @@ material WoodDark
             diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
             specular 0.5 0.5 0.5 1.0 12.5
             emissive 0.0 0.0 0.0 1.0
-
+			receive_shadows off
+			cast_shadows on
             alpha_to_coverage off
             colour_write on
             cull_hardware clockwise
             depth_check on
             depth_func less_equal
             depth_write on
-            illumination_stage 
+            illumination_stage
             light_clip_planes off
             light_scissor off
             lighting on
@@ -88,7 +88,7 @@ material WoodDark
             shading gouraud
             transparent_sorting on
 
-            texture_unit 
+            texture_unit
             {
                 texture DarkWood.jpg
                 tex_address_mode wrap
@@ -100,10 +100,8 @@ material WoodDark
 }
 // Red genrated by blender2ogre 0.5.9
 
-material Red 
+material Red
 {
-    receive_shadows on 
-
     technique
     {
         pass Red
@@ -112,14 +110,15 @@ material Red
             diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
             specular 0.5 0.5 0.5 1.0 12.5
             emissive 0.0 0.0 0.0 1.0
-
+			receive_shadows off
+			cast_shadows on
             alpha_to_coverage off
             colour_write on
             cull_hardware clockwise
             depth_check on
             depth_func less_equal
             depth_write on
-            illumination_stage 
+            illumination_stage
             light_clip_planes off
             light_scissor off
             lighting on
@@ -130,7 +129,7 @@ material Red
             shading gouraud
             transparent_sorting on
 
-            texture_unit 
+            texture_unit
             {
                 texture red.png
                 tex_address_mode wrap
@@ -142,10 +141,8 @@ material Red
 }
 // ToriiText genrated by blender2ogre 0.5.9
 
-material ToriiText 
+material ToriiText
 {
-    receive_shadows on 
-
     technique
     {
         pass ToriiText
@@ -154,14 +151,15 @@ material ToriiText
             diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
             specular 0.5 0.5 0.5 1.0 12.5
             emissive 0.0 0.0 0.0 1.0
-
+			receive_shadows off
+			cast_shadows on
             alpha_to_coverage off
             colour_write on
             cull_hardware clockwise
             depth_check on
             depth_func less_equal
             depth_write on
-            illumination_stage 
+            illumination_stage
             light_clip_planes off
             light_scissor off
             lighting on
@@ -172,7 +170,7 @@ material ToriiText
             shading gouraud
             transparent_sorting on
 
-            texture_unit 
+            texture_unit
             {
                 texture ToriiText.jpg
                 tex_address_mode wrap

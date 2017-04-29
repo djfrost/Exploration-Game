@@ -40,10 +40,12 @@ class GameManager{
 		void loadLights(std::vector<std::string> names, std::vector<float> types, std::vector< std::vector < float > > colors, std::vector< std::vector < float > > directions);
 		void loadSkyBox(std::string skyBoxMat);
 		void processAnims(std::vector<std::string> objects, std::vector<std::string> types, std::vector< std::vector < float > > values, std::vector< std::vector < float > >  axis, std::vector< std::vector < float > > timeSteps, std::vector< std::vector < float > > start, std::vector < std::vector<float> > begin);
+		void loadKeyScripts(std::vector<std::string> scriptKeys, std::vector<std::string> keyScripts);
 		void initialiseNewScene();
 		void logComment(std::string comment);
 		void checkForInput(float time_step);
 		void keyPressed(std::string keyPressed);
+		void keyPressed(std::string keyPressed, std::string script);
 		bool keyReleased(std::string keyUp);
 		void logProblem(std::string prob, std::string file, int line);
 		void leftJoystickAxisMoved(float north_south, float east_west);
@@ -65,6 +67,8 @@ class GameManager{
 		void unloadMainStream();
 		void playSample(std::string sample);
 		void loadLevel(std::string name);
+		LevelLoader* getLevelLoader();
+		void callScript(std::string scriptName, std::string functionName);
 };
 
 #endif

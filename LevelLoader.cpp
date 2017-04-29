@@ -244,6 +244,13 @@ void LevelLoader::LoadLevel(std::string levelName)
 			layout = t.second.data();
 		}
 	}
+	std::vector<std::string> scriptKeys;
+	std::vector<std::string> keyScripts;
+	ptree scriptTree = levelTree.get_child("Scripts");
+	BOOST_FOREACH(boost::property_tree::ptree::value_type &t, scriptTree.get_child("KeyScripts")){
+		scriptKeys.push_back(t.first.data());
+		keyScripts.push_back(t.second.data());
+	}
 	std::string skybox = levelTree.get<std::string>("SkyMap");
 	// unload last scene load next scene
 	std::cout << "Called gm->loadScene()" << std::endl;
@@ -260,6 +267,7 @@ void LevelLoader::LoadLevel(std::string levelName)
 	gm->guiProcessEvents(gui_types, gui_names, gui_functions);
 	std::cout << "Called handleAudioResources" << std::endl;
 	handleAudioResources(audioTypes, audioFiles, audioRepeats, audioNames, levelName, audioPlay);
+	gm->loadKeyScripts(scriptKeys, keyScripts);
 	if(typesAnims.size() > 0){
 		gm->processAnims(objects, typesAnims, values, axis, timeSteps, start, begin);
 	}

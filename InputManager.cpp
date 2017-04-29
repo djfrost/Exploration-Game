@@ -50,7 +50,13 @@ bool InputManager::mouseMoved(const OIS::MouseEvent& e){
 }
 bool InputManager::keyPressed(const OIS::KeyEvent& e){
 	//cout << "KP" << endl;
-	game_manager->keyPressed(keyMap(e));
+	std::string key = keyMap(e);
+	if(scriptKeyMap.find(key) == scriptKeyMap.end()){
+			game_manager->keyPressed(key);
+	}
+	else{
+		game_manager->keyPressed(key, scriptKeyMap[key]);
+	}
 	return true;
 }
 
@@ -100,7 +106,6 @@ InputManager::InputManager(GameManager* gm){
 	keyboard_ois = NULL;
 	mouse_ois = NULL;
 	joystick_ois = NULL;
-
 	init();
 
 	window_width = game_manager->getRenderWindowWidth();
@@ -304,4 +309,10 @@ int InputManager::mouseMap(const OIS::MouseEvent& id){
 		mouseKey = 2;
 	}
 	return mouseKey;
+}
+void InputManager::loadKeyScripts(std::vector<std::string> keys, std::vector<std::string> scripts){
+	for(int i = 0; i < keys.size(); i++){
+		std::cout << keys[i] << " == " << scripts[i] << std::endl;
+		scriptKeyMap[keys[i]] = scripts[i];
+	}
 }

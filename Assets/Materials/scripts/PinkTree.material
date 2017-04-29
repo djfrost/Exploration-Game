@@ -1,11 +1,12 @@
 
 material _missing_material_
 {
-    receive_shadows off
     technique
     {
         pass
         {
+			receive_shadows off
+			cast_shadows on
             ambient 0.1 0.1 0.1 1.0
             diffuse 0.8 0.0 0.0 1.0
             specular 0.5 0.5 0.5 1.0 12.5
@@ -18,12 +19,12 @@ material _missing_material_
 
 material PinkLeaf
 {
-    receive_shadows on
-
     technique
     {
         pass PinkLeaf
         {
+			receive_shadows off
+			cast_shadows on
             ambient 0.800000011920929 0.800000011920929 0.800000011920929 1.0
             diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
             specular 0.5 0.5 0.5 1.0 12.5
@@ -61,8 +62,6 @@ material PinkLeaf
 
 material Bark3
 {
-    receive_shadows on
-
     technique
     {
         pass Bark3
@@ -71,7 +70,8 @@ material Bark3
             diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
             specular 0.5 0.5 0.5 1.0 12.5
             emissive 0.0 0.0 0.0 1.0
-
+			receive_shadows off
+			cast_shadows on
             alpha_to_coverage off
             colour_write on
             cull_hardware clockwise

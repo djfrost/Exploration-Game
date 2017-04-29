@@ -1,9 +1,7 @@
 // Fox genrated by blender2ogre 0.5.9
 
-material Fox 
+material Fox
 {
-    receive_shadows on 
-	cast_shadows on
     technique
     {
         pass Fox
@@ -12,14 +10,15 @@ material Fox
             diffuse 1.0 0.27 0.0 1.0
             specular 0.5 0.5 0.5 1.0 12.5
             emissive 0.0 0.0 0.0 1.0
-
+			receive_shadows off
+			cast_shadows on
             alpha_to_coverage off
             colour_write on
             cull_hardware clockwise
             depth_check on
             depth_func less_equal
             depth_write on
-            illumination_stage 
+            illumination_stage
             light_clip_planes off
             light_scissor off
             lighting on

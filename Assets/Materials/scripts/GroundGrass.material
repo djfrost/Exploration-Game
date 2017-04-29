@@ -2,8 +2,7 @@
 
 material GroundGrass
 {
-    receive_shadows on
-	cast_shadows on
+
     technique
     {
         pass GroundGrass
@@ -12,7 +11,8 @@ material GroundGrass
             diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
             specular 0.5 0.5 0.5 1.0 12.5
             emissive 0.0 0.0 0.0 1.0
-
+			receive_shadows off
+			cast_shadows on
             alpha_to_coverage off
             colour_write on
             cull_hardware none

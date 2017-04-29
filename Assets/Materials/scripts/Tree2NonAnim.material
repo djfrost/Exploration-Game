@@ -1,7 +1,6 @@
 
 material _missing_material_
 {
-    receive_shadows off
     technique
     {
         pass
@@ -10,6 +9,8 @@ material _missing_material_
             diffuse 0.8 0.0 0.0 1.0
             specular 0.5 0.5 0.5 1.0 12.5
             emissive 0.3 0.3 0.3 1.0
+			receive_shadows off
+			cast_shadows on
         }
     }
 }
@@ -18,7 +19,6 @@ material _missing_material_
 
 material LeavesStatic
 {
-    receive_shadows on
 
     technique
     {
@@ -31,7 +31,8 @@ material LeavesStatic
             lighting off
             polygon_mode solid
             scene_blend alpha_blend
-
+			receive_shadows off
+			cast_shadows on
             texture_unit
             {
                 texture Leaf 03 back colour.png
@@ -47,7 +48,6 @@ material LeavesStatic
 
 material BarkStatic
 {
-    receive_shadows on
 
     technique
     {
@@ -57,7 +57,8 @@ material BarkStatic
             diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
             specular 0.5 0.5 0.5 1.0 12.5
             emissive 0.0 0.0 0.0 1.0
-
+			receive_shadows off
+			cast_shadows on
             alpha_to_coverage off
             colour_write on
             cull_hardware clockwise

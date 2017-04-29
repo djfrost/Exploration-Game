@@ -4,7 +4,7 @@
 #include <OIS.h>
 #include "CSC2110/ListArray.h"
 #include <iostream>
-
+#include <unordered_map>
 class GameManager;
 class InputManager: public OIS::KeyListener, public OIS::JoyStickListener, OIS::MouseListener{
 	private:
@@ -23,6 +23,7 @@ class InputManager: public OIS::KeyListener, public OIS::JoyStickListener, OIS::
 		//uint32 mouseMap(const OIS::MouseButtonID id);
 		std::string joystickButtonMap(int button);
 		int mouseMap(const OIS::MouseEvent& id);
+		std::unordered_map<std::string,std::string> scriptKeyMap;
 	public:
 		InputManager(GameManager* gm);
 		virtual ~InputManager();
@@ -41,6 +42,7 @@ class InputManager: public OIS::KeyListener, public OIS::JoyStickListener, OIS::
 		bool mouseMoved(const OIS::MouseEvent& e);
 		bool mouseReleased(const OIS::MouseEvent& e, OIS::MouseButtonID id);
 		bool mousePressed(const OIS::MouseEvent& e, OIS::MouseButtonID id);
+		void loadKeyScripts(std::vector<std::string> keys, std::vector<std::string> scripts);
 };
 
 #endif
