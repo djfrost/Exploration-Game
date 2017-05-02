@@ -224,3 +224,6 @@ void GameManager::applyImpulse(std::string& rigidBodyName, float ns, float ew,fl
 void GameManager::applyTorqueImpulse(std::string rigidBodyName, float pitch, float yaw, float roll){
 	render_manager->applyImpulse(rigidBodyName, pitch, yaw, roll);
 }
+void GameManager::stopGame(){
+	render_manager->stopRendering();
+}

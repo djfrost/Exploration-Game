@@ -283,7 +283,8 @@
 			},
 			"Scripts" : {
 				"KeyScripts" : {
-					"Z" : "./Assets/Lua/LoadTitle.lua"
+					"Z" : "./Assets/Lua/LoadTitle.lua",
+					"ESCAPE" : "./Assets/Lua/stop.lua"
 				}
 			},
 			"SkyMap" : "sky",

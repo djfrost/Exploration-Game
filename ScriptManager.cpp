@@ -29,6 +29,7 @@ ScriptManager::ScriptManager(GameManager* game_manager){
 	  .addFunction("changeLevel", &GameManager::changeLevel)
 	  .addFunction("applyImpulse", &GameManager::applyImpulse)
 	  .addFunction("applyTorqueImpulse", &GameManager::applyTorqueImpulse)
+	  .addFunction("stopGame", &GameManager::stopGame)
   	.endClass();
 
   	luabridge::push(L,gm);
