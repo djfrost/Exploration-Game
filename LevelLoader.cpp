@@ -46,6 +46,7 @@ void LevelLoader::LoadLevel(std::string levelName)
 	std::vector< std::vector< float > > rbTransforms;
 	std::vector< std::vector< float > > rbAngles;
 	std::vector< std::vector< float > > rbScales;
+	std::vector<float> rbMass;
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, meshTree.get_child("meshNames")){
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &t, meshTree.get_child(v.second.data())){
 			std::string type = t.first.data();
@@ -91,6 +92,9 @@ void LevelLoader::LoadLevel(std::string levelName)
 					}
 					else if(rbType == "scale"){
 						rbScales.push_back(parseMultF(rb.second.data()));
+					}
+					else if(rbType == "mass"){
+						rbMass.push_back(stof(rb.second.data()));
 					}
 				}
 			}
@@ -280,14 +284,14 @@ void LevelLoader::LoadLevel(std::string levelName)
 	// unload last scene load next scene
 	std::cout << "Called gm->loadScene()" << std::endl;
 	gm->loadScene(nextScene, currScene, meshes, meshFiles, transforms, rotates, angle, scales, defaultAnims);
-	std::cout << "Called gm->loadLights()" << std::endl;
-	gm->loadLights(names,types, colors, directions);
 	std::cout << "Called gm->loadCameras()" << std::endl;
 	gm->loadCameras(positions, lookAts, nearclips, farclips, camRots, camAngle, parents);
-	gm->createCollisionShapes(rbChildOfs, rbShape, rbTransforms, rbAngles, rbScales);
-	std::cout << "Called gm->createCollisionShapes()" << std::endl;
 	std::cout << "Called gm->loadSkyBox()" << std::endl;
 	gm->loadSkyBox(skybox);
+	std::cout << "Called gm->createCollisionShapes()" << std::endl;
+	gm->createCollisionShapes(rbChildOfs, rbShape, rbMass, rbTransforms, rbAngles, rbScales);
+	std::cout << "Called gm->loadLights()" << std::endl;
+	gm->loadLights(names,types, colors, directions);
 	std::cout << "Called gm->loadLevel()" << std::endl;
 	gm->guiLoadLevel(levelName, scheme, font, cursor, tooltip, layout);
 	std::cout << "Called gm->processEvents()" << std::endl;

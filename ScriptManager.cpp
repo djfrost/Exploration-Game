@@ -27,6 +27,8 @@ ScriptManager::ScriptManager(GameManager* game_manager){
 	 .beginClass<GameManager>("GameManager")
 	  .addFunction("playAudio", &GameManager::playAudio)
 	  .addFunction("changeLevel", &GameManager::changeLevel)
+	  .addFunction("applyImpulse", &GameManager::applyImpulse)
+	  .addFunction("applyTorqueImpulse", &GameManager::applyTorqueImpulse)
   	.endClass();
 
   	luabridge::push(L,gm);

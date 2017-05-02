@@ -18,7 +18,7 @@
 				},
 				"Fox" : {
 					"file" : "Fox.mesh",
-					"transform" : "0.0,0.0,-10.0",
+					"transform" : "0.0,5.0,-15.0",
 					"rotate" : "0.0,1.0,0.0",
 					"angle" : "90.0",
 					"scale" : "1.0,1.0,1.0",
@@ -27,13 +27,14 @@
 						"child" : "Fox",
 						"shape" : "box",
 						"angle" : "0,0,0",
-						"transform" : "0,0,0",
-						"scale" : "1,1,1"
+						"transform" : "0.0,0.0,0.0",
+						"scale" : "1,1,1",
+						"mass" : "0.01"
 					}
 				},
 				"GroundGrass" : {
 					"file" : "GroundGrass.mesh",
-					"transform" : "0.0,-7.15,0.0",
+					"transform" : "0.0,-20.15,0.0",
 					"rotate" : "0.0,1.0,0.0",
 					"angle" : "180.0",
 					"scale" : "120.0,1.0,120.0",
@@ -41,9 +42,10 @@
 					"rb" : {
 						"child" : "GroundGrass",
 						"shape" : "box",
-						"angle" : "0,0,0",
-						"transform" : "0,0,0",
-						"scale" : "1,1,1"
+						"angle" : "0,180,0",
+						"transform" : "0,-14.15,0",
+						"scale" : "120.0,0.01,120.0",
+						"mass" : "0.0"
 					}
 				},
 				"Tree" : {
@@ -98,7 +100,8 @@
 						"shape" : "box",
 						"angle" : "0,0,0",
 						"transform" : "0,0,0",
-						"scale" : "1,1,1"
+						"scale" : "1,1,1",
+						"mass" : "1.0"
 					}
 				},
 				"Rock2" : {
@@ -113,7 +116,8 @@
 						"shape" : "box",
 						"angle" : "0,0,0",
 						"transform" : "0,0,0",
-						"scale" : "1,1,1"
+						"scale" : "1,1,1",
+						"mass" : "1.0"
 					}
 				},
 				"ToriiGate" : {
@@ -128,7 +132,8 @@
 						"shape" : "box",
 						"angle" : "0,0,0",
 						"transform" : "0,0,0",
-						"scale" : "1,1,1"
+						"scale" : "1,1,1",
+						"mass" : "1.0"
 					}
 				},
 				"Water" : {
@@ -145,14 +150,7 @@
 					"rotate" : "1.0,0.0,0.0",
 					"angle" : "180.0",
 					"scale" : "8.3,3.0,8.3",
-					"defaultAnim" : "none",
-					"rb" : {
-						"child" : "Pool",
-						"shape" : "box",
-						"angle" : "0,0,0",
-						"transform" : "0,0,0",
-						"scale" : "1,1,1"
-					}
+					"defaultAnim" : "none"
 				},
 				"Animations" : {
 					"AnimNames" : {

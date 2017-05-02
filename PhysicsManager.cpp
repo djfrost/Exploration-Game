@@ -12,7 +12,7 @@
 void PhysicsManager::stepPhysicsSimulation(float timeInc){
 	btScalar timeStep(timeInc);
 	updateRigidBodies();
-	//updateRigidBodyVelocity(timeInc);
+	updateRigidBodyVelocity(timeInc);
 	dynamicsWorld->stepSimulation(timeStep, 10, .01667);
 	dynamicsWorld->debugDrawWorld();
 }

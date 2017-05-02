@@ -195,7 +195,7 @@ LevelLoader* GameManager::getLevelLoader(){
 void GameManager::callScript(std::string scriptName, std::string functionName){
 	scriptManager->executeScript(scriptName, functionName);
 }
-void GameManager::createCollisionShapes(std::vector<std::string> childOfs, std::vector<std::string> shape, std::vector<std::vector< float > > transforms, std::vector<std::vector< float > > angles, std::vector<std::vector< float > > scales){
+void GameManager::createCollisionShapes(std::vector<std::string> childOfs, std::vector<std::string> shape,std::vector<float> masses, std::vector<std::vector< float > > transforms, std::vector<std::vector< float > > angles, std::vector<std::vector< float > > scales){
 	for(int i = 0; i < childOfs.size(); i++){
 		float* transformRB = new float[3];
 		transformRB[0] = transforms[i][0]; transformRB[1] = transforms[i][1]; transformRB[2] = transforms[i][2];
@@ -204,7 +204,7 @@ void GameManager::createCollisionShapes(std::vector<std::string> childOfs, std::
 		float* scaleRB = new float[3];
 		scaleRB[0] = scales[i][0]; scaleRB[1] = scales[i][1]; scaleRB[2] = scales[i][2];
 
-		render_manager->createCollisionShape(childOfs[i],shape[i], 1.0, transformRB, anglesRB, scaleRB);
+		render_manager->createCollisionShape(childOfs[i],shape[i], masses[i], transformRB, anglesRB, scaleRB);
 		std::cout << "Iteration " << i << " of creating collisions" << std::endl;
 	}
 	std::cout << "Finished creating collision shapes" << std::endl;
@@ -217,4 +217,10 @@ void GameManager::setGravity(std::vector<float> g){
 	grav[2] = g[3];
 	render_manager->setGravity(grav);
 	delete[] grav;
+}
+void GameManager::applyImpulse(std::string& rigidBodyName, float ns, float ew,float other){
+	render_manager->applyImpulse(rigidBodyName, ns, ew, other);
+}
+void GameManager::applyTorqueImpulse(std::string rigidBodyName, float pitch, float yaw, float roll){
+	render_manager->applyImpulse(rigidBodyName, pitch, yaw, roll);
 }

@@ -509,3 +509,9 @@ void RenderManager::setGravity(float* gravity){
 void RenderManager::setDebugDrawer(bool debugMode){
 	physicsManager->setDebugDrawer(debugMode);
 }
+void RenderManager::applyImpulse(std::string& rigidBodyName, float ns, float ew,float other){
+	physicsManager->applyImpulse(rigidBodyName, ns, ew, other);
+}
+void RenderManager::applyTorqueImpulse(std::string rigidBodyName, float pitch, float yaw, float roll){
+	physicsManager->applyImpulse(rigidBodyName, pitch, yaw, roll);
+}

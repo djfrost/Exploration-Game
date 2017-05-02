@@ -95,6 +95,8 @@ class RenderManager{
 		void clearManualObject(SceneNodeManual* snm);
 		float* getPosition(SceneNodeMotion* sceneNodeMotion);
 		float* getOrientation(SceneNodeMotion* sceneNodeMotion);
+		void applyImpulse(std::string& rigidBodyName, float ns, float ew,float other);
+		void applyTorqueImpulse(std::string rigidBodyName, float pitch, float yaw, float roll);
 };
 
 #endif
