@@ -10,6 +10,14 @@ class GameManager;
 class ResourceParser;
 class RenderListener;
 class InputFunctionHandler;
+class PhysicsManager;
+struct SceneNodeMotion{
+	Ogre::SceneNode* sceneNodeMotion;
+};
+
+struct SceneNodeManual{
+	Ogre::SceneNode* sceneNodeManual;
+};
 class RenderManager{
 	private:
 		bool rootRendering;
@@ -34,6 +42,7 @@ class RenderManager{
 		ListArray<RenderListener>* render_listeners;
 		InputFunctionHandler* ifh;
 		void destroyAllAttachedMovableObjects( Ogre::SceneNode* node );
+		PhysicsManager* physicsManager;
 	public:
 		RenderManager(GameManager* game_manager);
 		virtual ~RenderManager();
@@ -71,6 +80,21 @@ class RenderManager{
 		void changeLevel(std::string level);
 		void changeMainSong(std::string song);
 		void playSample(std::string sample);
+		SceneNodeManual* createManualObject();
+		void drawLine(float* from, float* to, float* color, SceneNodeManual* snm);
+		void setOrientation(SceneNodeMotion* sceneNodeMotion, float x, float y, float z, float w);
+		void setPosition(SceneNodeMotion* sceneNodeMotion, float x, float y, float z);
+		void createCollisionShape(std::string& childName, std::string& shapeName, float mass, float* trans, float* rot,float* params);
+		void applyPulse(float northSouth, float eastWest, std::string& nodeName);
+		void setGravity(float* gravity);
+		void stepPhysicsSimulation(float elapsedTime);
+		void setDebugDrawer(bool debugMode);
+		void createRigidBodies();
+		SceneNodeMotion* createSceneNodeMotion(std::string& sceneNodeId);
+		void destroySceneNodeMotion(SceneNodeMotion* snm);
+		void clearManualObject(SceneNodeManual* snm);
+		float* getPosition(SceneNodeMotion* sceneNodeMotion);
+		float* getOrientation(SceneNodeMotion* sceneNodeMotion);
 };
 
 #endif

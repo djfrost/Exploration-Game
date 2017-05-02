@@ -41,6 +41,11 @@ void LevelLoader::LoadLevel(std::string levelName)
 	std::vector< std::vector< float > > scales;
 	std::vector<float> angle;
 	std::vector<std::string> defaultAnims;
+	std::vector<std::string> rbChildOfs;
+	std::vector<std::string> rbShape;
+	std::vector< std::vector< float > > rbTransforms;
+	std::vector< std::vector< float > > rbAngles;
+	std::vector< std::vector< float > > rbScales;
 	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, meshTree.get_child("meshNames")){
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &t, meshTree.get_child(v.second.data())){
 			std::string type = t.first.data();
@@ -68,6 +73,26 @@ void LevelLoader::LoadLevel(std::string levelName)
 				std::string anim = t.second.data();
 				defaultAnims.push_back(anim);
 				std::cout << anim << std::endl << std::endl << std::endl << std::endl;
+			}
+			else if (type == "rb"){
+				BOOST_FOREACH(boost::property_tree::ptree::value_type &rb, meshTree.get_child(v.second.data()).get_child("rb")){
+					std::string rbType = rb.first.data();
+					if(rbType == "shape"){
+						rbShape.push_back(rb.second.data());
+					}
+					else if(rbType == "child"){
+						rbChildOfs.push_back(rb.second.data()+"_node");
+					}
+					else if(rbType == "angle"){
+						rbAngles.push_back(parseMultF(rb.second.data()));
+					}
+					else if(rbType == "transform"){
+						rbTransforms.push_back(parseMultF(rb.second.data()));
+					}
+					else if(rbType == "scale"){
+						rbScales.push_back(parseMultF(rb.second.data()));
+					}
+				}
 			}
 		}
 		meshes.push_back(v.second.data());
@@ -259,6 +284,8 @@ void LevelLoader::LoadLevel(std::string levelName)
 	gm->loadLights(names,types, colors, directions);
 	std::cout << "Called gm->loadCameras()" << std::endl;
 	gm->loadCameras(positions, lookAts, nearclips, farclips, camRots, camAngle, parents);
+	gm->createCollisionShapes(rbChildOfs, rbShape, rbTransforms, rbAngles, rbScales);
+	std::cout << "Called gm->createCollisionShapes()" << std::endl;
 	std::cout << "Called gm->loadSkyBox()" << std::endl;
 	gm->loadSkyBox(skybox);
 	std::cout << "Called gm->loadLevel()" << std::endl;
@@ -271,6 +298,7 @@ void LevelLoader::LoadLevel(std::string levelName)
 	if(typesAnims.size() > 0){
 		gm->processAnims(objects, typesAnims, values, axis, timeSteps, start, begin);
 	}
+	gm->setGravity(parseMultF(levelTree.get<std::string>("Gravity")));
 	currScene = levelName;
 	nextScene = "";
 }

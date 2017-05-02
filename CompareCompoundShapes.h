@@ -3,11 +3,11 @@
 
 #include "CSC2110/Comparator.h"
 #include "GameHeader.h"
-
+#include <string>
 class CompoundShape;
 
 class CompareCompoundShapes : public Comparator<CompoundShape, std::string>
-{ 
+{
    private:
 
    public:

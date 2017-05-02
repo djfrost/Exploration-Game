@@ -69,6 +69,8 @@ class GameManager{
 		void loadLevel(std::string name);
 		LevelLoader* getLevelLoader();
 		void callScript(std::string scriptName, std::string functionName);
+		void createCollisionShapes(std::vector<std::string> childOfs, std::vector<std::string> shape, std::vector<std::vector< float > > transforms, std::vector<std::vector< float > > angles, std::vector<std::vector< float > > scales);
+		void setGravity(std::vector<float> g);
 };
 
 #endif

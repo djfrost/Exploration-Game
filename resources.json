@@ -22,7 +22,14 @@
 					"rotate" : "0.0,1.0,0.0",
 					"angle" : "90.0",
 					"scale" : "1.0,1.0,1.0",
-					"defaultAnim" : "none"
+					"defaultAnim" : "none",
+					"rb" : {
+						"child" : "Fox",
+						"shape" : "box",
+						"angle" : "0,0,0",
+						"transform" : "0,0,0",
+						"scale" : "1,1,1"
+					}
 				},
 				"GroundGrass" : {
 					"file" : "GroundGrass.mesh",
@@ -30,7 +37,14 @@
 					"rotate" : "0.0,1.0,0.0",
 					"angle" : "180.0",
 					"scale" : "120.0,1.0,120.0",
-					"defaultAnim" : "none"
+					"defaultAnim" : "none",
+					"rb" : {
+						"child" : "GroundGrass",
+						"shape" : "box",
+						"angle" : "0,0,0",
+						"transform" : "0,0,0",
+						"scale" : "1,1,1"
+					}
 				},
 				"Tree" : {
 					"file" : "Mesh.004.mesh",
@@ -78,7 +92,14 @@
 					"rotate" : "0.0,0.0,0.0",
 					"angle" : "180.0",
 					"scale" : "3.0,3.0,3.0",
-					"defaultAnim" : "none"
+					"defaultAnim" : "none",
+					"rb" : {
+						"child" : "Rock",
+						"shape" : "box",
+						"angle" : "0,0,0",
+						"transform" : "0,0,0",
+						"scale" : "1,1,1"
+					}
 				},
 				"Rock2" : {
 					"file" : "Rock.mesh",
@@ -86,7 +107,14 @@
 					"rotate" : "0.0,1.0,0.0",
 					"angle" : "180.0",
 					"scale" : "3.0,3.0,3.0",
-					"defaultAnim" : "none"
+					"defaultAnim" : "none",
+					"rb" : {
+						"child" : "Rock2",
+						"shape" : "box",
+						"angle" : "0,0,0",
+						"transform" : "0,0,0",
+						"scale" : "1,1,1"
+					}
 				},
 				"ToriiGate" : {
 					"file" : "ToriiGate.mesh",
@@ -94,7 +122,14 @@
 					"rotate" : "0.0,1.0,0.0",
 					"angle" : "90.0",
 					"scale" : "2.0,3.0,2.0",
-					"defaultAnim" : "none"
+					"defaultAnim" : "none",
+					"rb" : {
+						"child" : "ToriiGate",
+						"shape" : "box",
+						"angle" : "0,0,0",
+						"transform" : "0,0,0",
+						"scale" : "1,1,1"
+					}
 				},
 				"Water" : {
 					"file" : "Water.mesh",
@@ -110,7 +145,14 @@
 					"rotate" : "1.0,0.0,0.0",
 					"angle" : "180.0",
 					"scale" : "8.3,3.0,8.3",
-					"defaultAnim" : "none"
+					"defaultAnim" : "none",
+					"rb" : {
+						"child" : "Pool",
+						"shape" : "box",
+						"angle" : "0,0,0",
+						"transform" : "0,0,0",
+						"scale" : "1,1,1"
+					}
 				},
 				"Animations" : {
 					"AnimNames" : {
@@ -246,7 +288,8 @@
 					"Z" : "./Assets/Lua/LoadTitle.lua"
 				}
 			},
-			"SkyMap" : "sky"
+			"SkyMap" : "sky",
+			"Gravity" : "0,-9.8,0"
 		},
 		"Title" : {
 			"path": ["./Assets/Models", "./Assets/Materials/scripts", "./Assets/Textures", "./Assets/Audio", "./Assets/cegui/layouts", "./Assets/cegui/fonts", "./Assets/cegui/schemes", "./Assets/cegui/imagesets", "./Assets/cegui/looknfeel", "./Assets/cegui/animations", "./Assets/cegui/lua_scripts", "./Assets/cegui/xml_schemas"],
@@ -349,7 +392,8 @@
 					"Z" : "./Assets/Lua/LoadLevel1.lua"
 				}
 			},
-			"SkyMap" : "sky"
+			"SkyMap" : "sky",
+			"Gravity" : "0,-9.8,0"
 		}
 
 	},

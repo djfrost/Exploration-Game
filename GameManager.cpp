@@ -195,3 +195,26 @@ LevelLoader* GameManager::getLevelLoader(){
 void GameManager::callScript(std::string scriptName, std::string functionName){
 	scriptManager->executeScript(scriptName, functionName);
 }
+void GameManager::createCollisionShapes(std::vector<std::string> childOfs, std::vector<std::string> shape, std::vector<std::vector< float > > transforms, std::vector<std::vector< float > > angles, std::vector<std::vector< float > > scales){
+	for(int i = 0; i < childOfs.size(); i++){
+		float* transformRB = new float[3];
+		transformRB[0] = transforms[i][0]; transformRB[1] = transforms[i][1]; transformRB[2] = transforms[i][2];
+		float* anglesRB = new float[3];
+		anglesRB[0] = angles[i][0]; anglesRB[1] = angles[i][1]; anglesRB[2] = angles[i][2];
+		float* scaleRB = new float[3];
+		scaleRB[0] = scales[i][0]; scaleRB[1] = scales[i][1]; scaleRB[2] = scales[i][2];
+
+		render_manager->createCollisionShape(childOfs[i],shape[i], 1.0, transformRB, anglesRB, scaleRB);
+		std::cout << "Iteration " << i << " of creating collisions" << std::endl;
+	}
+	std::cout << "Finished creating collision shapes" << std::endl;
+	render_manager->createRigidBodies();
+}
+void GameManager::setGravity(std::vector<float> g){
+	float* grav = new float[3];
+	grav[0] = g[0];
+	grav[1] = g[1];
+	grav[2] = g[3];
+	render_manager->setGravity(grav);
+	delete[] grav;
+}

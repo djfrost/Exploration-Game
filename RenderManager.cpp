@@ -7,8 +7,11 @@
 #include "CSC2110/ListArrayIterator.h"
 #include "InputRenderListener.h"
 #include "InputFunctionHandler.h"
+#include "PhysicsManager.h"
 using namespace std;
 using namespace Ogre;
+
+
 
 void RenderManager::updateAudio(float time_step){
 	game_manager->updateAudio(time_step);
@@ -104,6 +107,9 @@ RenderManager::RenderManager(GameManager* gm){
 	levelChange = false;
 	game_manager = gm;
 	init();
+	std::cout << "Constructing physics manager " << std::endl;
+	physicsManager = new PhysicsManager(this);
+	std::cout << "Constructed physics manager " << std::endl;
 }
 
 RenderManager::~RenderManager(){
@@ -117,6 +123,7 @@ RenderManager::~RenderManager(){
    for(int i = 0; i < anims.size(); i++){
 	   anims[i] = NULL;
    }
+   delete physicsManager;
    std::cout << "Animation states deleted" << std::endl;
    render_listeners->removeAll();
    delete render_listeners;
@@ -133,7 +140,7 @@ RenderManager::~RenderManager(){
    window = NULL;
    std::cout << "Window destroyed" << std::endl;
    delete scene_manager;
-   std::cout << "SceneManager deleted" << std::endl;
+   std::cout << "scene_manager deleted" << std::endl;
    root = NULL;
 }
 
@@ -416,4 +423,89 @@ void RenderManager::changeMainSong(std::string song){
 }
 void RenderManager::playSample(std::string sample){
 	game_manager->playSample(sample);
+}
+void RenderManager::setOrientation(SceneNodeMotion* sceneNodeMotion, float x, float y, float z, float w){
+	Ogre::SceneNode* sceneNode = sceneNodeMotion->sceneNodeMotion;
+	sceneNode->setOrientation(x,y,z,w);
+}
+void RenderManager::setPosition(SceneNodeMotion* sceneNodeMotion, float x, float y, float z){
+	Ogre::SceneNode* sceneNode = sceneNodeMotion->sceneNodeMotion;
+	sceneNode->setPosition(x,y,z);
+}
+float* RenderManager::getOrientation(SceneNodeMotion* sceneNodeMotion){
+	Ogre::SceneNode* sceneNode = sceneNodeMotion->sceneNodeMotion;
+	Ogre::Quaternion q = sceneNode->getOrientation();
+	Ogre::Real w = q.w;
+	Ogre::Real x = q.x;
+	Ogre::Real y = q.y;
+	Ogre::Real z = q.z;
+	float* rot = new float[4];
+	rot[3] = w;
+	rot[0] = x;
+	rot[1] = y;
+	rot[2] = z;
+	return rot;
+}
+float* RenderManager::getPosition(SceneNodeMotion* sceneNodeMotion){
+	Ogre::SceneNode* sceneNode = sceneNodeMotion->sceneNodeMotion;
+	Ogre::Vector3 position = sceneNode->getPosition();
+	float* pos = new float[3];
+	pos[0] = position.x;
+	pos[1] = position.y;
+	pos[2] = position.z;
+	return pos;
+}
+void RenderManager::clearManualObject(SceneNodeManual* snm){
+	Ogre::SceneNode* sceneNodeManual = snm->sceneNodeManual;
+	Ogre::ManualObject* manualObject = (Ogre::ManualObject*) sceneNodeManual->getAttachedObject(0);
+	manualObject->clear();
+}
+SceneNodeManual* RenderManager::createManualObject(){
+	SceneNodeManual* sceneNodeManual = new SceneNodeManual;
+	Ogre::ManualObject* manualObject = scene_manager->createManualObject("Manual_Object");
+	manualObject->setDynamic(true);
+	static const char* mat_name = "OgreBulletCollisionsDebugDefault";
+	Ogre::MaterialPtr manualObjectMaterial = Ogre::MaterialManager::getSingleton().getDefaultSettings();
+	manualObjectMaterial->setReceiveShadows(false);
+	manualObjectMaterial->getTechnique(0)->setLightingEnabled(false);
+	Ogre::SceneNode* manualObjectNode = scene_manager->getRootSceneNode()->createChildSceneNode();
+	manualObjectNode->attachObject(manualObject);
+	sceneNodeManual->sceneNodeManual = manualObjectNode;
+	return sceneNodeManual;
+}
+void RenderManager::drawLine(float* from, float* to, float* color, SceneNodeManual* snm){
+	Ogre::SceneNode* sceneNodeManual = snm->sceneNodeManual;
+	Ogre::ManualObject* manualObject = (Ogre::ManualObject*)sceneNodeManual->getAttachedObject(0);
+	manualObject->begin("OgreBulletCollisionsDebugDefault", Ogre::RenderOperation:: OT_LINE_LIST);
+	manualObject->position(Ogre::Vector3(from[0], from[1], from[2]));
+	manualObject->colour(Ogre::ColourValue(color[0], color[1], color[2]));
+	manualObject->position(Ogre::Vector3(to[0], to[1], to[2]));
+	manualObject->colour(Ogre::ColourValue(color[0],color[1], color[2]));
+	manualObject->end();
+}
+void RenderManager::destroySceneNodeMotion(SceneNodeMotion* snm){
+	free(snm);
+}
+SceneNodeMotion* RenderManager::createSceneNodeMotion(std::string& sceneNodeId){
+	SceneNodeMotion* sceneNodeMotion = (SceneNodeMotion*) malloc(sizeof(SceneNodeMotion));
+	sceneNodeMotion->sceneNodeMotion = scene_manager->getSceneNode(sceneNodeId);
+	return sceneNodeMotion;
+}
+void RenderManager::stepPhysicsSimulation(float elapsedTime){
+	physicsManager->stepPhysicsSimulation(elapsedTime);
+}
+void RenderManager::createRigidBodies(){
+	physicsManager->createRigidBodies();
+}
+void RenderManager::createCollisionShape(std::string& childName, std::string& shapeName, float mass, float* trans, float* rot,float* params){
+	physicsManager->createCollisionShape(childName, shapeName, mass, trans, rot, params);
+}
+void RenderManager::applyPulse(float northSouth,float eastWest, std::string& nodeName){
+	physicsManager->applyImpulse(nodeName, northSouth, eastWest, 0.0);
+}
+void RenderManager::setGravity(float* gravity){
+	physicsManager->setGravity(gravity);
+}
+void RenderManager::setDebugDrawer(bool debugMode){
+	physicsManager->setDebugDrawer(debugMode);
 }
